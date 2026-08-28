@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Entity Separation</title>
+<style>
+*{box-sizing:border-box}
+.slide-container{width:1280px;min-height:720px;background:#E2E8F0;color:#1E293B;font-family:Arial,Helvetica,sans-serif;position:relative}
+.content{padding-top:52px;margin-left:64px;width:1152px}
+.eyebrow{font-size:17px;letter-spacing:2px;font-weight:800;color:#EA580C;text-transform:uppercase}
+.title{font-size:54px;line-height:1.02;font-weight:900;letter-spacing:-2px;margin-top:16px}
+.subtitle{font-size:22px;line-height:1.25;font-weight:650;color:#475569;margin-top:14px;width:840px}
+.map{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:38px;min-height:280px}
+.entity{min-height:280px;padding:12px 12px 0;background:#F8FAFC;border-top:10px solid #475569}
+.entity.tech{background:#1E293B;color:#F8FAFC;border-top-color:#EA580C}
+.entity.operator{background:#EA580C;color:#FFFFFF;border-top-color:#1E293B}
+.entity h2{font-size:27px;line-height:1.02;font-weight:900;margin:0 0 12px}
+.entity .role{font-size:15px;letter-spacing:1.2px;text-transform:uppercase;font-weight:900;color:#EA580C;margin-bottom:12px}
+.tech .role,.operator .role{color:#FFFFFF}
+.entity p{font-size:18px;line-height:1.25;font-weight:650;color:#475569;margin:0 0 12px}
+.tech p,.operator p{color:#F8FAFC}
+.entity ul{list-style:none;padding:0;margin:0;border-top:2px solid #CBD5E1;padding-top:6px}
+.tech ul,.operator ul{border-color:#FFFFFF}
+.entity li{font-size:16px;line-height:1.2;font-weight:650;padding-top:10px}
+.entity li+li{border-top:1px solid #CBD5E1;margin-top:10px}
+.tech li+li,.operator li+li{border-color:#FFFFFF}
+.principle{margin-top:6px;background:#1E293B;color:#F8FAFC;padding:10px 18px 8px;display:grid;grid-template-columns:220px 1fr;column-gap:20px}
+.principle strong{font-size:20px;font-weight:900;color:#EA580C;text-transform:uppercase;letter-spacing:1px}
+.principle .text{font-size:22px;line-height:1.18;font-weight:750}
+.principle .flows{margin-top:8px;font-size:18px;font-weight:900;color:#EA580C}
+.footer{font-size:13px;color:#64748B;font-weight:600;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="content">
+<div class="eyebrow">Entity architecture</div>
+<div class="title">Keep the operating system separate from the factory shell.</div>
+<div class="subtitle">Each entity owns or finances a different risk class, while the factory operator connects the platform, property, equipment, and customers.</div>
+<div class="map">
+<div class="entity tech">
+<div class="role">Scalable IP owner</div>
+<h2>Technology Company</h2>
+<p>Builds, owns, licenses, and supports the automation platform.</p>
+<ul><li>Software platform</li></ul>
+</div>
+<div class="entity">
+<div class="role">Physical site owner</div>
+<h2>Facility JV / PropCo</h2>
+<p>Owns or controls the land, building, and fixed site infrastructure.</p>
+<ul><li>Land and title</li></ul>
+</div>
+<div class="entity operator">
+<div class="role">Revenue interface</div>
+<h2>Factory Operator</h2>
+<p>Runs production, serves customers, and turns capacity into operating revenue.</p>
+<ul><li>Production workforce</li></ul>
+</div>
+<div class="entity">
+<div class="role">Asset financier</div>
+<h2>Equipment Finance Vehicle</h2>
+<p>Owns or holds security over identifiable productive machinery.</p>
+<ul><li>Robot arms</li></ul>
+</div>
+</div>
+<div class="principle">
+<strong>Ownership principle</strong>
+<div>
+<div class="text">The Technology Company licenses the platform into the factory; the Facility JV does not receive core IP merely because it provides the building.</div>
+<div class="flows">License + services · Lease / occupancy · Equipment availability</div>
+</div>
+</div>
+<div class="footer">Illustrative discussion material only • Definitive ownership, governance, tax, and financing terms require professional advice</div>
+</div>
+</div>
+</body>
+</html>

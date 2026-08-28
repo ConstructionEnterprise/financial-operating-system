@@ -1,0 +1,1 @@
+ALTER TABLE `investor_contacts` ADD CONSTRAINT `investor_owner_email_unique` UNIQUE(`ownerId`,`email`);

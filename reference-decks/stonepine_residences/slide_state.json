@@ -1,0 +1,88 @@
+{
+  "project_info": {
+    "title": "Stonepine Residences",
+    "created": 1787290966.984,
+    "last_updated": 1787292303.723,
+    "total_slides": 6
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "project_thesis",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "program",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "ceff_operating_model",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "historical_planning",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "status_and_controls",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "capital_architecture",
+      "state": "deleted",
+      "pageNum": -1
+    },
+    {
+      "id": "reference_checklist",
+      "state": "deleted",
+      "pageNum": -1
+    }
+  ],
+  "outline": [
+    {
+      "id": "cover",
+      "title": "Stonepine Residences",
+      "summary": "Cover slide establishing the project as an internal CE/FF project reference.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "project_thesis",
+      "title": "Subdivision-scale single-family industrialization",
+      "summary": "Project type, purpose, and the residential-production thesis without merging it with Cedarwood Flats.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "program",
+      "title": "Known program: 300 homes",
+      "summary": "Known home count and the detailed site, lot, and product-mix fields that remain unvalidated.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "ceff_operating_model",
+      "title": "Factory-to-field execution at subdivision scale",
+      "summary": "CE/FF construction-enterprise and Factory Foundation manufacturing, inventory, logistics, and execution context.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "historical_planning",
+      "title": "Historical planning scenarios",
+      "summary": "Displays user-supplied superseded base and optimized Stonepine scenarios side by side, with explicit historical, estimated, and unknown-effective-date treatment.",
+      "image_plan": "No image. Use an evidence-based two-scenario comparison layout in the deck's established editorial visual language."
+    },
+    {
+      "id": "status_and_controls",
+      "title": "Concept stage with a preserved naming boundary",
+      "summary": "Planning status and explicit confirmation that Stonepine remains distinct from Cedarwood Flats.",
+      "image_plan": "Use a suitable image if needed"
+    }
+  ]
+}

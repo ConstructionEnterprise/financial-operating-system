@@ -1,0 +1,41 @@
+CREATE TABLE `project_planning_financing_terms` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`ownerId` int NOT NULL,
+	`internalProjectId` int NOT NULL,
+	`projectionScenarioId` int NOT NULL,
+	`loanAmount` int,
+	`annualInterestRateBps` int,
+	`termMonths` int,
+	`amortizationMonths` int,
+	`interestOnlyMonths` int,
+	`closingMonth` int,
+	`dataState` enum('projected','estimated') NOT NULL,
+	`sourceReference` varchar(500),
+	`effectiveAt` timestamp,
+	`ownerName` varchar(255),
+	`notes` text,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `project_planning_financing_terms_id` PRIMARY KEY(`id`),
+	CONSTRAINT `project_planning_financing_owner_scenario_unique` UNIQUE(`ownerId`,`projectionScenarioId`)
+);
+--> statement-breakpoint
+CREATE TABLE `project_planning_schedule_months` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`ownerId` int NOT NULL,
+	`internalProjectId` int NOT NULL,
+	`projectionScenarioId` int NOT NULL,
+	`monthIndex` int NOT NULL,
+	`phase` enum('predevelopment','design_entitlement','construction','building_completion','lease_up_stabilization','commissioning','operating_ramp','stabilized_operations') NOT NULL,
+	`constructionSpendBps` int,
+	`occupancyBps` int,
+	`dataState` enum('projected','estimated') NOT NULL,
+	`sourceReference` varchar(500),
+	`effectiveAt` timestamp,
+	`ownerName` varchar(255),
+	`notes` text,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `project_planning_schedule_months_id` PRIMARY KEY(`id`),
+	CONSTRAINT `project_planning_schedule_owner_scenario_month_unique` UNIQUE(`ownerId`,`projectionScenarioId`,`monthIndex`)
+);

@@ -1,0 +1,1 @@
+ALTER TABLE `project_projection_monthly_lines` MODIFY COLUMN `deploymentCategory` enum('not_applicable','land_site','building','equipment','robotics_automation','technology','soft_costs','contingency','working_capital','other') NOT NULL DEFAULT 'not_applicable';

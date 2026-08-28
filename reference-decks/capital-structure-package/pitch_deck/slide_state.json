@@ -1,0 +1,144 @@
+{
+  "project_info": {
+    "title": "The Financing Insight",
+    "created": 1787189123.191,
+    "last_updated": 1787189614.223,
+    "total_slides": 12
+  },
+  "slides": [
+    {
+      "id": "financing_insight",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "single_bucket_problem",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "three_buckets",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "equity_use",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "entity_separation",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "capital_flow",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "ip_protection",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "provider_benefits",
+      "state": "edited",
+      "pageNum": 8
+    },
+    {
+      "id": "key_agreements",
+      "state": "edited",
+      "pageNum": 9
+    },
+    {
+      "id": "risks_mitigants",
+      "state": "edited",
+      "pageNum": 10
+    },
+    {
+      "id": "execution_sequence",
+      "state": "edited",
+      "pageNum": 11
+    },
+    {
+      "id": "investment_thesis",
+      "state": "edited",
+      "pageNum": 12
+    }
+  ],
+  "outline": [
+    {
+      "id": "financing_insight",
+      "title": "The Financing Insight",
+      "summary": "Introduce the principle of matching each capital source to the risk and asset class it underwrites.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "single_bucket_problem",
+      "title": "The Problem With a Single-Capital-Bucket Factory",
+      "summary": "Contrast an inefficient all-equity factory financing model with the proposed separated structure.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "three_buckets",
+      "title": "Three Capital Buckets",
+      "summary": "Explain technology equity, the facility JV, and equipment debt.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "equity_use",
+      "title": "What the $1M Actually Funds",
+      "summary": "Show how the initial equity round funds the scalable technology layer and first deployment.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "entity_separation",
+      "title": "Entity Separation",
+      "summary": "Map the technology company, facility JV, factory operator, and equipment financing vehicle.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "capital_flow",
+      "title": "Capital Flow to Revenue",
+      "summary": "Show the sequence from technology equity to facility, equipment, and operating cash flow.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "ip_protection",
+      "title": "IP Protection Is a Strategic Advantage",
+      "summary": "Explain why core software, robotics intelligence, and digital-twin IP should remain with the technology company.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "provider_benefits",
+      "title": "Why Each Capital Provider Benefits",
+      "summary": "Summarize the value proposition for the technology investor, property partner, equipment lender, and operator.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "key_agreements",
+      "title": "Key Agreements",
+      "summary": "List the commercial and governance documents required to make the structure operational.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "risks_mitigants",
+      "title": "Key Risks and Mitigants",
+      "summary": "Present principal technology, facility, equipment, IP, governance, and demand risks with mitigants.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "execution_sequence",
+      "title": "Proposed Execution Sequence",
+      "summary": "Lay out the staged path from equity close through commissioning and follow-on financing.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "investment_thesis",
+      "title": "The Investment Thesis in One Sentence",
+      "summary": "Close with the core capital-efficiency thesis and an important discussion-only disclaimer.",
+      "image_plan": "Use a suitable image if needed"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "project_info": {
+    "title": "Garden Haven",
+    "created": 1787290983.55,
+    "last_updated": 1787292349.854,
+    "total_slides": 6
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "project_thesis",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "program",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "ceff_operating_model",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "historical_planning",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "status_and_controls",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "capital_architecture",
+      "state": "deleted",
+      "pageNum": -1
+    },
+    {
+      "id": "reference_checklist",
+      "state": "deleted",
+      "pageNum": -1
+    }
+  ],
+  "outline": [
+    {
+      "id": "cover",
+      "title": "Garden Haven",
+      "summary": "Cover slide establishing the project as an internal CE/FF project reference.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "project_thesis",
+      "title": "A scalable single-family community delivery reference",
+      "summary": "Project type, single-family purpose, planning context, and the limits of validated information.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "program",
+      "title": "Known program: 100 homes",
+      "summary": "Known home count and the site, product, acreage, floor-area, and lot fields that remain unvalidated.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "ceff_operating_model",
+      "title": "Manufacturing, logistics, and execution support deployment",
+      "summary": "CE/FF and Factory Foundation context for industrialized single-family production and construction execution.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "historical_planning",
+      "title": "Historical planning figure",
+      "summary": "Displays the user-supplied Garden Haven planning figure while preserving its unresolved metric classification and unknown effective date.",
+      "image_plan": "No image. Use the deck's existing navy/orange editorial information layout and explicit classification boundary."
+    },
+    {
+      "id": "status_and_controls",
+      "title": "Development concept, not a construction claim",
+      "summary": "Current planning context and explicit separation of project facts, concepts, and unavailable financial input data.",
+      "image_plan": "Use a suitable image if needed"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+file_name,project_name,records,scenario_count,known_primary_control,source_boundary
+01_cedarwood_flats_financial_model_inputs.csv,Cedarwood Flats,438,1,$40.0M development-cost control,User-supplied Cedarwood Base Planning Case
+02_garden_lofts_financial_model_inputs.csv,Garden Lofts,438,1,$90.0M historical planning cost basis,Historical planning basis plus estimated model scaffolding
+03_stonepine_residences_financial_model_inputs.csv,Stonepine Residences,825,2,$174.6M base / $156.0M optimized,User-supplied historical planning cases preserved separately
+04_skyline_towers_financial_model_inputs.csv,Skyline Towers,1314,3,$185.0M base development case,User-supplied preliminary planning case; not recovered historical data
+05_chappell_international_financial_model_inputs.csv,Chappell International Manufacturing Facility,411,1,$41.0M facility CapEx,Historical facility CapEx plus inferred operating scaffolding; $300M is excluded from facility stack
+06_garden_haven_financial_model_inputs.csv,Garden Haven,1230,3,$11.5M historical planning figure,Historical figure plus inferred scenario scaffolding; original component scope unknown

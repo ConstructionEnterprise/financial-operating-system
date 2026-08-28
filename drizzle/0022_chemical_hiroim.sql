@@ -1,0 +1,1 @@
+ALTER TABLE `capital_opportunities` ADD `internalProjectId` int;

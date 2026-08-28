@@ -1,0 +1,88 @@
+{
+  "project_info": {
+    "title": "Chappell International Manufacturing Facility",
+    "created": 1787290978.255,
+    "last_updated": 1787292338.974,
+    "total_slides": 6
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "project_thesis",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "program",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "operating_system",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "historical_planning",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "status_and_controls",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "capital_architecture",
+      "state": "deleted",
+      "pageNum": -1
+    },
+    {
+      "id": "reference_checklist",
+      "state": "deleted",
+      "pageNum": -1
+    }
+  ],
+  "outline": [
+    {
+      "id": "cover",
+      "title": "Chappell International Manufacturing Facility",
+      "summary": "Cover slide establishing the facility as the CE/FF industrial-platform project reference.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "project_thesis",
+      "title": "The industrial production platform behind CE/FF",
+      "summary": "Facility purpose, industrialized-construction thesis, and its role as the flagship project reference.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "program",
+      "title": "Known program: approximately 100,000 SF of manufacturing capacity",
+      "summary": "Known Saginaw, Texas context, conceptual footprint, manufacturing workflows, and site-control boundary.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "operating_system",
+      "title": "Factory Foundation makes the facility operationally legible",
+      "summary": "Factory Foundation, CE Forge, robotics, material handling, and digital-twin operating-system relationship.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "historical_planning",
+      "title": "Historical facility CapEx scenario",
+      "summary": "Displays the user-supplied historical facility CapEx and detailed component scenario while explicitly excluding the broader CE scaling target from facility CapEx.",
+      "image_plan": "No image. Use the deck's existing navy/orange editorial information layout and strong scope-boundary language."
+    },
+    {
+      "id": "status_and_controls",
+      "title": "Conceptual maturity does not equal facility construction",
+      "summary": "Planning status, conceptual architecture readiness, and financial/output data boundaries.",
+      "image_plan": "Use a suitable image if needed"
+    }
+  ]
+}

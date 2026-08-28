@@ -1,0 +1,88 @@
+{
+  "project_info": {
+    "title": "Skyline Towers",
+    "created": 1787290972.853,
+    "last_updated": 1787292315.618,
+    "total_slides": 6
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "project_thesis",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "program",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "ceff_operating_model",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "historical_planning",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "status_and_controls",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "capital_architecture",
+      "state": "deleted",
+      "pageNum": -1
+    },
+    {
+      "id": "reference_checklist",
+      "state": "deleted",
+      "pageNum": -1
+    }
+  ],
+  "outline": [
+    {
+      "id": "cover",
+      "title": "Skyline Towers",
+      "summary": "Cover slide establishing the project as an internal CE/FF project reference.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "project_thesis",
+      "title": "High-density mixed use expands the CE/FF operating model",
+      "summary": "Project type, purpose, planning context, and validated limits.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "program",
+      "title": "Known program: 450 mixed-use residential units",
+      "summary": "Known residential unit count and the commercial mix, height, floor area, and allocation elements that remain unvalidated.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "ceff_operating_model",
+      "title": "A vertical project translated into an operating system",
+      "summary": "CE/FF role in connecting high-density requirements to manufacturing, logistics, construction, and capital formation.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "historical_planning",
+      "title": "Financial data recovery status",
+      "summary": "Explains that Skyline historical modeling exists but no exact current recoverable figure has been entered, preventing an unsupported financial scenario.",
+      "image_plan": "No image. Use a concise recovery-state diagram with the existing navy/orange editorial visual language."
+    },
+    {
+      "id": "status_and_controls",
+      "title": "Development concept, not a construction claim",
+      "summary": "Current concept stage and clear distinction between project context and unknown financial inputs.",
+      "image_plan": "Use a suitable image if needed"
+    }
+  ]
+}
