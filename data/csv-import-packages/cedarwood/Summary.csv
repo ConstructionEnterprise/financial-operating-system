@@ -1,0 +1,35 @@
+Unnamed: 0,Unnamed: 1,Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5,Unnamed: 6
+,,,,,,
+,,Cedarwood Flats | Underwriting Model Summary,,,,
+,,,,,,
+,,SKU-level model built from user-authorized historical planning figures and editable projected assumptions. This workbook is an underwriting tool—not a record of actual performance.,,,,
+,,($ in whole dollars unless noted),,,,
+,,,,,,
+,,HISTORICAL PLANNING CONTROLS,,,,
+,,Metric,Value,Source / Formula,Status,Model Treatment
+,,Development cost control,40000000,Authorized historical planning input,Estimated historical planning,Controls WBS reconciliation
+,,100-line WBS total,40000000,Linked WBS total,Formula,Budget control
+,,WBS reconciliation,0,WBS total less $40M control,Formula,Must equal $0.0
+,,Program units,280,Authorized historical planning input,Estimated historical planning,Program reference
+,,Buildings,5,Authorized historical planning input,Estimated historical planning,Program reference
+,,Annual NOI reference,4750000,Authorized historical planning input,Estimated historical planning,Reference only; not used to back-solve rents
+,,Historical yield on cost,0.11875,$4.75M / $40M,Derived historical planning,Reference metric
+,,Financing reference,55000000,Authorized historical planning input,Estimated historical planning,Reference only; not funded capital
+,,,,,,
+,,ACTIVE UNDERWRITING CASE STATUS,,,,
+,,Required Driver Block,SKU Lines,Completion,What the Model Does,
+,,Unit mix / market rent,REV-*,0 / 4 unit counts; 0 / 4 rents,Activates gross potential rent when populated.,
+,,Operating expenses,OPX-*,0 / 14 items,Activates EGI and NOI when populated.,
+,,36-month timing,SCH-*,0 / 36 construction; 0 / 36 occupancy,Activates monthly construction and lease-up cash flow.,
+,,Financing terms,FIN-010 to FIN-017,1 / 8 terms,Activates debt service and levered cash flow.,
+,,Exit / return drivers,EXIT-*,0 / 3 exit drivers,Supports exit and terminal-value analysis once entered.,
+,,,,,,
+,,MODEL NAVIGATION,,,,
+,,Tab,Purpose,Required Action,,
+,,Inputs - SKU Register,All required numbers have a SKU and source field.,Enter blue-font Base / Downside / Upside input cells with source comments.,,
+,,WBS Budget,100 development budget entries totaling $40M.,Use as the project cost control and replace allowances only with sourced revisions.,,
+,,Rent Roll,Unit-type program and market-rent build.,"Enter unit counts, SF, rents, and occupancy by unit type.",,
+,,Revenue & Operations,Stabilized operating statement.,Enter each operating expense line; do not force the historical NOI reference.,,
+,,Monthly Schedule,36-month construction and lease-up timing.,Enter construction deployment and occupancy each month.,,
+,,Sources & Uses / Debt Schedule,Capital structure and debt mechanics.,Enter active debt terms and actual intended sources.,,
+,,Returns,Monthly levered cash flow and return calculations.,Review only after the linked underlying schedules are complete.,,

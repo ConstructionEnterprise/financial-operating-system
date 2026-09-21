@@ -1,0 +1,43 @@
+CREATE TABLE `investor_research_proposals` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`ownerId` int NOT NULL,
+	`contactId` int NOT NULL,
+	`status` enum('proposed','applied','dismissed','failed') NOT NULL DEFAULT 'proposed',
+	`researchSummary` text,
+	`thesis` text,
+	`suggestedFitScore` int,
+	`geography` varchar(128),
+	`checkSizeMin` int,
+	`checkSizeMax` int,
+	`investorLanguage` varchar(255),
+	`portfolioHighlights` text,
+	`likelyObjections` text,
+	`bestPitchAngle` text,
+	`warmIntroPath` text,
+	`assetClassPreference` varchar(255),
+	`riskTolerance` varchar(128),
+	`returnExpectations` varchar(255),
+	`capitalPreference` varchar(128),
+	`investmentHorizon` varchar(128),
+	`decisionStructure` text,
+	`decisionCycle` varchar(128),
+	`communicationPreference` varchar(255),
+	`draftSubject` varchar(500),
+	`draftBody` text,
+	`fieldEvidence` text,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `investor_research_proposals_id` PRIMARY KEY(`id`)
+);
+--> statement-breakpoint
+CREATE TABLE `investor_research_sources` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`ownerId` int NOT NULL,
+	`proposalId` int NOT NULL,
+	`url` text NOT NULL,
+	`title` varchar(500),
+	`sourceType` varchar(64) NOT NULL DEFAULT 'public website',
+	`excerpt` text,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	CONSTRAINT `investor_research_sources_id` PRIMARY KEY(`id`)
+);

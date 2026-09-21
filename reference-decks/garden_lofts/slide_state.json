@@ -1,0 +1,100 @@
+{
+  "project_info": {
+    "title": "Garden Lofts",
+    "created": 1787290961.515,
+    "last_updated": 1787292290.39,
+    "total_slides": 8
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "project_thesis",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "program",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "ceff_operating_model",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "historical_planning",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "status_and_controls",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "capital_architecture",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "reference_checklist",
+      "state": "edited",
+      "pageNum": 8
+    }
+  ],
+  "outline": [
+    {
+      "id": "cover",
+      "title": "Garden Lofts",
+      "summary": "Cover slide establishing the project as an internal CE/FF project reference.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "project_thesis",
+      "title": "Urban multifamily as an industrialized delivery test case",
+      "summary": "Project type, urban residential purpose, planning context, and validated limits.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "program",
+      "title": "Known program: 250 residential units",
+      "summary": "Known unit count and the building form, unit mix, and floor area items that remain unvalidated.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "ceff_operating_model",
+      "title": "Construction, logistics, and installation converge",
+      "summary": "Factory Foundation logistics-flow context and CE/FF industrialized delivery role.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "historical_planning",
+      "title": "Historical planning scenario",
+      "summary": "Displays the user-supplied Garden Lofts historical cost basis and prior-program context as estimated planning material with unknown effective date.",
+      "image_plan": "No image. Use the deck's existing navy/orange editorial information layout and explicit data-boundary labels."
+    },
+    {
+      "id": "status_and_controls",
+      "title": "Development concept, not a construction claim",
+      "summary": "Current planning/development context and explicit truth boundaries.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "capital_architecture",
+      "title": "Capital pathways are strategies, not commitments",
+      "summary": "Potential project financing pathways with no confirmed partners or terms asserted.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "reference_checklist",
+      "title": "Reference deck to financial model: what comes next",
+      "summary": "The evidence package required before project-specific budget, revenue, or return outputs are created.",
+      "image_plan": "Use a suitable image if needed"
+    }
+  ]
+}

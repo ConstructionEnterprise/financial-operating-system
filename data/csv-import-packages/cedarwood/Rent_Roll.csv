@@ -1,0 +1,15 @@
+Unnamed: 0,Unnamed: 1,Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5,Unnamed: 6,Unnamed: 7,Unnamed: 8,Unnamed: 9,Unnamed: 10,Unnamed: 11,Unnamed: 12,Unnamed: 13
+,,,,,,,,,,,,,
+,,Cedarwood Flats | Rent Roll & Revenue Drivers,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,"All market rent, unit mix, and occupancy inputs are editable scenario drivers. The workbook does not back-solve rents from the NOI reference.",,,,,,,,,,,
+,,($ in whole dollars unless noted),,,,,,,,,,,
+,,,,,,,,,,,,,
+,,BASE-CASE UNIT MIX AND MARKET RENT DRIVERS,,,,,,,,,,,
+,,Unit Type,Count SKU,Count,Average SF SKU,Average SF,Rent SKU,Monthly Rent,Occupancy SKU,Occupancy,Monthly GPR,Monthly EGI,Notes
+,,Studio,REV-STUDIO-01,,REV-STUDIO-02,,REV-STUDIO-03,,REV-STUDIO-04,,,,"Enter sourced market rent, planned count, average SF, and stabilized occupancy."
+,,One bedroom,REV-ONEBR-01,,REV-ONEBR-02,,REV-ONEBR-03,,REV-ONEBR-04,,,,"Enter sourced market rent, planned count, average SF, and stabilized occupancy."
+,,Two bedroom,REV-TWOBR-01,,REV-TWOBR-02,,REV-TWOBR-03,,REV-TWOBR-04,,,,"Enter sourced market rent, planned count, average SF, and stabilized occupancy."
+,,Three bedroom,REV-THREEBR-01,,REV-THREEBR-02,,REV-THREEBR-03,,REV-THREEBR-04,,,,"Enter sourced market rent, planned count, average SF, and stabilized occupancy."
+,,Total / weighted output,,0,,,,,,,,,
+,,Unit-count check,,-280,,,,,,,,,Must equal zero before the working unit mix is treated as reconciling to the historical program reference.

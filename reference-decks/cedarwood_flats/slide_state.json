@@ -1,0 +1,100 @@
+{
+  "project_info": {
+    "title": "Cedarwood Flats",
+    "created": 1787290956.156,
+    "last_updated": 1787292249.299,
+    "total_slides": 8
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "project_thesis",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "program",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "ceff_operating_model",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "historical_planning",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "status_and_controls",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "capital_architecture",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "reference_checklist",
+      "state": "edited",
+      "pageNum": 8
+    }
+  ],
+  "outline": [
+    {
+      "id": "cover",
+      "title": "Cedarwood Flats",
+      "summary": "Cover slide establishing the project as an internal CE/FF project reference.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "project_thesis",
+      "title": "Multifamily delivery at repeatable scale",
+      "summary": "Project type, purpose, planning context, and what is known versus not validated.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "program",
+      "title": "Known program: 280 homes across five buildings",
+      "summary": "Known unit count, building count, indicative program elements, and unvalidated details identified explicitly.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "ceff_operating_model",
+      "title": "CE/FF connects the development to an operating system",
+      "summary": "CE/FF and Factory Foundation context for manufacturing, logistics, construction, and operational data.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "historical_planning",
+      "title": "Historical planning scenario",
+      "summary": "Displays the user-supplied Cedarwood historical cost, NOI, and loan scenario as estimated planning context with unknown effective date and no current-model inclusion.",
+      "image_plan": "No image. Use the deck's existing navy/orange editorial information layout to prevent any implication of a current financial statement."
+    },
+    {
+      "id": "status_and_controls",
+      "title": "Planning context with disciplined data boundaries",
+      "summary": "Current lifecycle status, near-term definition work, and the distinctions between project facts, concepts, and financial model inputs.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "capital_architecture",
+      "title": "Capital pathways are strategies, not commitments",
+      "summary": "Potential equity, JV/facility, equipment finance, and incentives paths, with no project-specific partner or terms asserted.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "reference_checklist",
+      "title": "Reference deck to financial model: what comes next",
+      "summary": "The evidence package required before financial model scenarios, budgets, or returns can be populated.",
+      "image_plan": "Use a suitable image if needed"
+    }
+  ]
+}

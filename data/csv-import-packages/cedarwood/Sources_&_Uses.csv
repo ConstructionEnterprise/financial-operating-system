@@ -1,0 +1,20 @@
+Unnamed: 0,Unnamed: 1,Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5,Unnamed: 6,Unnamed: 7
+,,,,,,,
+,,Cedarwood Flats | Sources & Uses,,,,,
+,,,,,,,
+,,The $55M financing figure is retained as a historical planning reference. Active sources use only editable base-case debt and equity SKUs.,,,,,
+,,($ in whole dollars unless noted),,,,,
+,,,,,,,
+,,USES,,,,,
+,,SKU,Use,Amount,Source / Formula,State,Notes
+,,USE-001,Total development budget,40000000,WBS Budget total,Historical planning control,
+,,,,,,,
+,,SOURCES,,,,,
+,,SKU,Source,Amount,Source / Formula,State,Notes
+,,FIN-010,Senior debt,55000000,Base-case input SKU FIN-010,Projected input,
+,,CAP-001,Sponsor / JV equity,,Base-case input SKU CAP-001,Projected input,
+,,CAP-002,Other capital sources,,Base-case input SKU CAP-002,Projected input,
+,,,Total sources,55000000,,,
+,,,Sources / uses gap,15000000,,Formula,
+,,,,,,,
+,,FIN-001,Historical financing reference — not applied,55000000,,Historical planning reference,Not funded capital. Copy or modify this reference into FIN-010 only when selecting an active debt case.

@@ -1,0 +1,363 @@
+# Project TODO
+
+- [x] Initialize the custom CE/FF investor outreach web app
+- [x] Import and manage the 50-investor target list
+- [x] Add investor segmentation and fit fields
+- [x] Add simple personalized initial-email drafting
+- [x] Add approval-before-send workflow
+- [x] Integrate Gmail OAuth and sending
+- [x] Add one six-month follow-up per investor; no 4-day or 7-day follow-ups
+- [x] Add opt-out and suppression-list handling
+- [x] Add duplicate-contact and no-send safeguards
+- [x] Add send, reply, bounce, and follow-up status tracking
+- [x] Add campaign dashboard and reporting
+- [x] Add vitest coverage for core outreach logic and safeguards
+- [x] Verify responsive UI with screenshots
+- [x] Add a hosted Gmail OAuth start and callback route
+- [x] Document the exact Authorized Redirect URI for Google Cloud setup
+- [x] Add a Gmail connection status panel before enabling send actions
+- [x] Add real duplicate prevention with server-side checks and a database uniqueness strategy
+- [x] Capture and review mobile and tablet screenshots for responsive verification
+- [x] Build a Gmail connection-status panel that reflects OAuth state and gates sending
+- [x] Add a database-level uniqueness constraint for ownerId plus normalized investor email
+- [x] Persist Gmail OAuth connection state securely and expose a server-side status query
+- [x] Gate send actions using persisted Gmail connection state, not only client state or an environment flag
+- [x] Remove the extra environment-only send gate or rename it as an explicit deployment feature flag
+- [x] Add a tested send-action flow enabled or disabled from server-reported Gmail status
+- [x] Add a real send action in the UI tied to server-reported Gmail status
+- [x] Add integration coverage proving disconnected Gmail blocks sending and connected Gmail enables the action path
+- [x] Make the Send via Gmail button depend solely on outreach.gmailStatus and refetch it after OAuth completion
+- [x] Preserve the existing refresh token when Google omits refresh_token on reconnect
+- [x] Add a visible suppression-management flow for opted-out, paused, and bounced contacts
+- [x] Add unsubscribe/opt-out handling or clearly document the manual suppression workflow
+- [x] Add integration tests for markSent with disconnected and persisted-connected Gmail states
+- [x] Add UI/state tests confirming Send via Gmail follows server-reported Gmail status
+- [x] Add explicit manual suppression guidance in the UI for Opt out, Pause, and Bounced controls
+- [x] Add a rendered UI/component test for Send via Gmail disabled and enabled states
+- [x] Add a prominent Gmail connection control in the deployed dashboard header
+- [x] Correct the OAuth redirect from the temporary preview host to the published app domain
+
+## Fundraising Operating System Expansion
+
+- [x] Define the fundraising domain model: Investor, Campaign, Task, Meeting, and Analytics
+- [x] Upgrade the database schema to support the expanded investor record (stage, check size, geography, relationship)
+- [x] Add database tables for Campaigns, Tasks, and Meetings
+- [x] Build the new navigation structure: Dashboard | Investors | Campaigns | Inbox | Tasks | Meetings | Analytics | Settings
+- [x] Implement the expanded Investor workspace UI
+- [x] Implement the Campaigns UI for managing funnel batches
+- [x] Implement the Tasks UI for next-action tracking
+- [x] Implement the Meetings UI for scheduling and reminders
+- [x] Implement the Analytics dashboard for conversion and response reporting
+- [x] Optimize the UI for mobile pipeline management
+- [x] Integrate the AI layer for drafting, personalization, classification, and summarization
+- [x] Test the expanded fundraising operating system workflows
+- [x] Add a full investor-record panel for relationship stage, geography, check-size range, owner, next action, due date, source, notes, campaign, and outreach history
+- [x] Expand Campaigns into funnel management with editing, target counts, investor assignment, and stage progression
+- [x] Upgrade Tasks with investor/campaign association, due dates, and next-action prioritization
+- [x] Add meeting investor/campaign context, reminders, and follow-up workflow
+- [x] Add phone-friendly cards or compact views for Investors, Campaigns, Tasks, and Meetings
+- [x] Capture mobile screenshots for each major fundraising workspace
+- [x] Implement AI classification for investor fit, stage, or priority in the UI
+- [x] Implement AI summarization for investor outreach history, replies, or meeting notes
+- [x] Add Vitest coverage for AI classification and summarization
+- [x] Render AI classification results inside the investor record with priority, recommended stage, and reason
+- [x] Render AI outreach-history summaries inside the investor record with loading and error states
+- [x] Persist or apply AI-generated classification and summary outputs so they remain usable after refresh
+- [x] Include reply and meeting-note context in the AI summary input where available
+- [x] Add inline AI summary error state inside the investor record
+- [x] Capture reply content and meeting notes for summary context when present
+- [x] Add tests for inline summary errors and enriched reply/meeting-note inputs
+- [x] Add workflow tests covering Investors, Campaigns, Tasks, and Meetings core flows
+- [x] Add a UI/component test verifying inline AI summary errors render in the investor record
+- [x] Add direct investor-record component coverage for inline AI summary errors
+- [x] Add behavior-level coverage for investor, campaign, task, and meeting workflows
+- [x] Add direct tests for investor record persistence and AI-summary save/apply actions
+- [x] Add direct campaign tests for creation, assignment, and stage progression controls
+- [x] Add direct task and meeting tests for linkage, creation, status, and context controls
+- [x] Add campaign rename and safe deletion controls
+- [x] Add campaign grouping, sorting, and compact management filters
+- [x] Test campaign organization mutations and responsive workspace behavior
+- [x] Add campaign filters for group, stage, and status
+- [x] Add direct campaign update and safe-deletion mutation coverage
+- [x] Add helper-level test proving campaign deletion unassigns linked records before removal
+- [x] Assert campaign cleanup order and linked-table scope before deletion
+- [x] Add a secure CE/FF document library with S3-backed uploads
+- [x] Associate fundraising documents with selected campaigns
+- [x] Add document upload, organization, open, unlink, and safe removal controls
+- [x] Test document library storage contracts and responsive campaign selection
+- [x] Add document type, version, status, description, and modification metadata
+- [x] Add current/archive lifecycle controls and campaign material-set views
+- [x] Add investor-level document attachment selection for approval and send
+- [x] Test versioned document lifecycle and investor attachment selection flows
+- [x] Add selected-attachment controls and summary inside the investor approval/send panel
+- [x] Add campaign material picker interaction coverage and verify it on desktop and mobile
+- [x] Move attachment controls inside the investor approval/send card
+- [x] Add direct interaction coverage for linking and unlinking campaign materials
+- [x] Add component-level campaign material picker link and unlink interaction coverage
+- [x] Add XLSX support plus audience and document-purpose metadata
+- [x] Add document preview/download and replacement-version workflow
+- [x] Add investor-record document association and recommended current attachments
+- [x] Test expanded document lifecycle and approval-first attachment recommendations
+- [x] Add in-app document preview controls with UI coverage
+- [x] Add direct recommendation matching and add-recommended interaction coverage
+- [x] Add deterministic investor intelligence scoring and priority views
+- [x] Add investor DNA profile fields and decision-support recommendations
+- [x] Add a daily fundraising copilot with prioritized actions and pipeline alerts
+- [x] Add a configurable fundraising funnel simulator with transparent assumptions
+- [x] Test intelligence scoring, recommendations, copilot actions, and simulator calculations
+- [x] Surface deterministic investor intelligence scores and score drivers in the Investors workspace
+- [x] Add daily fundraising copilot priorities, action counts, and recommended actions to the dashboard
+- [x] Test the integrated priority score and daily copilot UI
+- [x] Show score drivers and priority badges in the investor workspace
+- [x] Add explicit daily pipeline alerts and direct copilot UI coverage
+- [x] Render priority badges and transparent score-driver breakdowns in the investor workspace
+- [x] Persist investor DNA fields for language, portfolio, objections, pitch angle, and warm-intro path
+- [x] Build a configurable analytics funnel simulator driven by transparent conversion assumptions
+- [x] Add direct component coverage for scoring, alerts, recommendations, and simulation output
+- [x] Validate the intelligence upgrade on desktop and mobile, then publish the completed app
+- [x] Add a deterministic score and priority badge to each investor table row or compact investor card
+- [x] Add composed workspace coverage for the investor priority panel and dashboard Copilot alerts
+- [x] Add persisted investor DNA attributes for asset-class preference, risk tolerance, return expectations, capital preference, investment horizon, decision structure, decision cycle, and communication preference
+- [x] Tie investor-priority drivers, DNA attributes, alerts, and recommendations directly to the underlying investor, campaign, interaction, meeting, and task records
+- [x] Extend the funnel simulator with target capital, average check size, and capital-progress projections
+- [x] Add campaign and task context to Copilot alerts and recommendations, with direct record-linkage coverage
+- [x] Add outreach-history context to Copilot recommendations and prove that persisted interaction records influence daily actions
+- [x] Add real dashboard and investor-workspace composition components for integrated intelligence coverage
+- [x] Save the verified intelligence upgrade as a new published checkpoint
+- [x] Define public-source research scope, source attribution, confidence labels, and no-autosave/no-send controls
+- [x] Add persisted investor research proposals and source-attribution records
+- [x] Implement a structured AI research action for one selected investor at a time
+- [x] Render an investor-research review panel with field-level human apply controls
+- [x] Add tests for source attribution, proposal validation, approval gating, and no-send behavior
+- [x] Test that unattributed proposal evidence is filtered and unsupported research fields cannot update an investor record
+- [x] Add direct unsupported-field rejection coverage for research-proposal application
+- [x] Diagnose why the live Research investor action returns no proposal for an approved public URL
+- [x] Repair the public-source research path and show actionable errors when a source cannot be researched
+- [x] Add regression coverage for the diagnosed live research failure and publish the repair
+- [x] Define the four dedicated capital-path tabs and their shared aggregate reporting metrics
+- [x] Add a shared capital-opportunity data model with requested, committed, probability-weighted, and remaining funding amounts
+- [x] Preserve existing equity investor records in the Equity Investors workspace
+- [x] Build dedicated JV / Facility Partners, Equipment Financing, and Grants & Incentives workspaces
+- [x] Build an aggregate capital dashboard with funding progress and remaining gap by capital path
+- [x] Add tests and responsive validation for the unified capital-formation operating system
+- [x] Add specialized facility/JV fields for partner role, facility contribution, structure, terms, and operator responsibilities
+- [x] Add specialized equipment-finance fields for asset, vendor, equipment cost, down payment, term, rate, collateral, structure, approval, and funding date
+- [x] Add specialized grant fields for program, agency, eligibility, award ceiling, match requirement, deadline, eligible costs, application, award, and reporting status
+- [x] Show funded separately from committed and provide cross-path next actions ranked by funding impact and urgency
+- [x] Add direct interaction tests for specialized JV, equipment-finance, and grant detail saves plus funded-state updates
+- [x] Capture mobile validation for the JV / Facility and Grants & Incentives workspaces
+- [x] Add direct interaction coverage for JV / Facility specialized detail saves
+- [x] Add direct interaction coverage for Grants & Incentives specialized detail saves
+- [x] Re-run full capital-operating-system validation after completing all specialized save-flow coverage
+- [x] Define project/facility association and expanded JV partnership-formation fields on top of the shared opportunity engine
+- [x] Add JV facility, contribution, ownership, economics, relationship, and diligence records without flattening other capital paths
+- [x] Build the JV partnership-formation workspace with structure, facility, relationship, and diligence controls
+- [x] Add expected capital and remaining expected gap calculations alongside committed, funded, and weighted pipeline
+- [x] Test and validate the expanded JV workflow and capital-native executive calculations
+- [x] Wire shared JV relationship context into the workspace save flow
+- [x] Add explicit expected-capital calculation and expanded JV relationship/diligence coverage
+- [x] Add direct expected-capital and remaining expected-gap assertions
+- [x] Add direct JV relationship-context and diligence-checkbox interaction coverage
+- [x] Expose partnership opportunity, capital structure, and initial diligence fields directly in the JV entry workflow
+- [x] Add a visible JV opportunity summary that communicates project, requested capital, probability, structure, and next action
+- [x] Clarify all-capital, per-path, active, and passed opportunity counts in the app shell and dedicated workspaces
+- [x] Add direct UI coverage and responsive validation for the visible JV partnership-formation workflow
+- [x] Define a source-attributed Texas JV prospect schema with partner archetype, geography, contribution potential, strategic fit, and JV thesis
+- [x] Add a persisted Texas JV prospect universe with A/B/C qualification, research status, and conversion to a facility/JV opportunity
+- [x] Research and create an import-ready public-source Texas JV partner prospect CSV without unverified contact data
+- [x] Build a JV sourcing workspace with regional counts, strategic-priority views, and Prospect → Qualification → Opportunity conversion
+- [x] Test and validate source attribution, qualification scoring, and JV prospect conversion
+- [x] Add visible passed-opportunity counts alongside active counts in each dedicated capital workspace
+- [x] Add regional JV prospect counts and breakdowns to the JV sourcing workspace with direct UI coverage
+- [x] Add a dedicated idempotent import for the canonical Texas JV master universe that creates Research-only sourced prospects
+- [x] Add a clear JV workspace control and feedback for importing the verified Texas prospect universe without using the equity CSV importer
+- [x] Add import tests that prevent duplicate prospects and confirm no opportunity or outreach is created
+- [x] Validate the populated JV sourcing workspace on desktop and mobile
+- [x] Add automated master-universe import idempotency coverage for insert-first and skip-on-repeat behavior
+- [x] Capture desktop and mobile views of the populated JV / Facility workspace with imported prospect counts and qualification controls
+- [x] Support direct section targeting for reliable JV workspace verification without changing the default dashboard entry
+- [x] Add an automated assertion that master-universe import never creates outreach, email, or event records
+- [x] Display the JV Qualification Queue as a fixed-height 10-record operational page rather than a 100-row list
+- [x] Add default priority-first sorting plus selectable sort fields and ascending or descending order
+- [x] Add previous, next, direct-page navigation, and a visible result-range indicator for the complete JV prospect set
+- [x] Preserve queue page and sort choices while a user qualifies records or opens existing JV detail workflows
+- [x] Add direct queue pagination and sorting tests with desktop and mobile verification
+- [x] Back all displayed queue sort controls with persisted JV prospect fields or remove unsupported dimensions
+- [x] Add queue-row selection that opens a prospect action interface without resetting page or sort state
+- [x] Add rendered Qualification Queue interaction tests for page navigation, range updates, and sorting
+- [x] Add persisted indicative-capital and next-action-date fields to sourced JV prospects for operational queue sorting
+- [x] Add a non-destructive migration and editable prospect-action panel for those qualification fields
+- [x] Add a rendered complete-queue test for 10-per-page display, sorting, and range updates
+- [x] Add a rendered queue workflow test that preserves page and sort while opening and saving a selected prospect
+- [x] Define transparent CE project, capital-source allocation, and scenario inputs without hardcoded capital targets or fictional operating assumptions
+- [x] Add persisted project economics, capital-source allocations, and base/upside/downside scenario records
+- [x] Implement transparent project ROI, capital-efficiency, capital-path return, payback, and scenario calculations with clear undefined-state handling
+- [x] Add protected ROI data contracts and connect them to existing capital buckets and opportunities where supported by recorded data
+- [x] Build a dedicated ROI / Returns navigation workspace with CE ROI, project ROI, capital efficiency, and capital-path analysis
+- [x] Add configurable base, upside, and downside scenario comparison tied to project-level inputs
+- [x] Test ROI calculations, data boundaries, scenario behavior, and responsive workspace rendering
+- [x] Add structured CE and partner JV contribution components that supplement, rather than overwrite, the existing free-text formation context
+- [x] Calculate total JV capitalization, CE economic contribution, partner economic contribution, ownership, capital efficiency, and expected CE return only from recorded values
+- [x] Preserve prospect, opportunity, commitment, and funded capital as distinct states throughout ROI and JV reporting
+- [x] Label ROI inputs and outputs as actual, projected, estimated, or missing rather than silently blending financial states
+- [x] Show an explicit unavailable state when a project cash-flow schedule or required return inputs are incomplete
+- [x] Attribute recorded returns across CE, investor, JV, equipment-finance, and incentive sources only when supporting values are present
+- [x] Define distinct Equipment Financing and Equipment Rentals domain boundaries, lifecycle states, and data-state safeguards
+- [x] Extend Equipment Financing with acquisition, financier, financing structure, execution, and transparent economics fields
+- [x] Add a qualification-first Equipment Rentals vendor universe, rental requirements, vendor quotes, and active-rental records
+- [x] Preserve public-source rental vendors as prospects until explicit CE qualification; never treat a prospect as an approved or active vendor
+- [x] Build transparent rent-versus-acquire calculations that leave values unavailable when actual quotes, terms, utilization, or useful-life inputs are missing
+- [x] Build dedicated Equipment Financing and Equipment Rentals workspace controls with connections to projects, facilities, ROI / Returns, and future fleet ownership
+- [x] Add tests for equipment data boundaries, transparent calculations, qualification progression, and responsive workspace behavior
+- [x] Remove Equipment Rentals from global sidebar navigation while preserving the existing rental workspace and data model
+- [x] Add an Equipment Finance command ribbon with Financing, Rentals, Vendors, Requirements, Quotes, and Metrics contextual capabilities
+- [x] Route command-ribbon views over the existing Equipment Finance and Rentals functionality without duplicating records or workflows
+- [x] Test command-ribbon navigation, rental-workspace continuity, and mobile presentation
+- [x] Define a Grants & Incentives taxonomy for grants, tax credits, abatements, rebates, forgivable loans, workforce, infrastructure, economic-development, and R&D mechanisms
+- [x] Add source-attributed funding programs, opportunities, applications, awards, compliance items, and eligibility/economic records without blending lifecycle states
+- [x] Preserve Program ≠ Opportunity ≠ Qualified ≠ Application ≠ Submitted ≠ Award ≠ Funded Capital ≠ Compliance Closed across all grant workflows
+- [x] Build transparent qualification scoring and a 10-record paginated Grants & Incentives Qualification Queue with sorting controls
+- [x] Connect recorded awarded and funded amounts—not requested amounts—to the Capital Dashboard and ROI / Returns with non-dilutive capital-leverage safeguards
+- [x] Research and import an attributable federal-and-Texas seed universe of grants and incentives without invented programs, deadlines, award amounts, or eligibility claims
+- [x] Add a Grants & Incentives command ribbon for Overview, Programs, Opportunities, Applications, Awards, and Compliance
+- [x] Build source-aware, qualification-first grant workspace views that preserve research versus operating-application boundaries
+- [x] Test the grant taxonomy, scoring, lifecycle safeguards, import, capital/ROI handoff, command ribbon, and responsive layouts
+- [x] Import the verified 103-record federal-and-Texas Grants & Incentives seed as research-only program records
+- [x] Verify the imported count, research-only lifecycle state, source attribution, and repeat-import idempotency
+- [x] Define a cross-domain capital-attribution contract that maps equity, JV, equipment, rentals, grants, and ROI inputs without conflating stages
+- [x] Build server-side rollups that distinguish potential, requested, committed, awarded, funded, contributed, financed, deployed, and returned amounts
+- [x] Link staged capital outputs to ROI projects only when a recorded project, facility, asset, or project input provides an explicit connection
+- [x] Add source-aware ROI capital-stack views that show path, source record, capital state, data state, and calculation inclusion basis
+- [x] Add cross-domain CE capital-efficiency, capital-gap, and non-dilutive/debt/equity contribution analysis without hardcoded assumptions
+- [x] Test cross-domain rollups, stage exclusions, source traceability, project linking, and responsive ROI analytical views
+- [x] Audit current capital records to identify eligible staged opportunities for a labeled sample ROI project without promoting research programs
+- [x] Create a clearly labeled sample ROI project with no prefilled capital target, operating assumptions, cash flows, or returns
+- [x] Link the sample ROI project to eligible existing capital opportunities and disclose any unavailable connection rather than inventing one
+- [x] Build an interactive monthly cash-flow schedule grid with configurable horizon, actual/projected state, completeness feedback, and save controls
+- [x] Add interactive ROI source and capital-path visualizations that show underlying state, inclusion basis, and unavailable conditions
+- [x] Test sample-project creation, safe source linking, schedule interaction, visualization controls, and responsive presentation
+- [x] Define an Internal Projects domain that is project context—not a capital path or fundraising pipeline—and preserves all existing stage boundaries
+- [x] Add owner-scoped Internal Project, Capital Need, and project-document association records with source-aware actual/projected/estimated/missing states
+- [x] Add protected project CRUD and capital-need workflows, linking existing ROI models and capital opportunities only by explicit project reference
+- [x] Build the Internal Projects command ribbon with Overview, Projects, Capital Needs, Economics, Capital Stack, and Documents views
+- [x] Add a project capital stack that separates requirement targets from opportunity potential, committed, and funded totals without double counting
+- [x] Connect project economics to existing ROI / Returns records without duplicating ROI calculations or pre-filling assumptions
+- [x] Add project-specific document context using existing document-library records without copying file bytes or document metadata
+- [x] Add Internal Projects immediately below ROI / Returns in the primary sidebar and preserve all existing command-ribbon navigation
+- [x] Test project boundaries, data states, explicit linking, capital-stack exclusions, existing-document association, and responsive workspace presentation
+- [x] Translate the approved six-project seed into authoritative Internal Project context without financial, capital, ROI, or opportunity assumptions
+- [x] Add structured known-program and Factory Foundation relationship fields so verified project context is not hidden in narrative text
+- [x] Seed Cedarwood Flats, Garden Lofts, Stonepine Residences, Skyline Towers, Chappell International Manufacturing Facility, and Garden Haven as internal project records only
+- [x] Preserve Missing data states for all unknown project cost, capital requirement, capital stack, financing, cash flow, and return fields
+- [x] Verify the six seeded records are selectable across the Internal Projects command ribbon without creating capital opportunities or ROI models
+- [x] Add seed-boundary regression coverage and publish a concise data-seed audit report
+- [x] Inventory available project, capital, operating, and document inputs for a first CE/FF financial model and identify missing source data
+- [x] Define a staged project-model framework that separates validated actuals, approved assumptions, scenarios, and missing inputs
+- [x] Build first-pass financial-model intake for development costs, operating drivers, revenue drivers, capital sources, and timing
+- [x] Preserve source attribution, data-state labels, and non-duplication with existing capital-stack and ROI / Returns calculations
+- [x] Test financial-model input validation, scenario isolation, and incomplete-data presentation before publishing
+- [x] Define a Chappell 36-month project-economics model shell linked only to the existing Internal Project, with no new project, capital, or ROI assumptions
+- [x] Add governed model-input records for uses, operations, sources, and monthly cash-flow categories with value, source, effective date, owner, and actual/projected/estimated/missing state
+- [x] Add 36 monthly timeline records with Predevelopment, Construction, Commissioning, and Operating Ramp phases while leaving unrecorded values blank
+- [x] Build the Chappell model-shell UI in Internal Projects and clearly route ROI / Returns outputs to the existing economic-analysis authority
+- [x] Add safeguards that keep ROI, IRR, payback, distributions, and multiple unavailable until sufficient validated inputs exist
+- [x] Test model linkage, state metadata, missing-value handling, no-source-opportunity side effects, responsive layout, and run full regression before publishing
+- [x] Define the Projections workspace as a scenario-isolated modeling layer distinct from Internal Projects, capital domains, actuals, and ROI / Returns results
+- [x] Add owner-scoped projection scenarios and structured assumptions with category, metric, value, unit, period, state, source, effective date, owner, and notes
+- [x] Add a generic 36-month projection timeline for Internal Projects with explicit phase vocabulary and no prefilled project timing or economics
+- [x] Build data-gated projection calculations for revenue, cost, net operating result, cumulative cash flow, capital deployment, ROI trajectory, and projected payback
+- [x] Add a Projections command-ribbon view to ROI / Returns with Chappell as pilot selection and reusable all-project context
+- [x] Add scenario controls for Downside, Base, and Upside without writing assumptions into actual project records or existing ROI data
+- [x] Display explicit unavailable states when required projection inputs are absent; never coerce missing values to zero or calculate unsupported metrics
+- [x] Test scenario isolation, calculation eligibility, visualization data gates, capital-stage separation, and responsive Projections presentation
+- [x] Fix the project-economics query contract so an Internal Project with no model shell returns a defined nullable result instead of undefined
+- [x] Add regression coverage for the empty project-economics model query path and verify the Internal Projects workspace remains error-free
+- [x] Retrieve and summarize Cedarwood Flats live project-economics, capital, ROI, and projection data without inferring missing values
+- [x] Create Cedarwood Flats as the second 36-month Project Economics model shell without duplicating its Internal Project or adding financial values
+- [x] Extend reusable project-model phase vocabulary for Cedarwood’s configurable design, completion, and lease-up lifecycle stages without assigning months
+- [x] Add reusable Cedarwood operating and capital-source category options while preserving empty actual/project, capital, and return data states
+- [x] Create only empty Downside, Base, and Upside Cedarwood projection scenario shells, isolated from project facts, capital records, and ROI / Returns actuals
+- [x] Verify Cedarwood is selectable in ROI / Returns → Projections and all outputs remain explicitly unavailable with zero assumptions and monthly lines
+- [x] Test Cedarwood model-shell creation, lifecycle/category taxonomy, no-duplicate behavior, data isolation, and responsive presentation before publishing
+- [x] Retrieve and summarize recorded context, structured program information, Factory Foundation relationships, and model status for all Internal Projects without inferring missing facts
+- [x] Inventory the latest Document Library materials and verify whether each contains usable Cedarwood or cross-project budget evidence
+- [x] Extract only sourced Cedarwood development assumptions, costs, operating drivers, capital inputs, and timing with document-level provenance
+- [x] Populate Cedarwood projection scenarios only where a value, source, effective date, owner, and projected/estimated state are supported by the latest documents
+- [x] Keep unsupported Cedarwood assumptions, monthly lines, ROI, IRR, payback, distributions, and multiple outputs explicitly unavailable
+- [x] Build a six-project comparative development-budget summary that distinguishes recorded amounts from missing data and does not create cross-project estimates
+- [x] Test document-to-model traceability, scenario isolation, comparison data gates, and incomplete-input presentation before publishing
+- [x] Create six separate source-disciplined reference decks for Cedarwood Flats, Garden Lofts, Stonepine Residences, Skyline Towers, Chappell International Manufacturing Facility, and Garden Haven
+- [x] Verify the six project reference decks preserve recorded context, use explicit missing-data states, and follow the approved capital-structure visual language
+- [x] Classify user-supplied historical planning figures by project, scenario, metric, provenance, effective date, owner, and data-state boundary
+- [x] Add historical planning scenarios to governed project-model and projection records without overwriting actuals or treating historical values as commitments
+- [x] Update the six separate project reference decks with labeled historical financial scenarios and explicit unresolved data gaps
+- [x] Test historical-scenario provenance, model isolation, data-state display, and non-blending safeguards before publishing
+- [x] Create a six-project comparative historical-planning budget view that distinguishes supported scenario metrics from unavailable or non-comparable data
+- [x] Define and collect the minimum source-backed input package required for a basic Cedarwood Flats pro forma
+- [x] Build a 100-line Cedarwood reverse-engineered historical planning WBS that reconciles exactly to the authorized $40M control total
+- [x] Add Cedarwood historical planning controls, cost-basis sensitivity, inferred physical quantities, and explicit non-current-model disclosures
+- [x] Connect the Cedarwood WBS to governed project context, capital-need reference, and scenario-isolated projections without creating actuals or unsupported returns
+- [x] Test the Cedarwood WBS reconciliation, scenario isolation, calculation gates, and responsive pro forma interface before publishing
+- [x] Add an interactive, source-aware Cedarwood monthly construction and lease-up schedule that is isolated from actual project data
+- [x] Add governed Cedarwood financing terms with source, owner, effective-date, and estimated/projected state requirements
+- [x] Calculate and display debt service and monthly cash flow only when required construction, operating, and financing inputs are complete
+- [x] Test schedule editing, financing validation, debt-service gates, cash-flow gates, scenario isolation, and responsive presentation before publishing
+- [x] Add source-aware Cedarwood charts for construction deployment, lease-up occupancy, debt service, and construction-stage cash flow
+- [x] Keep Cedarwood charts visibly unavailable until their schedule and financing inputs are complete, and test responsive scenario-isolated behavior
+- [x] Populate Cedarwood charts from authorized historical planning control figures while preserving non-current and non-comparable labels
+- [x] Consolidate Internal Projects command-ribbon tabs so selected-project pro forma, schedule/debt, and historical-budget tools are grouped within Project Economics
+- [x] Preserve existing project-model deep links through redirects or mapped routes, and test the consolidated Internal Projects navigation on desktop and mobile
+- [x] Audit all CE/FF workspaces for consolidation opportunities and produce a prioritized, governance-preserving navigation roadmap
+- [x] Convert long Internal Projects model widgets, beginning with Cedarwood’s 36-month schedule and lease-up grid, into collapsed expandable work surfaces with progress summaries
+- [x] Display Cedarwood’s authorized historical planning controls inside ROI Projections without presenting them as monthly cash flow or current returns
+- [x] Add a clear data-availability bridge explaining which Cedarwood inputs exist, which monthly inputs remain missing, and why return outputs stay gated
+- [x] Test Cedarwood historical-data traceability and the clarified ROI Projections unavailable-state presentation before publishing
+- [x] Import existing Cedarwood historical planning controls into the isolated Historical Planning projection scenario with source and unknown-effective-date provenance
+- [x] Preserve monthly cash-flow, debt-service, lease-up, and return gates where no existing source data is available
+- [x] Reconcile and enter the user-supplied Cedarwood 36-month Base Planning Case as estimated historical planning assumptions with full provenance
+- [x] Calculate Cedarwood monthly development deployment, lease-up, operating performance, financing, debt service, cash flow, and returns from the underlying planning inputs
+- [x] Expand Cedarwood model visualizations for development deployment, lease-up, operating performance, debt, cash flow, and calculated return outputs
+- [x] Test Cedarwood calculation reconciliation, scenario isolation, data labels, output gates, and responsive presentation before publishing
+- [x] Reclassify Cedarwood’s $4.75M annual NOI as a historical planning reference rather than a rent-derived outcome
+- [x] Build Cedarwood Low/Base/High underwriting scenarios with independently sourced rent, occupancy, lease-up, other-income, operating-cost, development-cost, financing, and exit inputs
+- [x] Add market-rent source requirements and prevent unverified rent placeholders from being presented as underwriting assumptions
+- [x] Test Cedarwood sensitivity calculations, scenario isolation, source labels, and return-methodology gates before publishing
+- [x] Replace fixed Cedarwood Low/Base/High-only planning with a flexible multi-scenario matrix that supports any number of independent model cases
+- [x] Treat the $40M development-cost figure as a reverse-engineering control case and surface each scenario’s variance and reconciliation to that target
+- [x] Build reusable scenario-driver, monthly-calculation, and cross-scenario comparison contracts for eventual rollout to all Internal Projects
+- [x] Register protected Cedarwood scenario-matrix, unit-mix, clone, and financing-fee procedures
+- [x] Add source-labeled Cedarwood unit-mix capture and active-case cloning inside ROI / Returns → Projections
+- [x] Calculate and compare source-complete monthly revenue, EGI, NOI, debt service, cash flow, yield on cost, IRR, and equity multiple for every Cedarwood scenario
+- [x] Validate Vite rendering, responsive matrix interaction, and full regression coverage before publishing the Cedarwood modeling enhancement
+- [x] Audit and map every user-authorized Cedarwood historical planning figure to a scenario driver, monthly schedule input, or explicit non-calculating reference
+- [x] Populate the Historical Planning Cedarwood scenario with the authorized development-cost, program, financing-reference, and timing inputs needed for a working model
+- [x] Generate an auditable 36-month historical planning schedule from the authorized base-planning case, clearly distinguishing supplied timing from unresolved driver inputs
+- [x] Produce populated historical-scenario cash-flow and comparison outputs only where the authorized figures support calculations; retain explicit missing-state drivers otherwise
+- [x] Add model-reconciliation and UI regression coverage, validate desktop/mobile output surfaces, and publish the populated Cedarwood model
+- [x] Build an Excel-based Cedarwood Flats financial-model workbook using every user-authorized planning figure already captured in the CE/FF system
+- [x] Create a source-aware assumptions and input register that lists every remaining Cedarwood underwriting number required, with value, source, effective date, owner, and status
+- [x] Add linked development budget, sources-and-uses, rent roll, operating statement, 36-month construction/lease-up, debt-service, cash-flow, return, and scenario-comparison schedules
+- [x] Reconcile the $40M historical planning control and validate workbook formulas, data gates, and output disclosures before delivery
+- [x] Treat unresolved Cedarwood drivers as editable, source-labeled projected underwriting assumptions rather than requiring actual operating results before modeling
+- [x] Build a populated historical-planning base case from the authorized $40M, 280-unit, five-building, $4.75M NOI-reference, $55M financing-reference, cost-basis, and WBS inputs
+- [x] Deliver a Cedarwood Flats Excel model with at least 100 individual, source-traceable development-budget entries linked to the $40M control total
+- [x] Represent every required Cedarwood underwriting number as a SKU-level spreadsheet entry, including editable projected rows for presently unknown inputs
+- [x] Define a complete estimated Cedarwood Base Case from the existing $40M WBS, 280-unit program, five-building configuration, $4.75M NOI reference, $55M financing reference, and cost-basis controls
+- [x] Populate source-labeled estimated unit mix, operating, financing, exit, and capital drivers across the Cedarwood scenario engine
+- [x] Generate complete 36-month estimated revenue, operating-cost, debt-service, cash-flow, return, and scenario-comparison outputs for Cedarwood Flats
+- [x] Replace all Cedarwood empty-state charts and widgets with clearly labeled estimated underwriting visualizations and comparative scenarios
+- [x] Test model reconciliations, visualized outputs, and mobile/desktop presentation before publishing the populated Cedarwood model
+- [x] Load the user-supplied Cedarwood Base Planning Case from pasted_content_23.txt, including unit mix, rents, other income, operating expenses, 36-month S-curve, lease-up, and financing terms
+- [x] Analyze the user-supplied financial-model CSV format and define a standardized import mapping for all Internal Projects
+- [x] Create a project-specific, source-labeled financial-model CSV for Cedarwood Flats, Garden Lofts, Stonepine Residences, Skyline Towers, Chappell International Manufacturing Facility, and Garden Haven
+- [x] Validate each project CSV for required import columns, scenario isolation, data-state labels, and provenance fields
+- [x] Prepare the six validated CSV packages for CE/FF financial-model ingestion and summarize project-specific input gaps
+- [x] Map the standardized six-project CSV schema into Financial OS model, scenario, input, WBS, schedule, financing, and projection-series entities
+- [x] Implement an idempotent importer that pushes all six CSV packages into the governed Financial OS without converting planning values into actual, committed, or funded capital
+- [x] Verify imported Financial OS data counts, WBS reconciliations, scenario isolation, 36-month schedules, and model outputs for every Internal Project
+- [x] Validate all-project Financial OS navigation and visual output surfaces, then publish the populated data set
+- [x] Build portfolio-level comparisons inside the existing Financial OS views for development cost, capital requirement, cost basis, revenue, NOI, cash flow, scenario outcomes, and returns where calculable
+- [x] Connect existing Internal Projects and ROI / Returns project views to the imported WBS, monthly schedule, unit mix, operating, financing, and scenario records without adding navigation
+- [x] Render data-driven WBS, deployment, revenue, occupancy, NOI, debt/equity, cash-flow, scenario, and return visualizations in the existing project-level work surfaces
+- [x] Add explicit dependent-input disclosures for unavailable outputs while retaining historical, estimated, projected, actual, committed, and funded-state boundaries
+- [x] Verify all six projects are selectable, retrieve their stored Financial OS data, and update the existing visualizations on desktop and mobile

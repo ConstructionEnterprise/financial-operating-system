@@ -1,0 +1,56 @@
+Unnamed: 0,Unnamed: 1,Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5,Unnamed: 6,Unnamed: 7,Unnamed: 8,Unnamed: 9
+,,,,,,,,,
+,,Cedarwood Flats | Debt Schedule,,,,,,,
+,,,,,,,,,
+,,Debt service activates only after base-case financing SKU inputs are entered. Historical financing reference remains separate.,,,,,,,
+,,($ in whole dollars unless noted),,,,,,,
+,,,,,,,,,
+,,BASE-CASE DEBT TERMS,,,,,,,
+,,SKU,Term,Value,Source,State,Notes,,
+,,FIN-010,Loan amount,55000000,Base-case SKU FIN-010,Projected input,,,
+,,FIN-011,Annual interest rate,,Base-case SKU FIN-011,Projected input,,,
+,,FIN-012,Financing fee,,Base-case SKU FIN-012,Projected input,,,
+,,FIN-013,Term,,Base-case SKU FIN-013,Projected input,,,
+,,FIN-014,Amortization,,Base-case SKU FIN-014,Projected input,,,
+,,FIN-015,Interest-only period,,Base-case SKU FIN-015,Projected input,,,
+,,FIN-016,Closing / first draw month,,Base-case SKU FIN-016,Projected input,,,
+,,FIN-017,Extension fee,,Base-case SKU FIN-017,Projected input,,,
+,,,,,,,,,
+,,MONTHLY DEBT SERVICE,,,,,,,
+,,Month,Opening Balance,Draw,Interest,Principal,Debt Service,Closing Balance,Notes
+,,1,0,,,,,,Formula remains blank until debt terms are entered.
+,,2,,,,,,,Formula remains blank until debt terms are entered.
+,,3,,,,,,,Formula remains blank until debt terms are entered.
+,,4,,,,,,,Formula remains blank until debt terms are entered.
+,,5,,,,,,,Formula remains blank until debt terms are entered.
+,,6,,,,,,,Formula remains blank until debt terms are entered.
+,,7,,,,,,,Formula remains blank until debt terms are entered.
+,,8,,,,,,,Formula remains blank until debt terms are entered.
+,,9,,,,,,,Formula remains blank until debt terms are entered.
+,,10,,,,,,,Formula remains blank until debt terms are entered.
+,,11,,,,,,,Formula remains blank until debt terms are entered.
+,,12,,,,,,,Formula remains blank until debt terms are entered.
+,,13,,,,,,,Formula remains blank until debt terms are entered.
+,,14,,,,,,,Formula remains blank until debt terms are entered.
+,,15,,,,,,,Formula remains blank until debt terms are entered.
+,,16,,,,,,,Formula remains blank until debt terms are entered.
+,,17,,,,,,,Formula remains blank until debt terms are entered.
+,,18,,,,,,,Formula remains blank until debt terms are entered.
+,,19,,,,,,,Formula remains blank until debt terms are entered.
+,,20,,,,,,,Formula remains blank until debt terms are entered.
+,,21,,,,,,,Formula remains blank until debt terms are entered.
+,,22,,,,,,,Formula remains blank until debt terms are entered.
+,,23,,,,,,,Formula remains blank until debt terms are entered.
+,,24,,,,,,,Formula remains blank until debt terms are entered.
+,,25,,,,,,,Formula remains blank until debt terms are entered.
+,,26,,,,,,,Formula remains blank until debt terms are entered.
+,,27,,,,,,,Formula remains blank until debt terms are entered.
+,,28,,,,,,,Formula remains blank until debt terms are entered.
+,,29,,,,,,,Formula remains blank until debt terms are entered.
+,,30,,,,,,,Formula remains blank until debt terms are entered.
+,,31,,,,,,,Formula remains blank until debt terms are entered.
+,,32,,,,,,,Formula remains blank until debt terms are entered.
+,,33,,,,,,,Formula remains blank until debt terms are entered.
+,,34,,,,,,,Formula remains blank until debt terms are entered.
+,,35,,,,,,,Formula remains blank until debt terms are entered.
+,,36,,,,,,,Formula remains blank until debt terms are entered.

@@ -1,0 +1,1 @@
+ALTER TABLE `equipment_finance_details` ADD `economicsPeriodMonths` int;

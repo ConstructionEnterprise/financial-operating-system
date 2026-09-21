@@ -1,0 +1,24 @@
+FINANCIAL OPERATING SYSTEM
+
+The Financial Operating System is the CE/FF capital formation and project underwriting platform. It connects approval-first fundraising operations, four specialized capital paths, Internal Projects, scenario-isolated project economics, and portfolio-level financial visibility.
+
+Primary domains:
+- Equity Investors and approval-first Gmail outreach
+- JV / Facility partnership formation
+- Equipment Finance and Equipment Rental
+- Grants & Incentives
+- Internal Projects and Project Economics
+- Scenario-driven underwriting: drivers -> monthly schedule -> calculations -> comparison
+- Source attribution, data-state control, and capital-stage boundaries
+
+Current project-model package:
+- Cedarwood Flats
+- Garden Lofts
+- Stonepine Residences
+- Skyline Towers
+- Chappell International Manufacturing Facility
+- Garden Haven
+
+The repository is private and contains no environment secrets, OAuth credentials, sessions, or live database dump. Approved planning-model CSV packages, the Cedarwood Excel model, scripts, source code, tests, and documentation are included. Financial planning values remain labeled as estimates, historical planning references, projections, or actuals according to their source and status.
+
+Start with README.md and docs/ for setup, architecture, financial-model conventions, import workflows, governance rules, and project history.

@@ -1,0 +1,52 @@
+Unnamed: 0,Unnamed: 1,Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5,Unnamed: 6,Unnamed: 7,Unnamed: 8
+,,,,,,,,
+,,Cedarwood Flats | Levered Returns & Scenario Comparison,,,,,,
+,,,,,,,,
+,,"Returns are calculated from the linked 36-month schedule only after timing, operating, and debt input SKUs are completed.",,,,,,
+,,($ in whole dollars unless noted),,,,,,
+,,,,,,,,
+,,BASE-CASE LEVERED CASH FLOW,,,,,,
+,,Month,NOI,Construction Spend,Debt Service,Levered Cash Flow,Cumulative Cash Flow,Notes
+,,1,,,,,,No return is produced until all linked inputs are completed.
+,,2,,,,,,No return is produced until all linked inputs are completed.
+,,3,,,,,,No return is produced until all linked inputs are completed.
+,,4,,,,,,No return is produced until all linked inputs are completed.
+,,5,,,,,,No return is produced until all linked inputs are completed.
+,,6,,,,,,No return is produced until all linked inputs are completed.
+,,7,,,,,,No return is produced until all linked inputs are completed.
+,,8,,,,,,No return is produced until all linked inputs are completed.
+,,9,,,,,,No return is produced until all linked inputs are completed.
+,,10,,,,,,No return is produced until all linked inputs are completed.
+,,11,,,,,,No return is produced until all linked inputs are completed.
+,,12,,,,,,No return is produced until all linked inputs are completed.
+,,13,,,,,,No return is produced until all linked inputs are completed.
+,,14,,,,,,No return is produced until all linked inputs are completed.
+,,15,,,,,,No return is produced until all linked inputs are completed.
+,,16,,,,,,No return is produced until all linked inputs are completed.
+,,17,,,,,,No return is produced until all linked inputs are completed.
+,,18,,,,,,No return is produced until all linked inputs are completed.
+,,19,,,,,,No return is produced until all linked inputs are completed.
+,,20,,,,,,No return is produced until all linked inputs are completed.
+,,21,,,,,,No return is produced until all linked inputs are completed.
+,,22,,,,,,No return is produced until all linked inputs are completed.
+,,23,,,,,,No return is produced until all linked inputs are completed.
+,,24,,,,,,No return is produced until all linked inputs are completed.
+,,25,,,,,,No return is produced until all linked inputs are completed.
+,,26,,,,,,No return is produced until all linked inputs are completed.
+,,27,,,,,,No return is produced until all linked inputs are completed.
+,,28,,,,,,No return is produced until all linked inputs are completed.
+,,29,,,,,,No return is produced until all linked inputs are completed.
+,,30,,,,,,No return is produced until all linked inputs are completed.
+,,31,,,,,,No return is produced until all linked inputs are completed.
+,,32,,,,,,No return is produced until all linked inputs are completed.
+,,33,,,,,,No return is produced until all linked inputs are completed.
+,,34,,,,,,No return is produced until all linked inputs are completed.
+,,35,,,,,,No return is produced until all linked inputs are completed.
+,,36,,,,,,No return is produced until all linked inputs are completed.
+,,,,,,,,
+,,RETURN SUMMARY,,,,,,
+,,Metric,Value,Formula / Definition,Status,,,
+,,Total levered cash flow,,36-month sum,Calculated only when 36 complete monthly cash-flow values exist.,,,
+,,Monthly IRR,,IRR of monthly levered cash flow,Calculated only when 36 complete monthly cash-flow values exist.,,,
+,,Annualized IRR,,(1 + monthly IRR)^12 − 1,Calculated only when 36 complete monthly cash-flow values exist.,,,
+,,Equity multiple,,Positive distributions ÷ negative equity cash flows,Calculated only when 36 complete monthly cash-flow values exist.,,,

@@ -1,0 +1,47 @@
+Unnamed: 0,Unnamed: 1,Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5,Unnamed: 6,Unnamed: 7,Unnamed: 8,Unnamed: 9,Unnamed: 10,Unnamed: 11,Unnamed: 12,Unnamed: 13,Unnamed: 14,Unnamed: 15
+,,,,,,,,,,,,,,,
+,,"Cedarwood Flats | 36-Month Construction, Lease-Up & Cash Flow",,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,Every month has explicit construction and occupancy SKU rows. Blank timing inputs remain blank and prevent modeled cash-flow output.,,,,,,,,,,,,,
+,,($ in whole dollars unless noted),,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,BASE-CASE MONTHLY SCHEDULE,,,,,,,,,,,,,
+,,Month,Phase,Construction SKU,Construction %,Construction Spend,Occupancy SKU,Occupancy,Potential Rent,EGI,Operating Expenses,NOI,Debt Service,Levered Cash Flow,Notes
+,,1,Enter lifecycle phase,SCH-01-01,,,SCH-01-02,,,,,,,,Debt service links once financing terms are entered.
+,,2,Enter lifecycle phase,SCH-02-01,,,SCH-02-02,,,,,,,,Debt service links once financing terms are entered.
+,,3,Enter lifecycle phase,SCH-03-01,,,SCH-03-02,,,,,,,,Debt service links once financing terms are entered.
+,,4,Enter lifecycle phase,SCH-04-01,,,SCH-04-02,,,,,,,,Debt service links once financing terms are entered.
+,,5,Enter lifecycle phase,SCH-05-01,,,SCH-05-02,,,,,,,,Debt service links once financing terms are entered.
+,,6,Enter lifecycle phase,SCH-06-01,,,SCH-06-02,,,,,,,,Debt service links once financing terms are entered.
+,,7,Enter lifecycle phase,SCH-07-01,,,SCH-07-02,,,,,,,,Debt service links once financing terms are entered.
+,,8,Enter lifecycle phase,SCH-08-01,,,SCH-08-02,,,,,,,,Debt service links once financing terms are entered.
+,,9,Enter lifecycle phase,SCH-09-01,,,SCH-09-02,,,,,,,,Debt service links once financing terms are entered.
+,,10,Enter lifecycle phase,SCH-10-01,,,SCH-10-02,,,,,,,,Debt service links once financing terms are entered.
+,,11,Enter lifecycle phase,SCH-11-01,,,SCH-11-02,,,,,,,,Debt service links once financing terms are entered.
+,,12,Enter lifecycle phase,SCH-12-01,,,SCH-12-02,,,,,,,,Debt service links once financing terms are entered.
+,,13,Enter lifecycle phase,SCH-13-01,,,SCH-13-02,,,,,,,,Debt service links once financing terms are entered.
+,,14,Enter lifecycle phase,SCH-14-01,,,SCH-14-02,,,,,,,,Debt service links once financing terms are entered.
+,,15,Enter lifecycle phase,SCH-15-01,,,SCH-15-02,,,,,,,,Debt service links once financing terms are entered.
+,,16,Enter lifecycle phase,SCH-16-01,,,SCH-16-02,,,,,,,,Debt service links once financing terms are entered.
+,,17,Enter lifecycle phase,SCH-17-01,,,SCH-17-02,,,,,,,,Debt service links once financing terms are entered.
+,,18,Enter lifecycle phase,SCH-18-01,,,SCH-18-02,,,,,,,,Debt service links once financing terms are entered.
+,,19,Enter lifecycle phase,SCH-19-01,,,SCH-19-02,,,,,,,,Debt service links once financing terms are entered.
+,,20,Enter lifecycle phase,SCH-20-01,,,SCH-20-02,,,,,,,,Debt service links once financing terms are entered.
+,,21,Enter lifecycle phase,SCH-21-01,,,SCH-21-02,,,,,,,,Debt service links once financing terms are entered.
+,,22,Enter lifecycle phase,SCH-22-01,,,SCH-22-02,,,,,,,,Debt service links once financing terms are entered.
+,,23,Enter lifecycle phase,SCH-23-01,,,SCH-23-02,,,,,,,,Debt service links once financing terms are entered.
+,,24,Enter lifecycle phase,SCH-24-01,,,SCH-24-02,,,,,,,,Debt service links once financing terms are entered.
+,,25,Enter lifecycle phase,SCH-25-01,,,SCH-25-02,,,,,,,,Debt service links once financing terms are entered.
+,,26,Enter lifecycle phase,SCH-26-01,,,SCH-26-02,,,,,,,,Debt service links once financing terms are entered.
+,,27,Enter lifecycle phase,SCH-27-01,,,SCH-27-02,,,,,,,,Debt service links once financing terms are entered.
+,,28,Enter lifecycle phase,SCH-28-01,,,SCH-28-02,,,,,,,,Debt service links once financing terms are entered.
+,,29,Enter lifecycle phase,SCH-29-01,,,SCH-29-02,,,,,,,,Debt service links once financing terms are entered.
+,,30,Enter lifecycle phase,SCH-30-01,,,SCH-30-02,,,,,,,,Debt service links once financing terms are entered.
+,,31,Enter lifecycle phase,SCH-31-01,,,SCH-31-02,,,,,,,,Debt service links once financing terms are entered.
+,,32,Enter lifecycle phase,SCH-32-01,,,SCH-32-02,,,,,,,,Debt service links once financing terms are entered.
+,,33,Enter lifecycle phase,SCH-33-01,,,SCH-33-02,,,,,,,,Debt service links once financing terms are entered.
+,,34,Enter lifecycle phase,SCH-34-01,,,SCH-34-02,,,,,,,,Debt service links once financing terms are entered.
+,,35,Enter lifecycle phase,SCH-35-01,,,SCH-35-02,,,,,,,,Debt service links once financing terms are entered.
+,,36,Enter lifecycle phase,SCH-36-01,,,SCH-36-02,,,,,,,,Debt service links once financing terms are entered.
+,,CHECK,36-month totals,,,,,,,,,,,,
+,,,Construction allocation check,,,,,,,,,,,,Must equal 100.0% after monthly construction timing is entered.
