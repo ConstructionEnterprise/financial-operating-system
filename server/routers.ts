@@ -1,9 +1,15 @@
 import { z } from "zod";
+import { updateMeeting } from "./db";
+import { listEquipmentDevelopmentPlans, updateEquipmentDevelopmentPlan, equipmentPlanUpdateInput, equipmentPlanHistory } from "./equipmentDevelopmentPlans";
+import { campaignTypes } from "../shared/campaignFinance";
+import { allocationInput, paymentInput, listCapitalDeployment, saveCapitalAllocation, recordCapitalPayment, setCapitalPaymentVoided } from "./capitalDeployment";
 import { TRPCError } from "@trpc/server";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { addOutreachEvent, createInvestorContact, getGmailConnection, getInvestorContact, listInvestorContacts, updateInvestorContact, listInvestorEvents, listCampaigns, createCampaign, updateCampaign, deleteCampaign, listFundraisingDocuments, createFundraisingDocument, updateFundraisingDocument, listCampaignDocumentLinks, linkDocumentToCampaign, unlinkDocumentFromCampaign, deleteFundraisingDocument, listInvestorDocumentLinks, linkDocumentToInvestor, unlinkDocumentFromInvestor, listTasks, createTask, updateTask, listMeetings, createMeeting, getFundraisingAnalytics, createInvestorResearchProposal, getInvestorResearchProposal, listInvestorResearchProposals, listInvestorResearchSources, updateInvestorResearchProposalStatus, ensureCapitalBuckets, listCapitalBuckets, updateCapitalBucket, listCapitalOpportunities, createCapitalOpportunity, updateCapitalOpportunity, bootstrapEquityCapitalOpportunities, listCapitalOpportunityDocumentLinks, linkDocumentToCapitalOpportunity, unlinkDocumentFromCapitalOpportunity, getFacilityJvDetail, upsertFacilityJvDetail, getEquipmentFinanceDetail, listEquipmentFinanceDetails, upsertEquipmentFinanceDetail, getGrantDetail, upsertGrantDetail, listGrantFundingPrograms, createGrantFundingProgram, updateGrantFundingProgram, importTexasGrantsIncentivesMasterUniverse, listGrantFundingOpportunities, createGrantFundingOpportunity, updateGrantFundingOpportunity, listGrantFundingApplications, createGrantFundingApplication, updateGrantFundingApplication, listGrantFundingAwards, saveGrantFundingAward, listGrantAwardDisbursements, createGrantAwardDisbursement, listGrantComplianceItems, createGrantComplianceItem, updateGrantComplianceItem, listJvPartnerProspects, getJvPartnerProspect, createJvPartnerProspect, updateJvPartnerProspect, convertJvProspectToCapitalOpportunity, importTexasJvMasterUniverse, importTexasEquipmentRentalMasterUniverse, createEquipmentActiveRental, createEquipmentRentalQuote, createEquipmentRentalRequirement, createEquipmentRentalVendor, getEquipmentRentalVendor, listEquipmentActiveRentals, listEquipmentRentalQuotes, listEquipmentRentalRequirements, listEquipmentRentalVendors, updateEquipmentActiveRental, updateEquipmentRentalQuote, updateEquipmentRentalRequirement, updateEquipmentRentalVendor } from "./db";
-import { sendGmailMessage } from "./gmail";
+import { sendGmailMessage, isSandboxOnlyOutreach, isSandboxRecipient } from "./gmail";
+import { publishVcsdEvent } from "./vcsdEvents";
+import { getCapitalOpportunity } from "./db";
 import { canSendFromGmailStatus, canSendToContactStatus } from "../shared/outreach";
 import { generateInvestorDraft, classifyInvestor, summarizeInvestorHistory } from "./ai";
 import { fetchPublicResearchSources, generateInvestorResearchProposal } from "./investorResearch";
@@ -15,7 +21,7 @@ import { loadTexasGrantsIncentivesMasterUniverse } from "./texasGrantsIncentives
 import { createRoiCapitalSource, createRoiJvContributionComponent, createRoiProject, createRoiScenario, getCrossDomainRoiSnapshot, listRoiCapitalSources, listRoiCashFlows, listRoiJvContributionComponents, listRoiProjects, listRoiReturnDetails, listRoiScenarios, updateRoiCapitalSource, updateRoiJvContributionComponent, updateRoiProject, updateRoiScenario, upsertRoiCashFlow, upsertRoiEquipmentReturnDetail, upsertRoiEquityReturnDetail, upsertRoiGrantReturnDetail, upsertRoiJvReturnDetail } from "./roi";
 import { createInternalProject, getInternalProjectCapitalStack, linkDocumentToInternalProject, listInternalProjectCapitalNeeds, listInternalProjectCapitalNeedStrategies, listInternalProjectDocumentLinks, listInternalProjects, saveInternalProjectCapitalNeed, seedInitialInternalProjects, unlinkDocumentFromInternalProject, updateInternalProject } from "./internalProjects";
 import { getProjectEconomicsModelForProject, getProjectEconomicsReadiness, initializeChappellProjectEconomicsModel, initializeProjectEconomicsModel, linkDocumentToProjectEconomicsInput, listProjectEconomicsInputDocuments, listProjectEconomicsInputs, listProjectEconomicsMonthlyItems, saveProjectEconomicsInput, saveProjectEconomicsMonthlyItem, unlinkDocumentFromProjectEconomicsInput } from "./projectEconomics";
-import { createProjectionScenario, ensureProjectionScenarioShells, getFinancialOsPortfolioSnapshot, getHistoricalPlanningBudgetComparison, getProjectionSnapshot, listProjectionAssumptions, listProjectionMonthlyLines, listProjectionScenarios, saveProjectionAssumption, saveProjectionMonthlyLine, updateProjectionScenario } from "./projections";
+import { createProjectionScenario, ensureProjectionScenarioShells, getFinancialOsPortfolioSnapshot, getHistoricalPlanningBudgetComparison, getProjectionSnapshot, listProjectionAssumptions, listProjectionMonthlyLines, listProjectionScenarios, saveProjectionAssumption, saveProjectionDriverSchedule, saveProjectionMonthlyLine, updateProjectionScenario } from "./projections";
 import { getProjectPlanningWbsSummary, listProjectPlanningWbsLines, seedCedarwoodHistoricalPlanningWbs } from "./projectPlanningWbs";
 import { getCedarwoodScheduleFinancingSnapshot, getProjectPlanningFinancingTerms, listProjectPlanningScheduleMonths, saveProjectPlanningFinancingTerms, saveProjectPlanningScheduleMonths } from "./projectPlanningScheduleFinancing";
 import { cloneCedarwoodScenario, getCedarwoodScenarioMatrix, listCedarwoodScenarioUnitMix, saveCedarwoodScenarioUnitMix } from "./cedarwoodScenarioMatrix";
@@ -30,9 +36,21 @@ const contactInput = z.object({
   contactUrl: z.string().optional(),
 });
 
-const campaignInput = z.object({ name: z.string().min(1), description: z.string().optional(), groupName: z.string().min(1).max(128).default("Ungrouped"), sortOrder: z.number().int().optional(), funnelStage: z.string().default("1,000"), targetCount: z.number().int().positive().optional(), status: z.enum(["planning", "active", "paused", "completed"]).default("planning") });
-const taskInput = z.object({ title: z.string().min(1), description: z.string().optional(), investorId: z.number().int().optional(), campaignId: z.number().int().optional(), dueAt: z.coerce.date().optional(), status: z.enum(["open", "in_progress", "done", "snoozed"]).default("open") });
-const meetingInput = z.object({ title: z.string().min(1), investorId: z.number().int().optional(), campaignId: z.number().int().optional(), scheduledAt: z.coerce.date(), status: z.enum(["scheduled", "completed", "cancelled"]).default("scheduled"), notes: z.string().optional() });
+const optionalMoney = z.string().regex(/^\d{1,14}(\.\d{1,2})?$/).nullable().optional();
+const optionalBps = z.number().int().min(0).max(10000).nullable().optional();
+const campaignInput = z.object({ name: z.string().min(1).max(255), description: z.string().optional(), groupName: z.string().min(1).max(128).default("Ungrouped"), sortOrder: z.number().int().optional(), funnelStage: z.string().default("1,000"), targetCount: z.number().int().positive().optional(), status: z.enum(["planning", "active", "paused", "completed"]).default("planning"), financeType: z.enum(campaignTypes).default("unclassified"), recipientEntity: z.string().max(255).nullable().optional(), targetAmount: optionalMoney, internalProjectId: z.number().int().positive().nullable().optional(), campaignOwner: z.string().max(255).nullable().optional(), targetDate: z.iso.date().nullable().optional(), financingTerms: z.string().max(10000).nullable().optional(), preMoneyValuation: optionalMoney, ownershipOfferedBps: optionalBps, monthlyBurn: optionalMoney, currentCash: optionalMoney, plannedHeadcount: z.number().int().min(0).max(100000).nullable().optional(), interestRateBps: optionalBps, termMonths: z.number().int().positive().max(600).nullable().optional(), loanToCostBps: optionalBps, borrowerEquity: optionalMoney, partnerContribution: optionalMoney, ceContribution: optionalMoney, preferredReturnBps: optionalBps, downPayment: optionalMoney, monthlyPayment: optionalMoney, expectedUtilizationBps: optionalBps, grantMatchAmount: optionalMoney, grantRequestedAmount: optionalMoney });
+const taskInput = z.object({ title: z.string().min(1), description: z.string().optional(), investorId: z.number().int().optional(), campaignId: z.number().int().optional(), capitalOpportunityId: z.number().int().optional(), dueAt: z.coerce.date().optional(), status: z.enum(["open", "in_progress", "done", "snoozed"]).default("open") });
+const taskUpdateInput = z.object({
+  id: z.number().int(),
+  title: z.string().min(1).optional(),
+  description: z.string().nullable().optional(),
+  investorId: z.number().int().nullable().optional(),
+  campaignId: z.number().int().nullable().optional(),
+  capitalOpportunityId: z.number().int().nullable().optional(),
+  dueAt: z.coerce.date().nullable().optional(),
+  status: z.enum(["open", "in_progress", "done", "snoozed"]).optional(),
+});
+const meetingInput = z.object({ title: z.string().trim().min(1).max(255), investorId: z.number().int().positive().nullable().optional(), campaignId: z.number().int().positive().nullable().optional(), capitalOpportunityId: z.number().int().positive().nullable().optional(), scheduledAt: z.coerce.date(), status: z.enum(["scheduled", "completed", "cancelled"]).default("scheduled"), notes: z.string().max(10000).nullable().optional() });
 const capitalPathInput = z.enum(["equity", "facility_jv", "equipment_finance", "grants"]);
 const capitalStageInput = z.enum(["identified", "researching", "outreach", "meeting", "diligence", "term_sheet", "committed", "passed"]);
 const capitalOpportunityInput = z.object({ capitalPath: capitalPathInput, organizationName: z.string().min(1).max(255), opportunityName: z.string().max(255).optional(), internalProjectId: z.number().int().optional(), projectName: z.string().max(255).optional(), facilityName: z.string().max(255).optional(), contactName: z.string().max(255).optional(), contactRole: z.string().max(255).optional(), decisionMaker: z.string().max(255).optional(), relationshipStrength: z.string().max(128).optional(), email: z.string().email().optional(), contactUrl: z.string().url().optional(), stage: capitalStageInput.default("identified"), requestedAmount: z.number().int().min(0).optional(), committedAmount: z.number().int().min(0).default(0), fundedAmount: z.number().int().min(0).default(0), probability: z.number().int().min(0).max(100).default(0), linkedInvestorId: z.number().int().optional(), campaignId: z.number().int().optional(), source: z.string().max(255).optional(), termsNotes: z.string().optional(), nextAction: z.string().max(500).optional(), nextActionDueAt: z.coerce.date().optional(), targetCloseAt: z.coerce.date().optional(), firstContactAt: z.coerce.date().optional(), lastContactAt: z.coerce.date().optional() });
@@ -83,6 +101,11 @@ const messageInput = z.object({
 });
 
 export const appRouter = router({
+  equipmentPlanning: router({
+    list: protectedProcedure.query(({ ctx }) => listEquipmentDevelopmentPlans(ctx.user.id)),
+    update: protectedProcedure.input(equipmentPlanUpdateInput).mutation(({ ctx, input }) => updateEquipmentDevelopmentPlan(ctx.user.id, ctx.user.name || `Workspace user ${ctx.user.id}`, input)),
+    history: protectedProcedure.input(z.object({ planId: z.number().int().positive() })).query(({ ctx, input }) => equipmentPlanHistory(ctx.user.id, input.planId)),
+  }),
   system: systemRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
@@ -90,7 +113,7 @@ export const appRouter = router({
   fundraising: router({
     campaigns: protectedProcedure.query(({ ctx }) => listCampaigns(ctx.user.id)),
     createCampaign: protectedProcedure.input(campaignInput).mutation(({ ctx, input }) => createCampaign(ctx.user.id, input)),
-    updateCampaign: protectedProcedure.input(z.object({ id: z.number().int(), name: z.string().min(1).optional(), groupName: z.string().min(1).max(128).optional(), sortOrder: z.number().int().optional(), funnelStage: z.string().optional(), targetCount: z.number().int().positive().optional(), status: z.enum(["planning", "active", "paused", "completed"]).optional() })).mutation(({ ctx, input }) => { const { id, ...patch } = input; return updateCampaign(ctx.user.id, id, patch); }),
+    updateCampaign: protectedProcedure.input(campaignInput.partial().extend({ id: z.number().int() })).mutation(({ ctx, input }) => { const { id, ...patch } = input; return updateCampaign(ctx.user.id, id, patch); }),
     deleteCampaign: protectedProcedure.input(z.object({ id: z.number().int() })).mutation(({ ctx, input }) => deleteCampaign(ctx.user.id, input.id)),
     documents: protectedProcedure.query(({ ctx }) => listFundraisingDocuments(ctx.user.id)),
     campaignDocuments: protectedProcedure.query(({ ctx }) => listCampaignDocumentLinks(ctx.user.id)),
@@ -124,10 +147,27 @@ export const appRouter = router({
     updateJvPartnerProspect: protectedProcedure.input(jvProspectInput.partial().extend({ id: z.number().int() })).mutation(async ({ ctx, input }) => { const { id, ...patch } = input; const prior = await getJvPartnerProspect(ctx.user.id, id); if (!prior) throw new TRPCError({ code: "NOT_FOUND", message: "JV prospect not found." }); const routing = scoreJvProspect({ partnerType: patch.partnerType ?? prior.partnerType as any, region: patch.region ?? prior.region as any, assetFocus: patch.assetFocus ?? prior.assetFocus, developmentFocus: patch.developmentFocus ?? prior.developmentFocus, jvExperience: patch.jvExperience ?? prior.jvExperience, landContributionPotential: patch.landContributionPotential ?? prior.landContributionPotential, capitalContributionPotential: patch.capitalContributionPotential ?? prior.capitalContributionPotential, developmentContributionPotential: patch.developmentContributionPotential ?? prior.developmentContributionPotential, facilityContributionPotential: patch.facilityContributionPotential ?? prior.facilityContributionPotential, strategicFit: patch.strategicFit ?? prior.strategicFit as any, jvThesis: patch.jvThesis ?? prior.jvThesis }); return updateJvPartnerProspect(ctx.user.id, id, { ...patch, priority: routing.priority, priorityRationale: routing.rationale }); }),
     convertJvPartnerProspect: protectedProcedure.input(z.object({ id: z.number().int() })).mutation(({ ctx, input }) => convertJvProspectToCapitalOpportunity(ctx.user.id, input.id)),
     capitalBuckets: protectedProcedure.query(({ ctx }) => listCapitalBuckets(ctx.user.id)),
+    capitalDeployment: protectedProcedure.query(({ ctx }) => listCapitalDeployment(ctx.user.id)),
+    saveCapitalAllocation: protectedProcedure.input(allocationInput).mutation(({ ctx, input }) => saveCapitalAllocation(ctx.user.id, input)),
+    recordCapitalPayment: protectedProcedure.input(paymentInput).mutation(({ ctx, input }) => recordCapitalPayment(ctx.user.id, input)),
+    setCapitalPaymentVoided: protectedProcedure.input(z.object({ id: z.number().int().positive(), voided: z.boolean() })).mutation(({ ctx, input }) => setCapitalPaymentVoided(ctx.user.id, input.id, input.voided)),
     updateCapitalBucket: protectedProcedure.input(z.object({ capitalPath: capitalPathInput, targetAmount: z.number().int().min(0).optional(), description: z.string().nullable().optional() })).mutation(async ({ ctx, input }) => { await ensureCapitalBuckets(ctx.user.id); const { capitalPath, ...patch } = input; return updateCapitalBucket(ctx.user.id, capitalPath, patch); }),
     capitalOpportunities: protectedProcedure.input(z.object({ capitalPath: capitalPathInput.optional() }).optional()).query(({ ctx, input }) => listCapitalOpportunities(ctx.user.id, input?.capitalPath)),
     createCapitalOpportunity: protectedProcedure.input(capitalOpportunityInput).mutation(({ ctx, input }) => createCapitalOpportunity(ctx.user.id, input)),
-    updateCapitalOpportunity: protectedProcedure.input(capitalOpportunityInput.partial().extend({ id: z.number().int() })).mutation(({ ctx, input }) => { const { id, ...patch } = input; return updateCapitalOpportunity(ctx.user.id, id, patch); }),
+    updateCapitalOpportunity: protectedProcedure.input(capitalOpportunityInput.partial().extend({ id: z.number().int() })).mutation(async ({ ctx, input }) => {
+      const { id, ...patch } = input;
+      const previous = patch.stage === undefined ? undefined : await getCapitalOpportunity(ctx.user.id, id);
+      const updated = await updateCapitalOpportunity(ctx.user.id, id, patch);
+      if (updated && previous && patch.stage !== undefined && updated.stage !== previous.stage && updated.linkedInvestorId != null) {
+        try {
+          const contact = await getInvestorContact(ctx.user.id, updated.linkedInvestorId);
+          if (contact) await publishVcsdEvent({ email: contact.email, firmName: contact.firmName, type: "stage_changed", detail: `${previous.stage} → ${updated.stage}` });
+        } catch (error) {
+          console.warn("VCSD stage event could not be written:", error);
+        }
+      }
+      return updated;
+    }),
     capitalOpportunityDocuments: protectedProcedure.input(z.object({ capitalOpportunityId: z.number().int().optional() }).optional()).query(({ ctx, input }) => listCapitalOpportunityDocumentLinks(ctx.user.id, input?.capitalOpportunityId)),
     linkCapitalOpportunityDocument: protectedProcedure.input(z.object({ capitalOpportunityId: z.number().int(), documentId: z.number().int() })).mutation(({ ctx, input }) => linkDocumentToCapitalOpportunity(ctx.user.id, input.capitalOpportunityId, input.documentId)),
     unlinkCapitalOpportunityDocument: protectedProcedure.input(z.object({ capitalOpportunityId: z.number().int(), documentId: z.number().int() })).mutation(({ ctx, input }) => unlinkDocumentFromCapitalOpportunity(ctx.user.id, input.capitalOpportunityId, input.documentId)),
@@ -210,6 +250,7 @@ export const appRouter = router({
     saveProjectionAssumption: protectedProcedure.input(projectionAssumptionInput.extend({ id: z.number().int().optional() })).mutation(({ ctx, input }) => saveProjectionAssumption(ctx.user.id, input)),
     projectionMonthlyLines: protectedProcedure.input(z.object({ scenarioId: z.number().int().optional() }).optional()).query(({ ctx, input }) => listProjectionMonthlyLines(ctx.user.id, input?.scenarioId)),
     saveProjectionMonthlyLine: protectedProcedure.input(projectionMonthlyLineInput).mutation(({ ctx, input }) => saveProjectionMonthlyLine(ctx.user.id, input)),
+    saveProjectionDriverSchedule: protectedProcedure.input(z.object({ scenarioId: z.number().int(), salesStartMonth: z.number().int().min(1).max(36), salesEndMonth: z.number().int().min(1).max(36), leaseStartMonth: z.number().int().min(1).max(36), leaseEndMonth: z.number().int().min(1).max(36), sellingExpenseBps: z.number().int().min(0).max(10_000).nullable(), rentalOperatingExpenseBps: z.number().int().min(0).max(10_000).nullable() })).mutation(({ ctx, input }) => saveProjectionDriverSchedule(ctx.user.id, input)),
     projectionSnapshot: protectedProcedure.input(z.object({ modelId: z.number().int() })).query(({ ctx, input }) => getProjectionSnapshot(ctx.user.id, input.modelId)),
     historicalPlanningBudgetComparison: protectedProcedure.query(({ ctx }) => getHistoricalPlanningBudgetComparison(ctx.user.id)),
     financialOsPortfolioSnapshot: protectedProcedure.query(({ ctx }) => getFinancialOsPortfolioSnapshot(ctx.user.id)),
@@ -235,9 +276,10 @@ export const appRouter = router({
     updateRoiJvContributionComponent: protectedProcedure.input(roiContributionComponentInput.partial().extend({ id: z.number().int() })).mutation(({ ctx, input }) => { const { id, ...patch } = input; return updateRoiJvContributionComponent(ctx.user.id, id, patch); }),
     tasks: protectedProcedure.query(({ ctx }) => listTasks(ctx.user.id)),
     createTask: protectedProcedure.input(taskInput).mutation(({ ctx, input }) => createTask(ctx.user.id, input)),
-    updateTask: protectedProcedure.input(z.object({ id: z.number().int(), status: z.enum(["open", "in_progress", "done", "snoozed"]) })).mutation(({ ctx, input }) => updateTask(ctx.user.id, input.id, input.status)),
+    updateTask: protectedProcedure.input(taskUpdateInput).mutation(({ ctx, input }) => { const { id, ...patch } = input; return updateTask(ctx.user.id, id, patch); }),
     meetings: protectedProcedure.query(({ ctx }) => listMeetings(ctx.user.id)),
     createMeeting: protectedProcedure.input(meetingInput).mutation(({ ctx, input }) => createMeeting(ctx.user.id, input)),
+    updateMeeting: protectedProcedure.input(meetingInput.extend({ id: z.number().int().positive() })).mutation(({ ctx, input }) => { const { id, ...fields } = input; return updateMeeting(ctx.user.id, id, fields); }),
     analytics: protectedProcedure.query(({ ctx }) => getFundraisingAnalytics(ctx.user.id)),
     investorEvents: protectedProcedure.input(z.object({ contactId: z.number().int().optional() }).optional()).query(({ ctx, input }) => listInvestorEvents(ctx.user.id, input?.contactId)),
     researchProposals: protectedProcedure.input(z.object({ contactId: z.number().int() })).query(({ ctx, input }) => listInvestorResearchProposals(ctx.user.id, input.contactId)),
@@ -317,6 +359,11 @@ export const appRouter = router({
       if (!canSendFromGmailStatus(Boolean(gmail))) throw new TRPCError({ code: "PRECONDITION_FAILED", message: "Gmail sending is not configured. Connect Gmail before sending." });
       const contact = await getInvestorContact(ctx.user.id, input.id);
       if (!contact) throw new TRPCError({ code: "NOT_FOUND", message: "Investor contact not found." });
+      if (input.message === "initial" && contact.status !== "approved") throw new TRPCError({ code: "PRECONDITION_FAILED", message: "Approve this draft before sending initial outreach." });
+      if (input.message === "initial" && contact.initialSentAt) throw new TRPCError({ code: "PRECONDITION_FAILED", message: "Initial outreach was already sent." });
+      if (input.message === "followup" && (!contact.initialSentAt || contact.followUpSentAt)) throw new TRPCError({ code: "PRECONDITION_FAILED", message: "A follow-up requires a sent initial message and must not be sent twice." });
+      if (contact.email.toLowerCase().endsWith(".invalid")) throw new TRPCError({ code: "PRECONDITION_FAILED", message: "This investor has a placeholder email. Verify a real contact address before sending." });
+      if (isSandboxOnlyOutreach() && !isSandboxRecipient(contact.email)) throw new TRPCError({ code: "PRECONDITION_FAILED", message: "Sandbox-only outreach is enabled: this contact is not a sandbox test address." });
       if (!canSendToContactStatus(contact.status)) throw new TRPCError({ code: "PRECONDITION_FAILED", message: "This contact is suppressed from outreach." });
       const subject = input.message === "initial" ? contact.initialSubject : contact.followUpSubject;
       const body = input.message === "initial" ? contact.initialBody : contact.followUpBody;
@@ -326,6 +373,8 @@ export const appRouter = router({
       const attachments = await Promise.all(selectedDocuments.map(async (document) => { const response = await fetch(await storageGetSignedUrl(document.storageKey)); if (!response.ok) throw new Error(`Unable to load ${document.name} for attachment.`); return { name: document.name, mimeType: document.mimeType, content: Buffer.from(await response.arrayBuffer()) }; }));
       try { await sendGmailMessage(ctx.user.id, contact.email, subject, body, attachments); }
       catch (error) { throw new TRPCError({ code: "BAD_GATEWAY", message: error instanceof Error ? error.message : "Gmail send failed." }); }
+      await publishVcsdEvent({ email: contact.email, firmName: contact.firmName, type: input.message === "initial" ? "email_sent" : "followup_sent", detail: input.message === "initial" ? "Initial outreach sent from FOS" : "Follow-up sent from FOS" })
+        .catch((error) => console.warn("VCSD outreach event could not be written:", error));
       const patch = input.message === "initial" ? { status: "sent" as const, initialSentAt: new Date() } : { status: "sent" as const, followUpSentAt: new Date() };
       const updated = await updateInvestorContact(ctx.user.id, input.id, patch);
       await addOutreachEvent(ctx.user.id, input.id, `${input.message}_sent`, "Marked sent after configured Gmail send");

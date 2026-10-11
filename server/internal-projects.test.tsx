@@ -23,6 +23,30 @@ describe("Internal Projects", () => {
     expect(result.linkedOpportunities[0]).toMatchObject({ id: 18, linkReason: "explicit Internal Project link" });
   });
 
+  it("excludes Stonepine's imported 300-home requirement from the current 200-home capital stack", () => {
+    const result = summarizeInternalProjectCapitalStack({
+      projectId: 3,
+      projectName: "Stonepine Residences",
+      programUnitCount: 200,
+      capitalRequirement: 69_375_000,
+      capitalNeeds: [{ id: 1, internalProjectId: 3, requirementName: "Financial OS planning requirement", notes: "Imported from Historical Planning — Optimized Case.", amount: 156_000_000, amountDataState: "estimated" }],
+      capitalNeedStrategies: [],
+      opportunities: [],
+    });
+    expect(result.totals.capitalRequirement).toBe(69_375_000);
+    expect(result.totals.remainingCommittedGap).toBe(69_375_000);
+    const historical = summarizeInternalProjectCapitalStack({
+      projectId: 3,
+      projectName: "Stonepine Residences",
+      programUnitCount: 300,
+      capitalRequirement: 156_000_000,
+      capitalNeeds: [{ id: 1, internalProjectId: 3, requirementName: "Financial OS planning requirement", notes: "Imported from Historical Planning — Optimized Case.", amount: 156_000_000, amountDataState: "estimated" }],
+      capitalNeedStrategies: [],
+      opportunities: [],
+    });
+    expect(historical.totals.capitalRequirement).toBe(156_000_000);
+  });
+
   it("renders project context and does not present a project as another capital path", () => {
     const capitalStack = { totals: { capitalRequirement: null, potential: 0, committed: 0, funded: 0 }, rows: [{ strategyType: "equity", target: 0, potential: 0, committed: 0, funded: 0, opportunityCount: 0 }], linkedOpportunities: [] };
     const markup = renderToStaticMarkup(<InternalProjectsWorkspace projects={[{ id: 7, projectName: "Factory Context", projectStatus: "planning", developmentStage: "concept", capitalRequirementDataState: "missing" }]} capitalNeeds={[]} capitalNeedStrategies={[]} capitalStack={capitalStack} documents={[]} documentLinks={[]} roiProjects={[]} capitalOpportunities={[]} selectedProjectId={7} onProjectSelect={vi.fn()} onOpenRoi={vi.fn()} createProject={mutation} updateProject={mutation} saveCapitalNeed={mutation} linkDocument={mutation} unlinkDocument={mutation} updateCapitalOpportunity={mutation} />);

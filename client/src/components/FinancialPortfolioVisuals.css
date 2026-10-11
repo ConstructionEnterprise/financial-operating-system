@@ -1,0 +1,63 @@
+.scenario-brief {
+  margin: 18px 0 22px;
+  overflow: hidden;
+  border: 1px solid #c8d2c5;
+  border-radius: 18px;
+  background: #fbfcf8;
+  color: #203329;
+}
+
+.scenario-brief-heading,
+.scenario-brief-main,
+.scenario-brief-lower,
+.scenario-brief-basis { padding: 19px 24px; }
+
+.scenario-brief-heading { display: flex; align-items: start; justify-content: space-between; gap: 18px; border-bottom: 1px solid #dce4d9; }
+.scenario-brief-heading h3 { margin: 5px 0 0; color: #263f2e; font-family: Georgia, serif; font-size: clamp(21px, 2vw, 29px); line-height: 1.18; }
+.scenario-brief-heading .roi-state { flex: none; margin-top: 3px; }
+
+.scenario-brief-main { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 26px; align-items: end; }
+.scenario-brief-cost, .scenario-brief-program { min-width: 0; }
+.scenario-brief-cost > span, .scenario-brief-program > span, .scenario-brief-label, .scenario-brief-tenure > span { display: block; color: #667a69; font-size: 12px; font-weight: 700; letter-spacing: .065em; text-transform: uppercase; }
+.scenario-brief-cost > strong { display: block; margin: 8px 0 5px; color: #284f3b; font-family: Georgia, serif; font-size: clamp(29px, 3vw, 45px); font-variant-numeric: tabular-nums; line-height: 1.08; }
+.scenario-brief-cost > small { display: block; color: #69796d; font-size: 12px; line-height: 1.45; }
+.scenario-brief-program { padding-left: 25px; border-left: 1px solid #dce4d9; }
+.scenario-brief-program > strong { display: block; margin: 8px 0 10px; color: #263d30; font-size: clamp(20px, 2vw, 28px); font-variant-numeric: tabular-nums; line-height: 1.15; }
+.scenario-brief-program > div { display: flex; flex-wrap: wrap; gap: 5px 18px; color: #5a6e5e; font-size: 14px; }
+
+.scenario-brief-tenure { padding: 0 24px 20px; }
+.scenario-brief-tenure-bar { display: flex; height: 11px; margin: 10px 0 8px; overflow: hidden; border-radius: 20px; background: #e6e8dd; }
+.scenario-brief-tenure-bar i:first-child { display: block; background: #a98b51; }
+.scenario-brief-tenure-bar i:last-child { display: block; background: #668ba3; }
+.scenario-brief-tenure > div:last-child { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; color: #4f6154; font-size: 13px; font-variant-numeric: tabular-nums; }
+
+.scenario-brief-lower { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px; border-top: 1px solid #dce4d9; background: #f1f5ed; }
+.scenario-brief-lower > div { min-width: 0; }
+.scenario-brief-lower > div + div { padding-left: 25px; border-left: 1px solid #d3dfd2; }
+.scenario-brief-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; margin-top: 12px; }
+.scenario-brief-pair > div { min-width: 0; }
+.scenario-brief-pair small { display: block; color: #607365; font-size: 12px; line-height: 1.35; }
+.scenario-brief-pair strong { display: block; margin-top: 4px; color: #263e2f; font-size: clamp(17px, 1.6vw, 23px); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.scenario-brief-pair strong.scenario-negative { color: #9b583e; }
+.scenario-brief-lower p { margin: 12px 0 0; color: #5e6d62; font-size: 13px; line-height: 1.45; }
+.scenario-brief-margin { display: grid; grid-template-columns: 1fr auto; gap: 6px; margin-top: 13px; color: #536b58; font-size: 12px; }
+.scenario-brief-margin b { font-variant-numeric: tabular-nums; }
+.scenario-brief-margin > i { grid-column: 1 / -1; display: block; height: 7px; overflow: hidden; border-radius: 9px; background: #dce4d9; }
+.scenario-brief-margin em { display: block; height: 100%; border-radius: inherit; background: #4d7359; }
+
+.scenario-brief-basis { padding-top: 11px; padding-bottom: 13px; border-top: 1px solid #dce4d9; color: #5d705f; font-size: 12px; }
+.scenario-brief-basis summary { width: fit-content; color: #3c6049; font-weight: 700; cursor: pointer; }
+.scenario-brief-basis p { margin: 9px 0 0; overflow-wrap: anywhere; line-height: 1.5; }
+
+@media (max-width: 850px) {
+  .scenario-brief-main, .scenario-brief-lower { grid-template-columns: 1fr; gap: 20px; }
+  .scenario-brief-program, .scenario-brief-lower > div + div { padding-left: 0; border-left: 0; }
+  .scenario-brief-program { padding-top: 18px; border-top: 1px solid #dce4d9; }
+  .scenario-brief-lower > div + div { padding-top: 18px; border-top: 1px solid #d3dfd2; }
+}
+
+@media (max-width: 560px) {
+  .scenario-brief-heading, .scenario-brief-main, .scenario-brief-lower, .scenario-brief-basis { padding-left: 16px; padding-right: 16px; }
+  .scenario-brief-heading { flex-wrap: wrap; }
+  .scenario-brief-tenure { padding-left: 16px; padding-right: 16px; }
+}

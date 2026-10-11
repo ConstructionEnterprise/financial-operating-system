@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS equipment_development_plans (
+  id INT AUTO_INCREMENT PRIMARY KEY, ownerId INT NOT NULL, projectId INT NOT NULL,
+  revision INT NOT NULL DEFAULT 1, payload MEDIUMTEXT NOT NULL,
+  createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY equipment_plan_owner_project (ownerId, projectId)
+);
+CREATE TABLE IF NOT EXISTS equipment_development_plan_audit (
+  id INT AUTO_INCREMENT PRIMARY KEY, ownerId INT NOT NULL, planId INT NOT NULL,
+  revision INT NOT NULL, actor VARCHAR(255) NOT NULL, reason TEXT NOT NULL, payload MEDIUMTEXT NOT NULL,
+  createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY equipment_plan_audit_revision (planId, revision)
+);

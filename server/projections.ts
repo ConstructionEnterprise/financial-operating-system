@@ -1,7 +1,8 @@
 import { and, asc, eq } from "drizzle-orm";
-import { internalProjects, projectEconomicsModels, projectPlanningScheduleMonths, projectPlanningWbsLines, projectProjectionAssumptions, projectProjectionMonthlyLines, projectProjectionScenarios } from "../drizzle/schema";
+import { internalProjects, projectEconomicsModels, projectPlanningScheduleMonths, projectPlanningWbsLines, projectProjectionAssumptions, projectProjectionMonthlyLines, projectProjectionScenarios, projectProjectionUnitMixes } from "../drizzle/schema";
 import { calculateProjectionComparison, calculateProjectionScenarioSnapshot } from "../shared/projections";
 import { buildHistoricalPlanningComparison } from "../shared/historicalPlanning";
+import { buildProjectionDriverSchedule } from "../shared/projectionDriverSchedule";
 import { getDb } from "./db";
 
 type ScenarioInput = Omit<typeof projectProjectionScenarios.$inferInsert, "id" | "ownerId" | "createdAt" | "updatedAt">;
@@ -92,6 +93,40 @@ export async function saveProjectionMonthlyLine(ownerId: number, input: MonthlyL
   return rows[0];
 }
 
+const generatedScheduleSource = "FOS driver schedule v1";
+
+export async function saveProjectionDriverSchedule(ownerId: number, input: { scenarioId: number; salesStartMonth: number; salesEndMonth: number; leaseStartMonth: number; leaseEndMonth: number; sellingExpenseBps: number | null; rentalOperatingExpenseBps: number | null }) {
+  const scenario = await getOwnedScenario(ownerId, input.scenarioId);
+  if (!scenario) throw new Error("Projection scenario not found for this workspace owner.");
+  if (scenario.scenarioStatus === "archived") throw new Error("Archived projection cases are read-only. Select a current scenario to generate a schedule.");
+  const model = await getOwnedModel(ownerId, scenario.modelId);
+  if (!model) throw new Error("Project-economics model not found for this projection scenario.");
+  const assumptions = await listProjectionAssumptions(ownerId, scenario.id);
+  const required = ["for_sale_units", "rental_units", "sale_price_per_home", "monthly_rent_per_home"] as const;
+  const missing = required.filter((metric) => metricValue(assumptions, metric) === null);
+  if (missing.length) throw new Error(`Save these scenario assumptions before generating a schedule: ${missing.join(", ")}.`);
+  const months = buildProjectionDriverSchedule({
+    horizonMonths: model.horizonMonths,
+    saleUnits: metricValue(assumptions, "for_sale_units")!,
+    rentalUnits: metricValue(assumptions, "rental_units")!,
+    salePricePerHome: metricValue(assumptions, "sale_price_per_home")!,
+    monthlyRentPerHome: metricValue(assumptions, "monthly_rent_per_home")!,
+    ...input,
+  });
+  const existing = await listProjectionMonthlyLines(ownerId, scenario.id);
+  const metrics = input.sellingExpenseBps === null ? ["revenue"] : ["revenue", "operating_cost"];
+  const manual = existing.filter((line) => (line.metricCategory === "revenue" || line.metricCategory === "operating_cost") && !line.sourceReference?.startsWith(generatedScheduleSource));
+  if (manual.length) throw new Error(`This scenario already has ${manual.length} manually sourced revenue or operating-cost lines. Review them before generating; they will not be overwritten or combined with generated lines.`);
+  if (input.sellingExpenseBps === null && existing.some((line) => line.metricCategory === "operating_cost" && line.sourceReference?.startsWith(generatedScheduleSource))) throw new Error("This scenario has an earlier generated operating-cost schedule. Enter both expense percentages to revise it; existing cost records cannot silently remain when the new preview omits them.");
+  const sourceReference = `${generatedScheduleSource}; sales M${input.salesStartMonth}–${input.salesEndMonth}; lease-up M${input.leaseStartMonth}–${input.leaseEndMonth}; selling expense ${input.sellingExpenseBps === null ? "not entered" : `${input.sellingExpenseBps / 100}%`}; rental operating expense ${input.rentalOperatingExpenseBps === null ? "not entered" : `${input.rentalOperatingExpenseBps / 100}%`}`;
+  for (const row of months) {
+    const phase = row.month < input.leaseStartMonth ? "construction" : row.month <= input.leaseEndMonth ? "lease_up_stabilization" : "stabilized_operations";
+    await saveProjectionMonthlyLine(ownerId, { scenarioId: scenario.id, monthIndex: row.month, phase, metricCategory: "revenue", deploymentCategory: null, amount: row.revenue, dataState: "estimated", sourceReference, notes: `${row.homesSold} homes sold; ${row.occupiedRentals} occupied rentals. Even monthly sales and lease-up pace is an explicit planning assumption.` });
+    if (row.operatingCost !== null) await saveProjectionMonthlyLine(ownerId, { scenarioId: scenario.id, monthIndex: row.month, phase, metricCategory: "operating_cost", deploymentCategory: null, amount: row.operatingCost, dataState: "estimated", sourceReference, notes: `Estimated selling expense at ${input.sellingExpenseBps! / 100}% of home-sale proceeds plus rental operating expense at ${input.rentalOperatingExpenseBps! / 100}% of rental receipts. Financing and capital deployment are separate.` });
+  }
+  return { monthsWritten: months.length, metricsWritten: metrics, sourceReference };
+}
+
 export async function getProjectionSnapshot(ownerId: number, modelId: number) {
   const model = await getOwnedModel(ownerId, modelId); if (!model) throw new Error("Project-economics model not found for this workspace owner.");
   const scenarios = await listProjectionScenarios(ownerId, modelId);
@@ -122,14 +157,15 @@ function metricValue(rows: Array<{ metric: string; value: number | null }>, ...m
 export async function getFinancialOsPortfolioSnapshot(ownerId: number) {
   const db = await getDb();
   if (!db) return { projects: [], totals: { developmentCost: 0, annualRevenue: 0, annualNoi: 0, monthlyCashFlow: 0, projectsWithPlanningData: 0 } };
-  const [projects, models, scenarios, assumptions, lines, wbs, scheduleMonths] = await Promise.all([
-    db.select({ id: internalProjects.id, projectName: internalProjects.projectName, projectType: internalProjects.projectType, projectStatus: internalProjects.projectStatus, developmentStage: internalProjects.developmentStage, totalProjectCost: internalProjects.totalProjectCost, totalProjectCostDataState: internalProjects.totalProjectCostDataState, capitalRequirement: internalProjects.capitalRequirement, capitalRequirementDataState: internalProjects.capitalRequirementDataState }).from(internalProjects).where(eq(internalProjects.ownerId, ownerId)),
+  const [projects, models, scenarios, assumptions, lines, wbs, scheduleMonths, unitMixes] = await Promise.all([
+    db.select({ id: internalProjects.id, projectName: internalProjects.projectName, projectType: internalProjects.projectType, projectStatus: internalProjects.projectStatus, developmentStage: internalProjects.developmentStage, programBuildingCount: internalProjects.programBuildingCount, totalProjectCost: internalProjects.totalProjectCost, totalProjectCostDataState: internalProjects.totalProjectCostDataState, capitalRequirement: internalProjects.capitalRequirement, capitalRequirementDataState: internalProjects.capitalRequirementDataState }).from(internalProjects).where(eq(internalProjects.ownerId, ownerId)),
     db.select().from(projectEconomicsModels).where(eq(projectEconomicsModels.ownerId, ownerId)),
     db.select().from(projectProjectionScenarios).where(eq(projectProjectionScenarios.ownerId, ownerId)),
     db.select({ scenarioId: projectProjectionAssumptions.scenarioId, metric: projectProjectionAssumptions.metric, value: projectProjectionAssumptions.value, dataState: projectProjectionAssumptions.dataState, sourceReference: projectProjectionAssumptions.sourceReference }).from(projectProjectionAssumptions).where(eq(projectProjectionAssumptions.ownerId, ownerId)),
-    db.select({ scenarioId: projectProjectionMonthlyLines.scenarioId, monthIndex: projectProjectionMonthlyLines.monthIndex, metricCategory: projectProjectionMonthlyLines.metricCategory, deploymentCategory: projectProjectionMonthlyLines.deploymentCategory, amount: projectProjectionMonthlyLines.amount, dataState: projectProjectionMonthlyLines.dataState }).from(projectProjectionMonthlyLines).where(eq(projectProjectionMonthlyLines.ownerId, ownerId)),
+    db.select({ id: projectProjectionMonthlyLines.id, phase: projectProjectionMonthlyLines.phase, sourceReference: projectProjectionMonthlyLines.sourceReference, scenarioId: projectProjectionMonthlyLines.scenarioId, monthIndex: projectProjectionMonthlyLines.monthIndex, metricCategory: projectProjectionMonthlyLines.metricCategory, deploymentCategory: projectProjectionMonthlyLines.deploymentCategory, amount: projectProjectionMonthlyLines.amount, dataState: projectProjectionMonthlyLines.dataState }).from(projectProjectionMonthlyLines).where(eq(projectProjectionMonthlyLines.ownerId, ownerId)),
     db.select({ scenarioId: projectPlanningWbsLines.projectionScenarioId, allocatedAmount: projectPlanningWbsLines.allocatedAmount }).from(projectPlanningWbsLines).where(eq(projectPlanningWbsLines.ownerId, ownerId)),
     db.select({ scenarioId: projectPlanningScheduleMonths.projectionScenarioId, monthIndex: projectPlanningScheduleMonths.monthIndex, constructionSpendBps: projectPlanningScheduleMonths.constructionSpendBps, occupancyBps: projectPlanningScheduleMonths.occupancyBps }).from(projectPlanningScheduleMonths).where(eq(projectPlanningScheduleMonths.ownerId, ownerId)),
+    db.select({ scenarioId: projectProjectionUnitMixes.scenarioId, unitType: projectProjectionUnitMixes.unitType, unitCount: projectProjectionUnitMixes.unitCount, dataState: projectProjectionUnitMixes.dataState, sourceReference: projectProjectionUnitMixes.sourceReference }).from(projectProjectionUnitMixes).where(eq(projectProjectionUnitMixes.ownerId, ownerId)),
   ]);
   const modelByProject = new Map(models.map((model) => [model.internalProjectId, model]));
   const scenariosByModel = new Map<number, typeof scenarios>();
@@ -142,6 +178,8 @@ export async function getFinancialOsPortfolioSnapshot(ownerId: number) {
   wbs.forEach((row) => wbsByScenario.set(row.scenarioId, (wbsByScenario.get(row.scenarioId) ?? 0) + row.allocatedAmount));
   const scheduleByScenario = new Map<number, typeof scheduleMonths>();
   scheduleMonths.forEach((row) => scheduleByScenario.set(row.scenarioId, [...(scheduleByScenario.get(row.scenarioId) ?? []), row]));
+  const unitMixByScenario = new Map<number, typeof unitMixes>();
+  unitMixes.forEach((row) => unitMixByScenario.set(row.scenarioId, [...(unitMixByScenario.get(row.scenarioId) ?? []), row]));
 
   const projectRows = projects.map((project) => {
     const model = modelByProject.get(project.id);
@@ -154,6 +192,12 @@ export async function getFinancialOsPortfolioSnapshot(ownerId: number) {
       const squareFeet = metricValue(scenarioAssumptions, "program_gross_sf", "program_residential_sf", "residential_sq_ft");
       const annualRevenue = metricValue(scenarioAssumptions, "annual_effective_gross_income", "annual_potential_gross_revenue", "annual_residential_revenue");
       const annualNoi = metricValue(scenarioAssumptions, "annual_net_operating_income", "net_operating_income", "historical_annual_noi_reference");
+      const rentalUnits = metricValue(scenarioAssumptions, "rental_units");
+      const saleUnits = metricValue(scenarioAssumptions, "for_sale_units");
+      const salePricePerHome = metricValue(scenarioAssumptions, "sale_price_per_home");
+      const monthlyRentPerHome = metricValue(scenarioAssumptions, "monthly_rent_per_home");
+      const grossHomeSaleProceeds = metricValue(scenarioAssumptions, "gross_home_sale_proceeds");
+      const annualPotentialRentalIncome = metricValue(scenarioAssumptions, "annual_potential_rental_income");
       const endRoiBps = snapshot.ceRoiSeries.at(-1)?.ceRoiBps ?? null;
       const annualCashFlow = snapshot.cashFlowSeriesReady ? snapshot.cashFlowSeries.reduce((sum, month) => sum + month.monthlyCashFlow, 0) : null;
       const deploymentSeries = (scheduleByScenario.get(scenario.id) ?? []).sort((left, right) => left.monthIndex - right.monthIndex).map((month) => ({ monthIndex: month.monthIndex, constructionDeployment: developmentCost !== null && month.constructionSpendBps !== null ? Math.round(developmentCost * month.constructionSpendBps / 10_000) : null, occupancyBps: month.occupancyBps }));
@@ -162,16 +206,19 @@ export async function getFinancialOsPortfolioSnapshot(ownerId: number) {
         developmentCost, unitCount, squareFeet, costPerUnit: developmentCost !== null && unitCount ? Math.round(developmentCost / unitCount) : null,
         costPerSf: developmentCost !== null && squareFeet ? Math.round(developmentCost / squareFeet) : null,
         annualRevenue, annualNoi, annualCashFlow, ceRoiBps: endRoiBps, projectedPaybackMonth: snapshot.projectedPaybackMonth,
+        rentalUnits, saleUnits, unitMix: unitMixByScenario.get(scenario.id) ?? [], salePricePerHome, monthlyRentPerHome, grossHomeSaleProceeds, annualPotentialRentalIncome,
         cashFlowSeriesReady: snapshot.cashFlowSeriesReady, operatingSeriesReady: snapshot.operatingSeriesReady, ceRoiSeriesReady: snapshot.ceRoiSeriesReady,
         capitalDeployment: snapshot.capitalDeployment, deploymentSeries,
+        deploymentEvidence: linesByScenario.get(scenario.id) ?? [],
         sourceReference: scenarioAssumptions[0]?.sourceReference ?? null,
       };
     });
-    const populatedScenarioRows = scenarioRows.filter((row) => row.developmentCost !== null || row.annualRevenue !== null || row.annualNoi !== null || row.deploymentSeries.length > 0);
-    const primaryCandidates = populatedScenarioRows.length ? populatedScenarioRows : scenarioRows;
+    const currentScenarioRows = scenarioRows.filter((row) => row.scenarioStatus !== "archived");
+    const populatedScenarioRows = currentScenarioRows.filter((row) => row.developmentCost !== null || row.annualRevenue !== null || row.annualNoi !== null || row.deploymentSeries.length > 0);
+    const primaryCandidates = populatedScenarioRows.length ? populatedScenarioRows : currentScenarioRows;
     const primary = primaryCandidates.find((row) => row.scenarioType === "base") ?? primaryCandidates.find((row) => /base|optimized|facility capex/i.test(row.scenarioName)) ?? primaryCandidates[0] ?? null;
     return {
-      projectId: project.id, projectName: project.projectName, projectType: project.projectType, projectStatus: project.projectStatus, developmentStage: project.developmentStage,
+      projectId: project.id, projectName: project.projectName, projectType: project.projectType, projectStatus: project.projectStatus, developmentStage: project.developmentStage, programBuildingCount: project.programBuildingCount,
       planningDataState: primary ? "estimated" : "missing", primaryScenarioId: primary?.scenarioId ?? null, primaryScenarioName: primary?.scenarioName ?? null,
       developmentCost: primary?.developmentCost ?? null, capitalRequirement: primary?.developmentCost ?? project.capitalRequirement ?? null,
       capitalRequirementState: primary ? "estimated" : project.capitalRequirementDataState,

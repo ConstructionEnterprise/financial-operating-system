@@ -7,6 +7,8 @@ export type InternalProjectDataState = "actual" | "projected" | "estimated" | "m
 export type InternalProjectCapitalNeed = {
   id: number;
   internalProjectId: number;
+  requirementName?: string | null;
+  notes?: string | null;
   amount?: number | null;
   amountDataState: InternalProjectDataState;
 };
@@ -31,6 +33,13 @@ export type InternalProjectCapitalOpportunity = {
 const recordedAmount = (value: number | null | undefined) => typeof value === "number" && Number.isFinite(value) ? Math.max(value, 0) : null;
 const normalized = (value: string | null | undefined) => value?.trim().toLocaleLowerCase() ?? "";
 
+export function isSupersededStonepineCapitalNeed(project: { projectName: string; programUnitCount?: number | null }, need: Pick<InternalProjectCapitalNeed, "requirementName" | "notes">) {
+  return project.projectName === "Stonepine Residences"
+    && project.programUnitCount === 200
+    && need.requirementName === "Financial OS planning requirement"
+    && /historical planning/i.test(need.notes ?? "");
+}
+
 export function internalProjectOpportunityLinkReason(projectId: number, projectName: string, opportunity: InternalProjectCapitalOpportunity) {
   if (opportunity.internalProjectId === projectId) return "explicit Internal Project link";
   if (normalized(projectName) && normalized(projectName) === normalized(opportunity.projectName)) return "matching recorded project name";
@@ -38,15 +47,17 @@ export function internalProjectOpportunityLinkReason(projectId: number, projectN
   return null;
 }
 
-export function summarizeInternalProjectCapitalStack({ projectId, projectName, capitalRequirement, capitalNeeds, capitalNeedStrategies, opportunities }: {
+export function summarizeInternalProjectCapitalStack({ projectId, projectName, programUnitCount, capitalRequirement, capitalNeeds, capitalNeedStrategies, opportunities }: {
   projectId: number;
   projectName: string;
+  programUnitCount?: number | null;
   capitalRequirement?: number | null;
   capitalNeeds: InternalProjectCapitalNeed[];
   capitalNeedStrategies: InternalProjectCapitalNeedStrategy[];
   opportunities: InternalProjectCapitalOpportunity[];
 }) {
-  const needById = new Map(capitalNeeds.map((need) => [need.id, need]));
+  const currentNeeds = capitalNeeds.filter((need) => !isSupersededStonepineCapitalNeed({ projectName, programUnitCount }, need));
+  const needById = new Map(currentNeeds.map((need) => [need.id, need]));
   const targetByStrategy = new Map<InternalProjectStrategyType, number>();
   const missingNeedIds = new Set<number>();
   for (const strategy of capitalNeedStrategies) {
@@ -67,7 +78,7 @@ export function summarizeInternalProjectCapitalStack({ projectId, projectName, c
     const funded = pathOpportunities.reduce((sum, opportunity) => sum + (recordedAmount(opportunity.fundedAmount) ?? 0), 0);
     return { strategyType, target: targetByStrategy.get(strategyType) ?? 0, potential, committed, funded, opportunityCount: pathOpportunities.length };
   });
-  const requirementFromNeeds = capitalNeeds.length > 0 && missingNeedIds.size === 0 ? capitalNeeds.reduce((sum, need) => sum + (recordedAmount(need.amount) ?? 0), 0) : null;
+  const requirementFromNeeds = currentNeeds.length > 0 && missingNeedIds.size === 0 ? currentNeeds.reduce((sum, need) => sum + (recordedAmount(need.amount) ?? 0), 0) : null;
   const explicitRequirement = recordedAmount(capitalRequirement);
   const totalRequirement = requirementFromNeeds ?? explicitRequirement;
   const totals = rows.reduce((summary, row) => ({ potential: summary.potential + row.potential, committed: summary.committed + row.committed, funded: summary.funded + row.funded }), { potential: 0, committed: 0, funded: 0 });

@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { campaigns, investorContacts, meetings, tasks } from "../drizzle/schema";
+import { campaigns, investorContacts, meetings, tasks, capitalOpportunities, capitalAllocations } from "../drizzle/schema";
 
 const mocks = vi.hoisted(() => {
   const updateWhere = vi.fn().mockResolvedValue(undefined);
@@ -23,17 +23,19 @@ describe("deleteCampaign", () => {
     process.env.DATABASE_URL = "mysql://test";
   });
 
-  it("unassigns linked investors, tasks, and meetings before deleting only the campaign", async () => {
+  it("unassigns linked investors, tasks, meetings, opportunities, and allocations before deleting only the campaign", async () => {
     await expect(deleteCampaign(7, 4)).resolves.toEqual({ success: true });
     expect(mocks.updateSet).toHaveBeenNthCalledWith(1, { campaignId: null });
     expect(mocks.updateSet).toHaveBeenNthCalledWith(2, { campaignId: null });
     expect(mocks.updateSet).toHaveBeenNthCalledWith(3, { campaignId: null });
-    expect(mocks.updateWhere).toHaveBeenCalledTimes(3);
+    expect(mocks.updateWhere).toHaveBeenCalledTimes(5);
+    expect(mocks.update).toHaveBeenNthCalledWith(4, capitalOpportunities);
+    expect(mocks.update).toHaveBeenNthCalledWith(5, capitalAllocations);
     expect(mocks.update).toHaveBeenNthCalledWith(1, investorContacts);
     expect(mocks.update).toHaveBeenNthCalledWith(2, tasks);
     expect(mocks.update).toHaveBeenNthCalledWith(3, meetings);
     expect(mocks.remove).toHaveBeenCalledWith(campaigns);
     expect(mocks.deleteWhere).toHaveBeenCalledTimes(1);
-    expect(mocks.updateWhere.mock.invocationCallOrder[2]).toBeLessThan(mocks.deleteWhere.mock.invocationCallOrder[0]);
+    expect(mocks.updateWhere.mock.invocationCallOrder[4]).toBeLessThan(mocks.deleteWhere.mock.invocationCallOrder[0]);
   });
 });

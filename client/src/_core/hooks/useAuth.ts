@@ -4,8 +4,8 @@ import { useMemo } from "react";
 export function useAuth() {
 
   const meQuery = trpc.auth.me.useQuery(undefined, {
-    retry: false,
-    refetchOnWindowFocus: false,
+    retry: 3,
+    refetchOnWindowFocus: true,
   });
 
   const state = useMemo(() => {

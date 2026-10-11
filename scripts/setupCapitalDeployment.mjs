@@ -1,0 +1,11 @@
+import "dotenv/config";
+import mysql from "mysql2/promise";
+import { readFile } from "node:fs/promises";
+
+if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is required");
+const connection = await mysql.createConnection(process.env.DATABASE_URL);
+try {
+  const sql = await readFile(new URL("../drizzle/capital-deployment.sql", import.meta.url), "utf8");
+  for (const statement of sql.split(";").filter((part) => part.trim())) await connection.query(statement);
+  console.log("Capital allocation and payment tables ready. Existing records preserved.");
+} finally { await connection.end(); }

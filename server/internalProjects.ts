@@ -109,5 +109,5 @@ export async function getInternalProjectCapitalStack(ownerId: number, internalPr
     listInternalProjectCapitalNeedStrategies(ownerId),
     (async () => { const db = await getDb(); return db ? db.select().from(capitalOpportunities).where(eq(capitalOpportunities.ownerId, ownerId)) : []; })(),
   ]);
-  return summarizeInternalProjectCapitalStack({ projectId: project.id, projectName: project.projectName, capitalRequirement: project.capitalRequirement, capitalNeeds, capitalNeedStrategies, opportunities });
+  return summarizeInternalProjectCapitalStack({ projectId: project.id, projectName: project.projectName, programUnitCount: project.programUnitCount, capitalRequirement: project.capitalRequirement, capitalNeeds, capitalNeedStrategies, opportunities });
 }

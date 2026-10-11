@@ -1,0 +1,20 @@
+import assert from "node:assert/strict";
+const base = "http://localhost:3002/api/trpc/equipmentPlanning";
+const list = async () => {
+  const response = await fetch(`${base}.list`);
+  assert.equal(response.status, 200);
+  return (await response.json()).result.data.json;
+};
+const before = await list();
+assert.equal(before.length, 2);
+const selected = before[0];
+const update = async input => fetch(`${base}.update`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ json: input }) });
+const stale = await update({ id: selected.id, revision: selected.revision + 1, item: selected.plan.items[0], reason: "Validation probe; must reject stale revision without writes" });
+assert.equal(stale.status, 409);
+const missing = await update({ id: 2147483647, revision: 1, item: selected.plan.items[0], reason: "Validation probe; must reject absent record without writes" });
+assert.equal(missing.status, 404);
+const invalid = await update({ id: selected.id, revision: selected.revision, item: { ...selected.plan.items[0], quantity: -1 }, reason: "Validation probe; invalid quantity must not write" });
+assert.equal(invalid.status, 400);
+const after = await list();
+assert.deepEqual(after, before);
+console.log("Live equipment API verified: both saved plans load; stale revisions, absent IDs and invalid quantities rejected; stored plans unchanged.");

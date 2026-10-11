@@ -1,5 +1,48 @@
 import { relations } from "drizzle-orm";
-import { boolean, int, mysqlEnum, mysqlTable, text, timestamp, uniqueIndex, varchar } from "drizzle-orm/mysql-core";
+import { boolean, decimal, int, mediumtext, mysqlEnum, mysqlTable, text, timestamp, uniqueIndex, varchar } from "drizzle-orm/mysql-core";
+
+export const equipmentDevelopmentPlans = mysqlTable("equipment_development_plans", {
+  id: int("id").autoincrement().primaryKey(), ownerId: int("ownerId").notNull(),
+  projectId: int("projectId").notNull(), revision: int("revision").notNull().default(1),
+  payload: mediumtext("payload").notNull(), createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+}, t => ({ projectOwner: uniqueIndex("equipment_plan_owner_project").on(t.ownerId, t.projectId) }));
+export const equipmentDevelopmentPlanAudit = mysqlTable("equipment_development_plan_audit", {
+  id: int("id").autoincrement().primaryKey(), ownerId: int("ownerId").notNull(), planId: int("planId").notNull(),
+  revision: int("revision").notNull(), actor: varchar("actor", { length: 255 }).notNull(),
+  reason: text("reason").notNull(), payload: mediumtext("payload").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+}, t => ({ planRevision: uniqueIndex("equipment_plan_audit_revision").on(t.planId, t.revision) }));
+
+export const capitalAllocations = mysqlTable("capital_allocations", {
+  id: int("id").autoincrement().primaryKey(),
+  ownerId: int("ownerId").notNull(),
+  campaignId: int("campaignId"),
+  sourceOpportunityId: int("sourceOpportunityId"),
+  internalProjectId: int("internalProjectId"),
+  purpose: varchar("purpose", { length: 255 }).notNull(),
+  category: varchar("category", { length: 64 }).notNull(),
+  equipmentName: varchar("equipmentName", { length: 255 }),
+  plannedAmount: decimal("plannedAmount", { precision: 16, scale: 2 }).notNull(),
+  committedAmount: decimal("committedAmount", { precision: 16, scale: 2 }),
+  plannedMonth: varchar("plannedMonth", { length: 7 }),
+  reference: varchar("reference", { length: 500 }),
+  notes: text("notes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export const capitalPayments = mysqlTable("capital_payments", {
+  id: int("id").autoincrement().primaryKey(),
+  ownerId: int("ownerId").notNull(),
+  allocationId: int("allocationId").notNull(),
+  requestKey: varchar("requestKey", { length: 64 }).notNull(),
+  amount: decimal("amount", { precision: 16, scale: 2 }).notNull(),
+  paidOn: varchar("paidOn", { length: 10 }).notNull(),
+  reference: varchar("reference", { length: 500 }).notNull(),
+  voided: boolean("voided").notNull().default(false),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+}, (table) => ({ requestUnique: uniqueIndex("capital_payment_request_unique").on(table.ownerId, table.requestKey) }));
 
 export const users = mysqlTable("users", {
   id: int("id").autoincrement().primaryKey(),
@@ -18,6 +61,30 @@ export const campaigns = mysqlTable("campaigns", {
   ownerId: int("ownerId").notNull(),
   name: varchar("name", { length: 255 }).notNull(),
   description: text("description"),
+  financeType: varchar("financeType", { length: 32 }).notNull().default("unclassified"),
+  recipientEntity: varchar("recipientEntity", { length: 255 }),
+  targetAmount: decimal("targetAmount", { precision: 16, scale: 2 }),
+  internalProjectId: int("internalProjectId"),
+  campaignOwner: varchar("campaignOwner", { length: 255 }),
+  targetDate: varchar("targetDate", { length: 10 }),
+  financingTerms: text("financingTerms"),
+  preMoneyValuation: decimal("preMoneyValuation", { precision: 16, scale: 2 }),
+  ownershipOfferedBps: int("ownershipOfferedBps"),
+  monthlyBurn: decimal("monthlyBurn", { precision: 16, scale: 2 }),
+  currentCash: decimal("currentCash", { precision: 16, scale: 2 }),
+  plannedHeadcount: int("plannedHeadcount"),
+  interestRateBps: int("interestRateBps"),
+  termMonths: int("termMonths"),
+  loanToCostBps: int("loanToCostBps"),
+  borrowerEquity: decimal("borrowerEquity", { precision: 16, scale: 2 }),
+  partnerContribution: decimal("partnerContribution", { precision: 16, scale: 2 }),
+  ceContribution: decimal("ceContribution", { precision: 16, scale: 2 }),
+  preferredReturnBps: int("preferredReturnBps"),
+  downPayment: decimal("downPayment", { precision: 16, scale: 2 }),
+  monthlyPayment: decimal("monthlyPayment", { precision: 16, scale: 2 }),
+  expectedUtilizationBps: int("expectedUtilizationBps"),
+  grantMatchAmount: decimal("grantMatchAmount", { precision: 16, scale: 2 }),
+  grantRequestedAmount: decimal("grantRequestedAmount", { precision: 16, scale: 2 }),
   groupName: varchar("groupName", { length: 128 }).notNull().default("Ungrouped"),
   sortOrder: int("sortOrder").notNull().default(0),
   funnelStage: varchar("funnelStage", { length: 64 }).notNull().default("1,000"),
@@ -26,6 +93,24 @@ export const campaigns = mysqlTable("campaigns", {
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
+
+/** Append-only record of an internal campaign planning decision; never a lender commitment. */
+export const campaignFinancingDecisions = mysqlTable("campaign_financing_decisions", {
+  id: int("id").autoincrement().primaryKey(),
+  ownerId: int("ownerId").notNull(),
+  campaignId: int("campaignId").notNull(),
+  decisionKey: varchar("decisionKey", { length: 128 }).notNull(),
+  decisionType: varchar("decisionType", { length: 64 }).notNull(),
+  status: varchar("status", { length: 32 }).notNull(),
+  amount: decimal("amount", { precision: 16, scale: 2 }),
+  loanToCostBps: int("loanToCostBps"),
+  borrowerEquity: decimal("borrowerEquity", { precision: 16, scale: 2 }),
+  basis: text("basis").notNull(),
+  decidedBy: varchar("decidedBy", { length: 255 }).notNull(),
+  decidedAt: timestamp("decidedAt").defaultNow().notNull(),
+}, (table) => ({
+  ownerDecisionKeyUnique: uniqueIndex("campaign_financing_decision_owner_key_unique").on(table.ownerId, table.decisionKey),
+}));
 
 export const fundraisingDocuments = mysqlTable("fundraising_documents", {
   id: int("id").autoincrement().primaryKey(),

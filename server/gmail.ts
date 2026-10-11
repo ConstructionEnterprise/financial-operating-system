@@ -2,6 +2,7 @@ import type { Express, Request } from "express";
 import crypto from "node:crypto";
 import { ENV } from "./_core/env";
 import { getGmailConnectionSecret, upsertGmailConnection, getWorkspaceUser } from "./db";
+import { sandboxAgentForEmail } from "./vcsdIdentity";
 
 const CALLBACK_PATH = "/api/gmail/oauth/callback";
 
@@ -44,9 +45,28 @@ function buildRawMessage(to: string, subject: string, body: string, attachments:
   return [`To: ${to}`, `Subject: ${subject}`, "MIME-Version: 1.0", `Content-Type: multipart/mixed; boundary="${boundary}"`, "", `--${boundary}`, "Content-Type: text/plain; charset=UTF-8", "", body, ...attachmentParts, `--${boundary}--`, ""].join("\r\n");
 }
 
+// Sandbox-only outreach guard. While OUTREACH_SANDBOX_ONLY is not "false"
+// (the default), Gmail sending is restricted to the ten seeded VCSD addresses,
+// so a mis-approved campaign can never reach a real
+// investor. Flip OUTREACH_SANDBOX_ONLY to "false" deliberately when real
+// outreach begins.
+export function isSandboxOnlyOutreach(): boolean {
+  return (process.env.OUTREACH_SANDBOX_ONLY || "true").toLowerCase() !== "false";
+}
+export function isSandboxRecipient(email: string): boolean {
+  return sandboxAgentForEmail(email) !== null;
+}
+export function assertSandboxRecipient(email: string): void {
+  if (isSandboxOnlyOutreach() && !isSandboxRecipient(email))
+    throw new Error("Sandbox-only outreach is enabled: refusing to send to " + email + ".");
+}
+
 export async function sendGmailMessage(ownerId: number, to: string, subject: string, body: string, attachments: GmailAttachment[] = []) {
+  assertSandboxRecipient(to);
   const connection = await getGmailConnectionSecret(ownerId);
   if (!connection?.refreshTokenEncrypted) throw new Error("Gmail is connected without a usable refresh token. Reconnect Gmail.");
+  if (isSandboxOnlyOutreach() && connection.email.toLowerCase() !== "chappellintl@gmail.com")
+    throw new Error("Sandbox outreach requires the chappellintl@gmail.com sending account.");
   const refreshToken = decrypt(connection.refreshTokenEncrypted);
   const tokenResponse = await fetch("https://oauth2.googleapis.com/token", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ client_id: process.env.GMAIL_CLIENT_ID || "", client_secret: process.env.GMAIL_CLIENT_SECRET || "", refresh_token: refreshToken, grant_type: "refresh_token" }) });
   if (!tokenResponse.ok) throw new Error("Gmail token refresh failed. Reconnect Gmail.");
@@ -60,13 +80,24 @@ export async function sendGmailMessage(ownerId: number, to: string, subject: str
 
 export function registerGmailRoutes(app: Express) {
   app.get("/api/gmail/oauth/start", async (req, res) => {
-    const user = await getWorkspaceUser();
+    let user;
+    try {
+      user = await getWorkspaceUser();
+    } catch (error) {
+      // A stale MySQL connection can reset between requests. The lookup is
+      // read-only, so one retry is safe; never let an OAuth popup crash FOS.
+      try { user = await getWorkspaceUser(); }
+      catch (retryError) {
+        console.error("[Gmail OAuth] Workspace lookup failed:", retryError);
+        return res.status(503).send("The FOS database is temporarily unavailable. Please retry Connect Gmail.");
+      }
+    }
     if (!user) return res.status(401).send("User not found. Please ensure the application is properly configured.");
     const clientId = process.env.GMAIL_CLIENT_ID;
     if (!clientId) return res.status(503).send("Gmail OAuth is not configured yet. Add GMAIL_CLIENT_ID first.");
     const state = makeState(user.id);
     res.setHeader("Set-Cookie", `gmail_oauth_state=${state}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=600`);
-    const params = new URLSearchParams({ client_id: clientId, redirect_uri: redirectUri(req), response_type: "code", access_type: "offline", prompt: "consent", scope: "https://www.googleapis.com/auth/gmail.send", state });
+    const params = new URLSearchParams({ client_id: clientId, redirect_uri: redirectUri(req), response_type: "code", access_type: "offline", prompt: "consent", scope: "https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.readonly openid email", state });
     res.redirect(`https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`);
   });
 
@@ -83,11 +114,17 @@ export function registerGmailRoutes(app: Express) {
     if (!tokenResponse.ok) return res.status(502).send("Gmail authorization succeeded, but token exchange failed. Check the redirect URI and OAuth client.");
     const tokens = await tokenResponse.json() as { access_token?: string; refresh_token?: string };
     if (!tokens.access_token) return res.status(502).send("Gmail authorization did not return an access token.");
-    const profileResponse = await fetch("https://gmail.googleapis.com/gmail/v1/users/me/profile", { headers: { Authorization: `Bearer ${tokens.access_token}` } });
-    const profile = profileResponse.ok ? await profileResponse.json() as { emailAddress?: string } : {};
-    await upsertGmailConnection(ownerId, profile.emailAddress || "connected Gmail mailbox", tokens.refresh_token ? encrypt(tokens.refresh_token) : undefined);
+    const profileResponse = await fetch("https://openidconnect.googleapis.com/v1/userinfo", { headers: { Authorization: `Bearer ${tokens.access_token}` } });
+    if (!profileResponse.ok) return res.status(502).send("Gmail connected, but the mailbox identity could not be verified. Please retry.");
+    const profile = await profileResponse.json() as { email?: string };
+    const mailboxEmail = profile.email?.trim().toLowerCase();
+    if (!mailboxEmail) return res.status(502).send("Gmail did not identify the connected mailbox. Please retry.");
+    const expectedEmail = (process.env.SHARED_INBOX || "").trim().toLowerCase();
+    if ((expectedEmail && mailboxEmail !== expectedEmail) || (isSandboxOnlyOutreach() && mailboxEmail !== "chappellintl@gmail.com"))
+      return res.status(403).send("This is not the configured sandbox Gmail account. Choose chappellintl@gmail.com and retry.");
+    await upsertGmailConnection(ownerId, mailboxEmail, tokens.refresh_token ? encrypt(tokens.refresh_token) : undefined);
     res.setHeader("Set-Cookie", "gmail_oauth_state=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0");
-    res.send(`<!doctype html><html><body style="font-family: sans-serif; padding: 32px"><h2>Gmail connected</h2><p>${profile.emailAddress || "Mailbox connected"}</p><script>window.opener && window.opener.postMessage({ type: 'gmail-connected' }, '*'); setTimeout(() => window.close(), 700);</script></body></html>`);
+    res.send("<!doctype html><html><body style=\"font-family: sans-serif; padding: 32px\"><h2>Gmail connected</h2><p>Return to FOS to confirm the mailbox status.</p><script>window.opener && window.opener.postMessage({ type: 'gmail-connected' }, '*'); setTimeout(() => window.close(), 700);</script></body></html>");
   });
 }
 

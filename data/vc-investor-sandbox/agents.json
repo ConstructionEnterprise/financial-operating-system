@@ -1,0 +1,742 @@
+{
+  "agents": [
+    {
+      "bestPitchAngle": "Lead with the $1M equity bucket as factory infrastructure: lot-size-1 manufacturing economics, Cedarwood as the reference plant output.",
+      "building": "Cedarwood Flats",
+      "buildingNote": "Diligencing Cedarwood Flats ($40M, 258,300 SF, 64% building modular) as the lot-size-1 manufacturing proof case.",
+      "checkSizeMax": 5000000,
+      "checkSizeMin": 500000,
+      "dialogue": {
+        "greeting": "Jonas Weber, Foundamental. We back CapEx-heavy project markets from day zero. Show me the factory economics and I will show you a cheque — in that order.",
+        "onObjection": "My concern with CE is execution risk on heavy CapEx before revenue. Katerra taught everyone what happens when the factory story outruns the factory. Convince me your first plant cash-flows.",
+        "onThesis": "Our thesis is simple: the next industrial giants are built around project markets — infrastructure, AEC, heavy supply chains, lot-size-1 manufacturing. We write the first institutional cheque, $500k to $5M, pre-seed through Series A and B.",
+        "onWhatMovesMe": "A credible path from Cedarwood Flats to a repeatable plant template — unit economics per module, then per plant. Bring me that model and we are in diligence."
+      },
+      "emailLocal": "vc-foundamental",
+      "firm": "Foundamental",
+      "fitScore": 95,
+      "geography": "Global (Berlin-based)",
+      "id": "foundamental",
+      "likelyObjections": "Pre-revenue hardware risk; single-founder concentration; can a Texas factory team execute a European-style industrial playbook?",
+      "persona": "Jonas Weber",
+      "relationshipStage": "identified",
+      "role": "Partner, Industrial Systems (sandbox persona)",
+      "stage": "Pre-seed through Series A+B",
+      "thesis": "We invest day zero through Series A+B in CapEx-heavy project markets — infrastructure, AEC, heavy supply chains, and lot-size-1 manufacturing. First cheques $500k–$5M.",
+      "type": "VC",
+      "warmIntroPath": "Cold via hello@foundamental.com in sandbox; real world via industrial-tech founder network.",
+      "admin": "Priya Nair",
+      "email": "chappellintl+vc-foundamental@gmail.com",
+      "interior": {
+        "floors": 4,
+        "topName": "Partner Offices",
+        "receptionist": {
+          "name": "Lena Hoffmann",
+          "role": "Receptionist",
+          "greeting": "Welcome to Foundamental. The industrial team is upstairs — who are you here to see?",
+          "about": "I run the front of the house. If it involves steel, concrete, or a factory floor, it passes through this desk eventually.",
+          "pointer": "Jonas Weber is on the top floor — take the elevator all the way up. Bring numbers; he respects numbers."
+        },
+        "staffFloors": [
+          {
+            "level": 2,
+            "name": "Investment Team",
+            "staff": [
+              {
+                "name": "Tomas Berger",
+                "role": "Investment Associate",
+                "greeting": "Tomas Berger — I cover the industrial portfolio. You're here about CE, I assume?",
+                "about": "I run the numbers on first plants — capex schedules, unit economics, the unglamorous math that decides everything.",
+                "tip": "Before you go up: Jonas will ask about plant-level cash flow before anything else. Have that answer ready."
+              },
+              {
+                "name": "Aisha Khan",
+                "role": "Analyst",
+                "greeting": "Hi — Aisha. I build the factory models here.",
+                "about": "Every module costed down to the fastener. Jonas doesn't let a deck survive without a real cost model behind it.",
+                "tip": "Tip from the bullpen: the fastest way to his attention is a credible per-module cost curve."
+              }
+            ]
+          },
+          {
+            "level": 3,
+            "name": "Industrial Research",
+            "staff": [
+              {
+                "name": "Marco Ruiz",
+                "role": "Research Lead",
+                "greeting": "Marco Ruiz, industrial research. We study how industrial giants actually get built.",
+                "about": "Project markets, heavy supply chains, lot-size-1 manufacturing — the patterns repeat if you look closely enough.",
+                "tip": "If you want to impress upstairs, talk in project markets, not startups. That's the language here."
+              },
+              {
+                "name": "Sofia Lindqvist",
+                "role": "Analyst",
+                "greeting": "Sofia — I track every CapEx-heavy startup in our markets.",
+                "about": "If someone's pouring concrete anywhere in the world, I probably have a file on them.",
+                "tip": "Fair warning: Jonas has seen every factory pitch. Lead with what's genuinely different."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "bestPitchAngle": "FF is the operating system the factory runs on — 100k lines of real workplace code, and the crew agents are the deployment model. Software margins, industrial moat.",
+      "building": "Chappell International",
+      "buildingNote": "Diligencing the Chappell International hub as the FF platform deployment — AEC software + hardware under one roof.",
+      "checkSizeMax": 4000000,
+      "checkSizeMin": 500000,
+      "dialogue": {
+        "greeting": "Maya Chen, Brick & Mortar. We live in AEC software and hardware. If it touches how buildings get designed, built, or operated — we want to see it.",
+        "onObjection": "Every contech deck claims to be a platform. My filter: who pays, for what workflow, every month? Show me FF's wedge — one workflow, one buyer, repeatable — and I will listen.",
+        "onThesis": "We back early-stage construction technology across the full stack: software for AEC workflows, hardware for the jobsite and the factory, and the connective tissue between them.",
+        "onWhatMovesMe": "A live customer loop: factory telemetry in, decisions out, dollars attached. Give me one facility running FF end-to-end and we move to partner meeting."
+      },
+      "emailLocal": "vc-brickmortar",
+      "firm": "Brick & Mortar Ventures",
+      "fitScore": 92,
+      "geography": "US (San Francisco-based)",
+      "id": "brick-mortar",
+      "likelyObjections": "Crowded contech SaaS market; is FF a product or a services business wearing software clothes?",
+      "persona": "Maya Chen",
+      "relationshipStage": "identified",
+      "role": "Partner, AEC Technology (sandbox persona)",
+      "stage": "Seed / early-stage",
+      "thesis": "We identify, invest in, and grow emerging companies developing software and hardware for architecture, engineering, construction, and facilities management. Early-stage construction technology.",
+      "type": "VC",
+      "warmIntroPath": "Cold via info@brickmortar.vc in sandbox; real world via AEC founder network.",
+      "admin": "Tom Becker",
+      "email": "chappellintl+vc-brickmortar@gmail.com",
+      "interior": {
+        "floors": 4,
+        "topName": "Partner Offices",
+        "receptionist": {
+          "name": "Jess Park",
+          "role": "Receptionist",
+          "greeting": "Welcome to Brick & Mortar. Here for the AEC team? They're on two and three — Maya's at the top.",
+          "about": "I keep this place running. Half the AEC industry walks through that door in a given month.",
+          "pointer": "Maya Chen is on the top floor. She'll want to know your wedge — one workflow, one buyer. Just saying."
+        },
+        "staffFloors": [
+          {
+            "level": 2,
+            "name": "Investment Team",
+            "staff": [
+              {
+                "name": "Devon Carter",
+                "role": "Associate",
+                "greeting": "Devon Carter — I cover construction software.",
+                "about": "If a workflow touches a jobsite, I've demoed the tool. I can tell in ten minutes whether it's real.",
+                "tip": "Maya's filter is simple: who pays, for what workflow, every month. Answer that and you're in the room."
+              },
+              {
+                "name": "Priya Raman",
+                "role": "Analyst",
+                "greeting": "Hi, Priya. I map the AEC stack for the team.",
+                "about": "Every category, every incumbent, every wedge. The map is the easy part — the timing is the hard part.",
+                "tip": "Before you head up: know exactly which workflow you own first. Not the platform — the first workflow."
+              }
+            ]
+          },
+          {
+            "level": 3,
+            "name": "Platform & Network",
+            "staff": [
+              {
+                "name": "Marcus Webb",
+                "role": "Platform Director",
+                "greeting": "Marcus Webb — I run our operator network.",
+                "about": "Contractors, owners, facility managers who pilot our companies' products. Distribution is the moat in AEC.",
+                "tip": "A pilot with the right GC is worth a hundred pitch meetings. If you have one lined up, say so early."
+              },
+              {
+                "name": "Elena Petrova",
+                "role": "Network Lead",
+                "greeting": "Elena — I connect founders to the industry.",
+                "about": "The right introduction at the right time. That's the whole job, and it's everything.",
+                "tip": "Maya listens to operators more than decks. Bring a customer voice if you can."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "bestPitchAngle": "The twin is the derisker: every stud, every pick, every weld simulated before steel is cut. Chappell Robotics doesn't sell robots — it sells verified wall frames.",
+      "building": "Stonepine Residences",
+      "buildingNote": "Diligencing Stonepine Residences (630,000 SF program) as the at-scale modular + robotics deployment case.",
+      "checkSizeMax": 3000000,
+      "checkSizeMin": 250000,
+      "dialogue": {
+        "greeting": "Derek Cole, Shadow Ventures. Construction robotics, modular, advanced materials — the hard stuff. Seed stage is where we live.",
+        "onObjection": "I have seen a dozen modular factories die on working capital. Your twin is impressive — but simulations don't pour concrete. What is the smallest real deployment that proves the loop?",
+        "onThesis": "We back founders solving the genuinely difficult problems in construction and real estate. Robotics on the factory floor, modular done right, materials that change the cost curve.",
+        "onWhatMovesMe": "One wall frame, built by the cell, installed in a real project, with the cost and time stamped. That single artifact beats any deck."
+      },
+      "emailLocal": "vc-shadow",
+      "firm": "Shadow Ventures",
+      "fitScore": 90,
+      "geography": "US",
+      "id": "shadow",
+      "likelyObjections": "Modular's graveyard is full (Katerra et al.); robotics timelines always slip — where is the derisked first deployment?",
+      "persona": "Derek Cole",
+      "relationshipStage": "identified",
+      "role": "Principal, Construction Robotics (sandbox persona)",
+      "stage": "Seed",
+      "thesis": "We invest in ambitious founders solving difficult problems in construction and real estate — construction robotics, software, advanced materials, and modular construction. Seed-focused.",
+      "type": "VC",
+      "warmIntroPath": "Submit-a-deck route in sandbox; real world via built-world founder community.",
+      "admin": "Lisa Grant",
+      "email": "chappellintl+vc-shadow@gmail.com",
+      "interior": {
+        "floors": 3,
+        "topName": "Partner Offices",
+        "receptionist": {
+          "name": "Casey Nguyen",
+          "role": "Receptionist",
+          "greeting": "Welcome to Shadow. Small team, big ambitions — Derek's upstairs if you're here about the seed round.",
+          "about": "I do a bit of everything here. Seed funds run lean — you've probably noticed the building isn't exactly towering.",
+          "pointer": "Derek Cole, top floor. He'll ask what the smallest real deployment looks like. Have a crisp answer."
+        },
+        "staffFloors": [
+          {
+            "level": 2,
+            "name": "Investment Team",
+            "staff": [
+              {
+                "name": "Jake Morrison",
+                "role": "Associate",
+                "greeting": "Jake Morrison. I live on factory floors, mostly.",
+                "about": "If a robot hasn't placed a real member yet, I'm skeptical until it does. Simulations don't pour concrete.",
+                "tip": "Derek's question will be about working capital — every modular factory dies there. Don't dodge it."
+              },
+              {
+                "name": "Tara Singh",
+                "role": "Analyst",
+                "greeting": "Tara — I study why modular factories die.",
+                "about": "Working capital, every time. The graveyard is full of great technology and empty treasuries.",
+                "tip": "Bring the stamped artifact: one frame, built by the cell, installed, costed. That beats any model."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "bestPitchAngle": "Factory-to-foundation as one controlled chain: DOLLY-004, load verification, twin-tracked members from PO to install. Logistics isn't overhead here — it's the product.",
+      "building": "Garden Lofts",
+      "buildingNote": "Diligencing Garden Lofts ($90M, 156,250 SF) with focus on the factory-to-site logistics chain.",
+      "checkSizeMax": 5000000,
+      "checkSizeMin": 500000,
+      "dialogue": {
+        "greeting": "Arjun Mehta, Nirman Ventures. Construction, manufacturing, logistics, energy — the heavy industries. If it moves atoms at scale, it is in our strike zone.",
+        "onObjection": "The full-stack story worries me — factory, software, logistics, development. Each is a company. Which one is the business, and which are supporting acts?",
+        "onThesis": "We invest where the physical economy is being rebuilt: construction tech, manufacturing, logistics, construction robotics. Patient capital for founders who respect the weight of steel.",
+        "onWhatMovesMe": "Show me the logistics leg as a standalone P&L: cost per module from factory gate to installed. If that works, the rest is upside."
+      },
+      "emailLocal": "vc-nirman",
+      "firm": "Nirman Ventures",
+      "fitScore": 88,
+      "geography": "US / global heavy industry",
+      "id": "nirman",
+      "likelyObjections": "Capital intensity across the full stack; logistics is where construction margins go to die — prove the delivery economics.",
+      "persona": "Arjun Mehta",
+      "relationshipStage": "identified",
+      "role": "Partner, Heavy Industry (sandbox persona)",
+      "stage": "Seed through Series A",
+      "thesis": "We invest across construction, mining, energy, manufacturing, and logistics — including construction robotics. We like founders who understand heavy industry from the ground up.",
+      "type": "VC",
+      "warmIntroPath": "Cold via hello@nirman.vc in sandbox; real world via industrial/logistics operator network.",
+      "admin": "Ravi Patel",
+      "email": "chappellintl+vc-nirman@gmail.com",
+      "interior": {
+        "floors": 4,
+        "topName": "Partner Offices",
+        "receptionist": {
+          "name": "Anika Sharma",
+          "role": "Receptionist",
+          "greeting": "Welcome to Nirman. Heavy industries live here — mind the steel-toed energy.",
+          "about": "Front desk, but I've absorbed enough about manufacturing economics to be dangerous.",
+          "pointer": "Arjun Mehta is on the top floor. He'll ask which leg of the stack is the actual business — know your answer."
+        },
+        "staffFloors": [
+          {
+            "level": 2,
+            "name": "Investment Team",
+            "staff": [
+              {
+                "name": "Rohan Desai",
+                "role": "Associate",
+                "greeting": "Rohan Desai — manufacturing and construction tech.",
+                "about": "If it moves atoms at scale, it's on my desk. I like founders who've worn steel-toes.",
+                "tip": "Arjun respects operators. If you've run a crew or a line, lead with that, not the deck."
+              },
+              {
+                "name": "Grace Liu",
+                "role": "Analyst",
+                "greeting": "Grace — I model the full stack for the team.",
+                "about": "Factory, software, logistics. Each leg has to stand on its own before I'll believe the whole.",
+                "tip": "The logistics P&L is where he'll press hardest. Cost per module, gate to installed."
+              }
+            ]
+          },
+          {
+            "level": 3,
+            "name": "Operations & Logistics",
+            "staff": [
+              {
+                "name": "Victor Okafor",
+                "role": "Operations Lead",
+                "greeting": "Victor Okafor — I run diligence on delivery economics.",
+                "about": "Cost per module, factory gate to installed. That's where construction margins go to die — or live.",
+                "tip": "Show him the chain as a standalone business and the rest becomes upside. That's the unlock here."
+              },
+              {
+                "name": "Hannah Kim",
+                "role": "Logistics Analyst",
+                "greeting": "Hannah — freight, fleet, and install crews.",
+                "about": "The last mile of a wall frame is the whole game. Everyone models the factory; nobody models the road.",
+                "tip": "If your logistics leg has real numbers, you're already ahead of most decks he sees."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "bestPitchAngle": "Reshoring needs factories that think: the CE cell is American manufacturing infrastructure, software-defined. Skyline is the demand signal at 600,000 SF.",
+      "building": "Skyline Towers",
+      "buildingNote": "Diligencing Skyline Towers (600,000 SF program) as the industrial-automation-at-scale deployment.",
+      "checkSizeMax": 8000000,
+      "checkSizeMin": 1000000,
+      "dialogue": {
+        "greeting": "Sarah Lawson, Construct Capital. Foundational industries — manufacturing, logistics, industrial automation. We bet on American industrial capacity.",
+        "onObjection": "I need to understand what CE is at scale. A developer with a factory is a different risk than a manufacturer with a software moat. Which are you when this is 10x?",
+        "onThesis": "Our conviction: the US rebuilds its industrial base this decade, and the winners are software-defined manufacturers. Automation, logistics, dual-use tech — that is our lane.",
+        "onWhatMovesMe": "A crisp answer to that identity question, plus one industrial customer whose automation spend recurs annually. Then we talk terms."
+      },
+      "emailLocal": "vc-constructcap",
+      "firm": "Construct Capital",
+      "fitScore": 86,
+      "geography": "US",
+      "id": "construct-capital",
+      "likelyObjections": "Scale threshold — is CE an industrial company or a project developer? Dual-use diligence adds cycle time.",
+      "persona": "Sarah Lawson",
+      "relationshipStage": "identified",
+      "role": "Partner, Industrial Automation (sandbox persona)",
+      "stage": "Seed through Series A",
+      "thesis": "We back foundational industries — manufacturing, logistics, industrial automation, and defense-adjacent dual-use technology. American industrial capacity is the bet.",
+      "type": "VC",
+      "warmIntroPath": "Cold via sayhello@constructcap.com in sandbox; real world via industrial automation founder network.",
+      "admin": "Mark Ellis",
+      "email": "chappellintl+vc-constructcap@gmail.com",
+      "interior": {
+        "floors": 5,
+        "topName": "Partner Offices",
+        "receptionist": {
+          "name": "Emily Hart",
+          "role": "Receptionist",
+          "greeting": "Welcome to Construct Capital. American industrial capacity — that's the whole thesis, and the whole building.",
+          "about": "I keep the front running. Five floors of people betting the US rebuilds its industrial base this decade.",
+          "pointer": "Sarah Lawson is on the top floor — five. She'll ask which you are at 10x: industrial company or project developer."
+        },
+        "staffFloors": [
+          {
+            "level": 2,
+            "name": "Investment Team",
+            "staff": [
+              {
+                "name": "Nathan Cole",
+                "role": "Associate",
+                "greeting": "Nathan Cole — industrial automation.",
+                "about": "Software-defined manufacturing. That's the bet, and the diligence is technical.",
+                "tip": "Sarah's identity question isn't a trick — it's the whole investment. Know your answer cold."
+              },
+              {
+                "name": "Olivia Zhang",
+                "role": "Analyst",
+                "greeting": "Olivia — I size the reshoring opportunity.",
+                "about": "The numbers are bigger than people think. The question is who captures them.",
+                "tip": "Bring the demand signal. Six hundred thousand square feet of it doesn't hurt."
+              }
+            ]
+          },
+          {
+            "level": 3,
+            "name": "Industrial Research",
+            "staff": [
+              {
+                "name": "David Park",
+                "role": "Research Director",
+                "greeting": "David Park — I study the industrial base rebuild.",
+                "about": "Which segments automate first, and who sells the picks and shovels. The pattern matters more than any one company.",
+                "tip": "She thinks in decades. If your story only works for eighteen months, it won't survive the fifth floor."
+              },
+              {
+                "name": "Rachel Kim",
+                "role": "Analyst",
+                "greeting": "Rachel — dual-use tech is my beat.",
+                "about": "Commercial first, defense-adjacent second. The diligence is slower but the moats are deeper.",
+                "tip": "Don't oversell the defense angle. She can smell a slide built for someone else's thesis."
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "name": "Portfolio Operations",
+            "staff": [
+              {
+                "name": "James Wright",
+                "role": "Portfolio Operations",
+                "greeting": "James Wright — I work inside our companies after we invest.",
+                "about": "Usually on the factory floor, not in a boardroom. That's where the truth is.",
+                "tip": "Whatever you claim the cell can do, assume someone like me will verify it with a stopwatch."
+              },
+              {
+                "name": "Nina Patel",
+                "role": "Value Creation Lead",
+                "greeting": "Nina Patel — I help founders answer the identity question.",
+                "about": "Industrial company or project developer? It changes hiring, capital structure, everything downstream.",
+                "tip": "Have the crisp version. Then have the five-minute version. She'll ask for both."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "meridian-trust",
+      "type": "Bank",
+      "firm": "Meridian Trust Bank",
+      "persona": "Elena Vasquez",
+      "role": "SVP, Commercial Lending",
+      "admin": "Carlos Mendez",
+      "email": "chappellintl+bank-meridian@gmail.com",
+      "emailLocal": "bank-meridian",
+      "thesis": "Senior secured construction debt for experienced operators with presold revenue. Meridian banks the building, not the dream — leverage stays inside covenants and every draw is earned.",
+      "checkSizeMin": 2000000,
+      "checkSizeMax": 15000000,
+      "stage": "Construction debt",
+      "geography": "US (Charlotte-based)",
+      "fitScore": 88,
+      "likelyObjections": "Leverage ratios, draw discipline, completion guarantees, and appraisal gaps. If the appraisal doesn't support the loan, the loan doesn't happen.",
+      "bestPitchAngle": "Presold units plus a fixed-price GC: your factory de-risks the one thing that kills construction loans — completion.",
+      "warmIntroPath": "Cold via the sandbox inbox; real world via a mortgage broker who has placed with Meridian before.",
+      "building": "Skyline Towers",
+      "buildingNote": "Diligencing Skyline Towers as a senior-debt candidate: presale velocity and the GC's completion record carry the credit.",
+      "relationshipStage": "identified",
+      "dialogue": {
+        "greeting": "Elena Vasquez. I run commercial lending here. You've got ten minutes — start with the collateral.",
+        "onThesis": "We do senior construction debt, two to fifteen million, for operators who've built before. Presales, fixed-price contracts, covenants with teeth. We are not venture capital; we don't underwrite dreams.",
+        "onObjection": "My objection is arithmetic. Show me the appraisal, the contingency, and what happens if absorption slips two quarters. If the numbers only work in the blue-sky case, we're done here.",
+        "onWhatMovesMe": "A presold schedule, a GC who has built this exact product before, and a borrower who draws like the money is expensive. Bring me that and I'll fight credit committee for you."
+      },
+      "interior": {
+        "floors": 3,
+        "topName": "Executive Offices",
+        "receptionist": {
+          "name": "David Park",
+          "role": "Receptionist",
+          "greeting": "Meridian Trust, commercial lending. Elena's with a borrower — sign in, please.",
+          "about": "I keep the lobby quiet and the coffee fresh. Bankers notice when either slips.",
+          "pointer": "Elena Vasquez, top floor. She'll ask about your contingency first. Have a number, not a story."
+        },
+        "staffFloors": [
+          {
+            "level": 2,
+            "name": "Credit Team",
+            "staff": [
+              {
+                "name": "Sam Whitfield",
+                "role": "Credit Analyst",
+                "greeting": "Sam Whitfield — I stress-test the pro forma.",
+                "about": "I break models for a living. The good borrowers thank me; the bad ones argue with me.",
+                "tip": "Bring the downside case yourself. If she finds it before you show it, you're finished."
+              },
+              {
+                "name": "Grace Liu",
+                "role": "Loan Operations",
+                "greeting": "Grace Liu, loan ops. I run the draws.",
+                "about": "Every draw request crosses my desk with lien waivers attached. No waivers, no wire.",
+                "tip": "Elena trusts my read on draw discipline. Sloppy paperwork here echoes upstairs."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "foundry-private",
+      "type": "Bank",
+      "firm": "Foundry Private Bank",
+      "persona": "James Okafor",
+      "role": "Private Banker",
+      "admin": "Aisha Bello",
+      "email": "chappellintl+bank-foundry@gmail.com",
+      "emailLocal": "bank-foundry",
+      "thesis": "Relationship banking for builders: revolvers, term loans, and operating accounts under one roof. Foundry banks the builder, not just the project — the full relationship or nothing.",
+      "checkSizeMin": 1000000,
+      "checkSizeMax": 10000000,
+      "stage": "Relationship banking",
+      "geography": "US (Chicago-based)",
+      "fitScore": 82,
+      "likelyObjections": "Personal recourse, concentration limits, and the deposits question — the loan and the operating accounts move together or not at all.",
+      "bestPitchAngle": "Make Foundry the house bank: factory payroll, operating accounts, and the revolver in one place. Builders with their banking consolidated get answered faster.",
+      "warmIntroPath": "Cold via the sandbox inbox; real world via his existing depository relationship.",
+      "building": "Cedarwood Flats",
+      "buildingNote": "Exploring a full banking relationship around Cedarwood Flats: revolver for factory working capital plus project term debt.",
+      "relationshipStage": "identified",
+      "dialogue": {
+        "greeting": "James Okafor. I bank builders — the whole relationship, not a one-off loan. What does your balance sheet look like?",
+        "onThesis": "Revolvers, term debt, treasury, deposits. I want the operating accounts, the payroll, the factory's cash cycle. A borrower who banks elsewhere is a borrower I can't see.",
+        "onObjection": "Two things: recourse — I need a guarantee with teeth — and concentration. And I'll say it plainly: if your deposits live at another bank, my rate has a different number in it.",
+        "onWhatMovesMe": "Move the relationship, not just the loan. Show me the factory's cash conversion cycle and let me design around it. That's when I pick up the phone."
+      },
+      "interior": {
+        "floors": 3,
+        "topName": "Executive Offices",
+        "receptionist": {
+          "name": "Nadia Hussain",
+          "role": "Receptionist",
+          "greeting": "Foundry Private Bank. James is expecting you — he's between client reviews.",
+          "about": "I know every regular by name and coffee order. Bankers are creatures of habit.",
+          "pointer": "James Okafor, top floor. Mention the operating accounts early — it's his favorite subject."
+        },
+        "staffFloors": [
+          {
+            "level": 2,
+            "name": "Banking Team",
+            "staff": [
+              {
+                "name": "Chris Delaney",
+                "role": "Associate Banker",
+                "greeting": "Chris Delaney — I structure the facilities.",
+                "about": "Revolvers are my love language. A well-structured revolver beats a bigger term loan every time.",
+                "tip": "Know your working capital cycle cold. James will ask, and 'roughly' is the wrong answer."
+              },
+              {
+                "name": "Mei Chen",
+                "role": "Treasury Specialist",
+                "greeting": "Mei Chen, treasury. I make the cash visible.",
+                "about": "Lockbox, sweeps, fraud controls — the unglamorous plumbing that keeps a builder alive.",
+                "tip": "Ask her about the factory's disbursement flow. She'll sketch the right structure on a napkin."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "bluebonnet-capital",
+      "type": "Bank",
+      "firm": "Bluebonnet Capital Bank",
+      "persona": "Rachel Kim",
+      "role": "SVP, Construction Finance",
+      "admin": "Hannah Seo",
+      "email": "chappellintl+bank-bluebonnet@gmail.com",
+      "emailLocal": "bank-bluebonnet",
+      "thesis": "Texas residential construction lending at scale: phased draws tied to absorption, appraisals grounded in local comps, and zero appetite for spec exposure without presales.",
+      "checkSizeMin": 5000000,
+      "checkSizeMax": 25000000,
+      "stage": "Construction debt",
+      "geography": "US (Austin-based)",
+      "fitScore": 90,
+      "likelyObjections": "Appraisal gaps in volatile rate environments, absorption pace versus pro forma, and any spec units without a buyer in sight.",
+      "bestPitchAngle": "Phased draws tied to presale velocity: the factory's throughput is the absorption hedge — units complete as buyers close, not before.",
+      "warmIntroPath": "Cold via the sandbox inbox; real world via a Texas residential mortgage network.",
+      "building": "Stonepine Residences",
+      "buildingNote": "Sizing a phased construction facility for Stonepine Residences: draw schedule indexed to presale closings, not calendar dates.",
+      "relationshipStage": "identified",
+      "dialogue": {
+        "greeting": "Rachel Kim. I finance Texas residential construction — big facilities, tight monitoring. Walk me through Stonepine.",
+        "onThesis": "Five to twenty-five million, phased draws, appraisals from people who know the submarket. I fund production, not speculation: every phase earns the next one.",
+        "onObjection": "Absorption. Your pro forma says a unit a week; the submarket says otherwise, and I'm paid to believe the submarket. Convince me with presales, not projections.",
+        "onWhatMovesMe": "A draw schedule indexed to closings. If your factory can pace production to presale velocity, you've solved my biggest risk — show me that machine."
+      },
+      "interior": {
+        "floors": 3,
+        "topName": "Executive Offices",
+        "receptionist": {
+          "name": "Tom Becker",
+          "role": "Receptionist",
+          "greeting": "Bluebonnet Capital. Rachel's reviewing appraisals — she'll be with you shortly.",
+          "about": "Twenty years at this desk. I've seen three cycles; the paperwork always tells the truth.",
+          "pointer": "Rachel Kim, top floor. Lead with presales. Everything else is commentary."
+        },
+        "staffFloors": [
+          {
+            "level": 2,
+            "name": "Construction Finance",
+            "staff": [
+              {
+                "name": "Alicia Gomez",
+                "role": "Portfolio Manager",
+                "greeting": "Alicia Gomez — I watch the portfolio after closing.",
+                "about": "I monitor every active loan monthly. Borrowers who communicate early get flexibility; silent ones get covenants.",
+                "tip": "She decides how your loan is graded. Monthly reporting that's early and honest buys you room."
+              },
+              {
+                "name": "Dan Kowalski",
+                "role": "Appraisal Review",
+                "greeting": "Dan Kowalski. I read appraisals so Rachel doesn't have to.",
+                "about": "If the comps are cherry-picked, I'll find it by page three. Bring clean ones.",
+                "tip": "Don't argue his adjustments — ask what would make the value supportable and go get it."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "terra-firma",
+      "type": "JV",
+      "firm": "Terra Firma Developments",
+      "persona": "Marcus Webb",
+      "role": "Managing Partner",
+      "admin": "Victor Hale",
+      "email": "chappellintl+jv-terrafirma@gmail.com",
+      "emailLocal": "jv-terrafirma",
+      "thesis": "JV equity with operator-partners on missing-middle multifamily: Terra Firma brings land and entitlements, the partner brings execution. Aligned economics, defined exits, no drift.",
+      "checkSizeMin": 3000000,
+      "checkSizeMax": 20000000,
+      "stage": "JV equity",
+      "geography": "US (Denver-based)",
+      "fitScore": 93,
+      "likelyObjections": "Control and decision rights, promote structure and hurdles, capital call mechanics, and exit timing — who decides when we sell.",
+      "bestPitchAngle": "The factory is schedule certainty in a business where schedule is the risk: propose a clean promote with a defined buyout and let the production system do the talking.",
+      "warmIntroPath": "Cold via the sandbox inbox; real world via multifamily developer networks in the Mountain West.",
+      "building": "Garden Lofts",
+      "buildingNote": "Structuring a potential JV on Garden Lofts: land and entitlements from Terra Firma, factory-built execution from the operator.",
+      "relationshipStage": "identified",
+      "dialogue": {
+        "greeting": "Marcus Webb. We do JV equity on multifamily — our land, your execution. Tell me why Garden Lofts works.",
+        "onThesis": "Three to twenty million of JV equity. We bring entitled land and local knowledge; you bring the machine that builds it. Promote over a real hurdle, defined exit, no lifestyle projects.",
+        "onObjection": "Control. Who decides when we sell, who funds the capital call, and what happens when we disagree. Get the operating agreement right on day one or don't call me on day one hundred.",
+        "onWhatMovesMe": "Certainty. Show me a production system that hits dates, propose a promote that's fair at the hurdle and generous above it, and put the buyout in writing. Then we build."
+      },
+      "interior": {
+        "floors": 3,
+        "topName": "Partner Offices",
+        "receptionist": {
+          "name": "Jenna Cole",
+          "role": "Receptionist",
+          "greeting": "Terra Firma Developments. Marcus is walking a site plan — he'll be right with you.",
+          "about": "I keep the deal pipeline board updated. Green means closing, red means Marcus is annoyed.",
+          "pointer": "Marcus Webb, top floor. He'll ask who controls the exit. Have an answer with a date on it."
+        },
+        "staffFloors": [
+          {
+            "level": 2,
+            "name": "Development Team",
+            "staff": [
+              {
+                "name": "Omar Haddad",
+                "role": "Development Manager",
+                "greeting": "Omar Haddad — I run the entitlements.",
+                "about": "Zoning, permits, community meetings. The factory is fast; my job is making sure the paper is faster.",
+                "tip": "Ask him about the Garden Lofts entitlement path. He'll tell you exactly where the bodies are buried."
+              },
+              {
+                "name": "Lisa Tran",
+                "role": "Acquisitions Analyst",
+                "greeting": "Lisa Tran, acquisitions. I underwrite the dirt.",
+                "about": "Every deal starts with my land basis model. If the dirt's wrong, nothing downstream matters.",
+                "tip": "She respects operators who ask about her basis assumptions instead of pitching past them."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "lone-star",
+      "type": "JV",
+      "firm": "Lone Star Builders Group",
+      "persona": "Sofia Delgado",
+      "role": "Principal",
+      "admin": "Nina Petrova",
+      "email": "chappellintl+jv-lonestar@gmail.com",
+      "emailLocal": "jv-lonestar",
+      "thesis": "Builder-led joint ventures: the GC as partner, not vendor. Open-book costing, shared upside, and a builder who eats what she cooks — cost transparency is the whole thesis.",
+      "checkSizeMin": 2000000,
+      "checkSizeMax": 12000000,
+      "stage": "JV equity",
+      "geography": "US (Fort Worth-based)",
+      "fitScore": 91,
+      "likelyObjections": "Cost-plus versus guaranteed maximum price, schedule accountability, and who funds overruns — partnership means shared pain, not transferred pain.",
+      "bestPitchAngle": "Open-book factory costing with a GMP backed by the cell's own cycle times: the builder-partner model with the numbers to prove the price.",
+      "warmIntroPath": "Cold via the sandbox inbox; real world via DFW builder and subcontractor networks.",
+      "building": "Chappell International",
+      "buildingNote": "Exploring a builder-partner JV around the Chappell International factory pipeline: open-book costs, GMP discipline, shared upside.",
+      "relationshipStage": "identified",
+      "dialogue": {
+        "greeting": "Sofia Delgado. I build, then I partner — in that order. Show me you can do both.",
+        "onThesis": "Two to twelve million per JV. I'm the builder and the partner: open books, GMP pricing, and I share the upside because I share the risk. Vendors bid; partners build.",
+        "onObjection": "The GMP. If your factory numbers are real, you'll sign a guaranteed max. If you won't sign it, I've learned everything I need to know.",
+        "onWhatMovesMe": "Cost transparency down to the stud. Show me the cell's cycle times, let me audit the factory, and price it as a GMP. That's a partnership."
+      },
+      "interior": {
+        "floors": 3,
+        "topName": "Partner Offices",
+        "receptionist": {
+          "name": "Ray Morales",
+          "role": "Receptionist",
+          "greeting": "Lone Star Builders. Sofia's on a job walk — grab a coffee, she runs on time.",
+          "about": "I dispatch the supers and keep the trailer stocked. This office smells like sawdust and ambition.",
+          "pointer": "Sofia Delgado, top floor. She'll ask for the GMP. Bring the factory's real cycle times."
+        },
+        "staffFloors": [
+          {
+            "level": 2,
+            "name": "Operations",
+            "staff": [
+              {
+                "name": "Karen Doyle",
+                "role": "Preconstruction Lead",
+                "greeting": "Karen Doyle — I price it before we build it.",
+                "about": "Estimating is truth-telling with numbers. I can smell a soft estimate from the parking lot.",
+                "tip": "Bring your open-book factory costs. She'll respect the transparency more than the number."
+              },
+              {
+                "name": "Eddie Ruiz",
+                "role": "Field Operations",
+                "greeting": "Eddie Ruiz, field ops. I make the schedule real.",
+                "about": "Thirty years in the field. The plan meets reality on my watch, and I report what actually happened.",
+                "tip": "He'll ask how factory tolerances survive the field. Have a real answer — he's seen promises die."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "campaign": {
+    "description": "Sandbox campaign: FOS drafts outreach to the 5 sandbox investors at their plus-addressed emails; personas reply in character; every touch logged to outreach_events; stages advance identified → contacted → engaged → meeting.",
+    "funnelStages": [
+      "identified",
+      "researched",
+      "contacted",
+      "engaged",
+      "meeting",
+      "diligence",
+      "term_sheet",
+      "committed"
+    ],
+    "name": "VC Investor Sandbox — Seed Outreach"
+  },
+  "created": "2026-10-09",
+  "labeling": "ALL personas are fictional sandbox characters. Firm names and investment theses are drawn from Joshua's verified public research notes (Aug 2026); no persona represents or speaks for any real person. All sandbox email addresses are plus-addressed variants of ONE shared inbox Joshua controls, so FOS email automation can be tested without ever touching a real investor address.",
+  "owner": "Joshua Chappell",
+  "raiseContext": {
+    "capitalModel": "Three-bucket: Equity ($1M / 10% company-building), JV capital (growth/scale), Debt (asset-level)",
+    "vehicle": "CE / Factory to Foundation — $1M equity bucket (company-building: the CE/FF platform, not a single project)"
+  },
+  "sandbox": "vc-investor-sandbox",
+  "sharedInbox": {
+    "emailBase": "chappellintl@gmail.com",
+    "note": "Confirmed 2026-10-09. Final addresses: chappellintl+<local>@gmail.com — five distinct addresses, one inbox.",
+    "strategy": "plus-addressing"
+  },
+  "version": "1.0.0"
+}

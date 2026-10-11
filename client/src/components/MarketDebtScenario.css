@@ -1,0 +1,24 @@
+.market-debt-scenario { padding: 22px; border: 1px solid #c4d1be; border-radius: 12px; background: #fffefa; }
+.market-debt-heading { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
+.market-debt-heading small { color: #65796b; font-weight: 700; letter-spacing: .08em; }
+.market-debt-heading h3 { margin: 5px 0 8px; }
+.market-debt-heading > span { font-size: 12px; color: #647160; }
+.market-debt-scenario > p { margin: 4px 0 16px; color: #4b5e50; line-height: 1.5; }
+.market-debt-cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+.market-debt-cases button { display: grid; gap: 4px; padding: 12px; border: 1px solid #c4d1be; border-radius: 5px; background: #f2f5ee; text-align: left; color: #304e39; }
+.market-debt-cases button.selected { background: #365c42; color: white; border-color: #365c42; }
+.market-debt-cases button span { font-size: 12px; }
+.market-debt-visuals { display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px; margin-top: 14px; }
+.market-debt-chart { min-width: 0; height: 235px; padding: 10px; border: 1px solid #dce2d8; background: #f8f9f5; }
+.market-debt-selected { display: grid; align-content: start; gap: 8px; padding: 15px; border: 1px solid #dce2d8; }
+.market-debt-selected > small { color: #65796b; font-weight: 700; letter-spacing: .06em; }
+.market-debt-selected > div { display: flex; justify-content: space-between; gap: 14px; border-bottom: 1px solid #e2e6df; padding-bottom: 6px; }
+.market-debt-selected strong { color: #294c36; }
+.market-debt-selected p { margin: 4px 0 0; color: #647160; font-size: 12px; line-height: 1.4; }
+.market-debt-caution { display: grid; gap: 4px; margin-top: 14px; padding: 12px 14px; background: #fbefdc; border-left: 4px solid #b6863c; font-size: 13px; line-height: 1.45; }
+.market-debt-sources { margin-top: 12px; }
+.market-debt-sources summary { cursor: pointer; font-weight: 700; }
+.market-debt-sources li { margin: 8px 0; }
+.market-debt-sources p { font-size: 12px; color: #647160; }
+@media (max-width: 900px) { .market-debt-visuals { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .market-debt-heading { flex-direction: column; } .market-debt-cases { grid-template-columns: 1fr; } }

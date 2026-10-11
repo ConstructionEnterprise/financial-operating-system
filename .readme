@@ -8,8 +8,12 @@ Primary domains:
 - Equipment Finance and Equipment Rental
 - Grants & Incentives
 - Internal Projects and Project Economics
-- Scenario-driven underwriting: drivers -> monthly schedule -> calculations -> comparison
+- Scenario-driven underwriting: drivers -> monthly schedule -> calculations -> comparison, with selected-project, selected-scenario scorecards
+- 4D Capital Viewer: one spatial relationship graph with dated project trajectories and a time playhead
+- Capital-path analytics: target, requested, probability-weighted, committed, and funded values kept separate
 - Source attribution, data-state control, and capital-stage boundaries
+
+Gmail / VCSD pilot status (2026-10-11): the sandbox shared mailbox is OAuth-connected and visible in FOS Integrations. This is a connection milestone, not a completed automated campaign. Sandbox-only sending and explicit approval remain in force; verify sandbox send/receive and VCSD reply ingestion before considering real-investor outreach. Local OAuth credentials stay in ignored `.env` and tokens stay in the database.
 
 Current project-model package:
 - Cedarwood Flats
@@ -19,6 +23,6 @@ Current project-model package:
 - Chappell International Manufacturing Facility
 - Garden Haven
 
-The repository is private and contains no environment secrets, OAuth credentials, sessions, or live database dump. Approved planning-model CSV packages, the Cedarwood Excel model, scripts, source code, tests, and documentation are included. Financial planning values remain labeled as estimates, historical planning references, projections, or actuals according to their source and status.
+The GitHub repository currently reports as public (checked 2026-10-11). It must not receive environment secrets, OAuth credentials, sessions, live database dumps, or confidential outreach data. Review internal fundraising materials before any public push. Approved planning-model CSV packages, the Cedarwood Excel model, scripts, source code, tests, and documentation are part of this local checkout. Financial planning values remain labeled as estimates, historical planning references, projections, or actuals according to their source and status.
 
-Start with README.md and docs/ for setup, architecture, financial-model conventions, import workflows, governance rules, and project history.
+Start with README.md and CHANGELOG.md, then docs/, for current capabilities, setup, architecture, financial-model conventions, import workflows, governance rules, and project history.

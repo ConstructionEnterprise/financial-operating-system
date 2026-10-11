@@ -1,0 +1,26 @@
+.investor-filter-bar{display:flex;align-items:end;gap:10px;flex-wrap:wrap;border:1px solid #d6d7cc;background:#fffefa;padding:12px 16px}
+.investor-filter-bar label{display:grid;gap:4px;font-size:12px;font-weight:700;color:#4d5b50;min-width:135px;flex:1}
+.investor-filter-bar input,.investor-filter-bar select{height:38px;border:1px solid #d6d7cc;background:white;padding:0 10px;font:inherit}
+.investor-filter-bar>button,.investor-show-all{border:1px solid #b8c9b5;background:#f5f8f1;color:#365641;padding:9px 12px;cursor:pointer}
+.investor-show-all{margin-top:10px;justify-self:start}
+.investor-shortlist-scroll>button{grid-template-columns:40px minmax(0,1fr)}
+.investor-shortlist-scroll>button>span:nth-child(2){min-width:0}
+.investor-shortlist-scroll>button small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.investor-score-explainer{margin:14px 0 0!important;font-size:13px}
+.investor-quality{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px;padding-bottom:12px;border-bottom:1px solid #c8d3c3;font-size:12px}
+.investor-quality>div{display:flex;gap:5px;flex-wrap:wrap}
+.investor-quality span{background:#f4e8cf;color:#674a1c;padding:4px 8px}
+.investor-quality a{color:#2857d9}
+.investor-source-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#fffefa;border:1px solid #d6d7cc;padding:10px;font-size:12px}
+.investor-source-flow strong{overflow-wrap:anywhere}
+.investor-capital-profile>small{line-height:1.4}
+.investor-record-drawer{margin:18px 0;border:1px solid #c8d3c3;background:#f7faf4}
+.investor-record-drawer>summary{cursor:pointer;padding:17px 20px;font-size:14px;font-weight:800;color:#365641}
+.investor-record-drawer>p{padding:0 20px;color:#667369}
+.investor-record-drawer .contacts-card{display:none}
+.investor-record-drawer .workspace{display:block;padding:0 20px 20px}
+.investor-record-drawer .editor-card{width:100%}
+.investor-detail-main{min-width:0;flex:1}
+.investor-jump-label{display:block;margin:9px 0 4px;font-size:12px;font-weight:700;color:#4d5b50}
+.investor-jump-select{display:block;width:min(100%,420px);height:43px;padding:0 12px;border:1px solid #b9c9b7;background:#fffefa;color:#263a2c;font:inherit;cursor:pointer}
+.investor-jump-select:focus-visible{outline:3px solid #6c926e;outline-offset:2px}

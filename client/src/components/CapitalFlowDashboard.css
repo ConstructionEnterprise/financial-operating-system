@@ -1,0 +1,52 @@
+.capital-flow-dashboard { display: grid; gap: 28px; min-width: 0; }
+.capital-funding-overview, .capital-deployment-section { display: grid; gap: 18px; min-width: 0; }
+.capital-flow-title { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.capital-flow-title h2 { margin: 5px 0; font-family: Georgia, serif; font-size: 32px; color: #293e31; }
+.capital-flow-dashboard p { color: #637062; font-size: 13px; line-height: 1.55; margin: 4px 0 12px; }
+.capital-flow-dashboard h3 { color: #344c3c; font-size: 18px; margin: 0 0 8px; }
+.capital-flow-dashboard h4 { margin: 10px 0; }
+.capital-flow-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.capital-flow-kpis article { display: grid; gap: 9px; padding: 18px; border: 1px solid #d9dfd2; border-radius: 12px; background: #fffdf9; }
+.capital-flow-kpis span { font-size: 11px; color: #62735e; text-transform: uppercase; letter-spacing: .05em; }
+.capital-flow-kpis b { color: #395940; font: 600 clamp(17px, 1.7vw, 29px) Georgia, serif; }
+.capital-visual-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.capital-chart-panel { padding: 22px; border: 1px solid #d4dccf; border-radius: 14px; background: #fffefb; min-width: 0; overflow: hidden; }
+.capital-chart { height: 280px; min-width: 0; width: 100%; }
+.capital-flow-dashboard button { cursor: pointer; }
+.capital-flow-dashboard button:disabled { cursor: not-allowed; opacity: .55; }
+.capital-flow-dashboard button:focus-visible, .capital-flow-dashboard select:focus-visible, .capital-flow-dashboard input:focus-visible, .capital-flow-dashboard summary:focus-visible { outline: 2px solid #597858; outline-offset: 3px; }
+.capital-primary-action { border: 0; border-radius: 7px; background: #466b50; color: white; font-weight: 700; padding: 11px 17px; white-space: nowrap; }
+.capital-panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.capital-flow-dashboard select, .capital-flow-dashboard input, .capital-flow-dashboard textarea { border: 1px solid #cad4c3; border-radius: 5px; padding: 9px 10px; background: #fffefb; color: #283b2b; font-size: 13px; min-width: 0; }
+.capital-view-switch, .capital-measure-controls { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.capital-view-switch button, .capital-measure-controls button, .capital-active-filter button, .capital-form-actions > button:not(.capital-primary-action), .capital-payment-editor .capital-panel-heading button { border: 1px solid #bacab3; border-radius: 6px; padding: 9px 12px; color: #466147; background: #f9fbf6; font-size: 12px; }
+.capital-view-switch button[aria-pressed="true"], .capital-measure-controls button[aria-pressed="true"] { background: #466b50; color: #fff; border-color: #466b50; }
+.capital-measure-controls > span { font-size: 12px; color: #687562; margin-right: 7px; }
+.capital-deployment-section { border-top: 2px solid #b8c9ad; padding-top: 25px; }
+.capital-context-note { padding: 12px 16px; background: #edf1e7; border-left: 3px solid #a48848; border-radius: 4px; }
+.capital-flow-columns { display: flex; justify-content: space-between; color: #6d7968; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; padding-bottom: 14px; border-bottom: 1px solid #e0e5d9; }
+.capital-flow-scroll { overflow-x: auto; }
+.capital-chart-footnote { margin: 12px 0 0 !important; font-size: 11px !important; }
+.capital-active-filter { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 10px 16px; background: #e9f0e3; color: #3b5b3f; border-radius: 7px; font-size: 13px; }
+.capital-chart-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 15px; }
+.capital-chart-legend button { display: flex; align-items: center; gap: 7px; padding: 6px 0; background: transparent; border: 0; font-size: 11px; color: #51634e; text-align: left; }
+.capital-chart-legend button i { width: 9px; height: 9px; flex-shrink: 0; border-radius: 50%; }
+.capital-chart-legend button b { margin-left: auto; white-space: nowrap; }
+.capital-visual-empty { min-height: 190px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 28px; background: #f5f7f1; border: 1px dashed #cad4c3; border-radius: 8px; color: #71806c; font-size: 13px; line-height: 1.6; }
+.capital-audit { border: 1px solid #cad5c4; border-radius: 10px; background: #fffdf8; padding: 0 18px 12px; }
+.capital-audit summary { cursor: pointer; color: #425d43; padding: 15px 0; font-size: 14px; font-weight: 700; }
+.capital-audit > input { width: 100%; margin-bottom: 10px; }
+.capital-five-rows { max-height: 360px; overflow-y: auto; scrollbar-gutter: stable; }
+.capital-inspect-row { display: flex; align-items: center; gap: 14px; justify-content: space-between; width: 100%; min-height: 72px; padding: 10px 4px; background: transparent; color: #42533e; border: 0; border-bottom: 1px solid #e1e6dc; text-align: left; font-size: 12px; }
+.capital-inspect-row small { display: block; font-size: 11px; margin-top: 5px; color: #71806c; }
+.capital-inspect-row b { white-space: nowrap; }
+.capital-inspect-row button { border: 1px solid #c4cebf; border-radius: 5px; padding: 6px; background: #fffefb; }
+.capital-allocation-form { background: #edf3e8; padding: 24px; border: 1px solid #b7cbb0; border-radius: 12px; scroll-margin-top: 20px; }
+.capital-form-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; margin: 15px 0; }
+.capital-allocation-form label, .capital-payment-editor label { display: grid; gap: 6px; font-size: 12px; color: #4a6146; font-weight: 600; }
+.capital-allocation-form textarea { width: 100%; min-height: 75px; }
+.capital-form-actions { display: flex; gap: 10px; margin-top: 14px; }
+.capital-payment-editor { padding: 18px 0 0; border-top: 2px solid #c5d4bd; margin-top: 15px; }
+.capital-payment-editor form { padding: 15px; border: 1px solid #d5dfce; background: #f4f7ee; border-radius: 8px; margin: 15px 0; }
+@media (max-width: 1100px) { .capital-flow-title { align-items: start; flex-direction: column; } .capital-form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .capital-visual-grid { grid-template-columns: 1fr; } .capital-flow-kpis { grid-template-columns: 1fr 1fr; } .capital-form-grid { grid-template-columns: 1fr; } .capital-chart-legend { grid-template-columns: 1fr; } .capital-inspect-row { flex-wrap: wrap; } .capital-chart-panel { padding: 16px; } }

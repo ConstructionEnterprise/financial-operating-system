@@ -1,7 +1,7 @@
 import { eq, desc, and, asc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { InsertUser, users, investorContacts, outreachEvents, gmailConnections, campaigns, tasks, meetings, fundraisingDocuments, campaignDocuments, investorDocuments, investorResearchProposals, investorResearchSources, capitalBuckets, capitalOpportunities, capitalOpportunityDocuments, facilityJvDetails, equipmentFinanceDetails, grantDetails, grantFundingPrograms, grantFundingOpportunities, grantFundingApplications, grantFundingAwards, grantAwardDisbursements, grantComplianceItems, jvPartnerProspects, equipmentRentalVendors, equipmentRentalRequirements, equipmentRentalQuotes, equipmentActiveRentals, InsertInvestorContact, InsertCampaign, InsertTask, InsertMeeting, InsertFundraisingDocument, InsertCapitalOpportunity } from "../drizzle/schema";
-import { internalProjects } from "../drizzle/schema";
+import { capitalAllocations, internalProjects } from "../drizzle/schema";
 import { capitalPathMeta, capitalPaths, type CapitalPath } from "../shared/capitalFormation";
 import { planTexasJvMasterUniverseImport } from "./texasJvMasterUniverse";
 import { loadTexasEquipmentRentalMasterUniverse, planTexasEquipmentRentalMasterUniverseImport } from "./texasEquipmentRentalMasterUniverse";
@@ -86,8 +86,14 @@ export async function createInvestorContact(ownerId: number, contact: Omit<Inser
 
 export async function updateInvestorContact(ownerId: number, id: number, patch: Partial<Omit<InsertInvestorContact, "ownerId" | "id">>) {
   const db = await getDb(); if (!db) throw new Error("Database unavailable");
+  const previous = await db.select().from(investorContacts).where(and(eq(investorContacts.id, id), eq(investorContacts.ownerId, ownerId))).limit(1);
   await db.update(investorContacts).set(patch).where(and(eq(investorContacts.id, id), eq(investorContacts.ownerId, ownerId)));
   const rows = await db.select().from(investorContacts).where(and(eq(investorContacts.id, id), eq(investorContacts.ownerId, ownerId))).limit(1);
+  const tracked = ["relationshipStage", "geography", "checkSizeMin", "checkSizeMax", "relationshipOwner", "nextAction", "nextActionDueAt", "source", "campaignId", "warmIntroPath"] as const;
+  const changes = tracked.filter((key) => patch[key] !== undefined && String(previous[0]?.[key] ?? "") !== String(rows[0]?.[key] ?? ""));
+  if (previous[0] && changes.length) {
+    await db.insert(outreachEvents).values({ ownerId, contactId: id, kind: "profile_updated", detail: `Updated ${changes.join(", ")}.` });
+  }
   return rows[0];
 }
 
@@ -130,6 +136,7 @@ export async function listCampaigns(ownerId: number) {
 
 export async function createCampaign(ownerId: number, input: Omit<InsertCampaign, "ownerId">) {
   const db = await getDb(); if (!db) throw new Error("Database unavailable");
+  await assertOwnedInternalProject(ownerId, input.internalProjectId);
   await db.insert(campaigns).values({ ...input, ownerId });
   const rows = await db.select().from(campaigns).where(eq(campaigns.ownerId, ownerId)).orderBy(desc(campaigns.id)).limit(1);
   return rows[0];
@@ -137,6 +144,7 @@ export async function createCampaign(ownerId: number, input: Omit<InsertCampaign
 
 export async function updateCampaign(ownerId: number, id: number, patch: Partial<Omit<InsertCampaign, "ownerId" | "id">>) {
   const db = await getDb(); if (!db) throw new Error("Database unavailable");
+  await assertOwnedInternalProject(ownerId, patch.internalProjectId);
   await db.update(campaigns).set(patch).where(and(eq(campaigns.ownerId, ownerId), eq(campaigns.id, id)));
   const rows = await db.select().from(campaigns).where(and(eq(campaigns.ownerId, ownerId), eq(campaigns.id, id))).limit(1);
   return rows[0];
@@ -147,6 +155,8 @@ export async function deleteCampaign(ownerId: number, id: number) {
   await db.update(investorContacts).set({ campaignId: null }).where(and(eq(investorContacts.ownerId, ownerId), eq(investorContacts.campaignId, id)));
   await db.update(tasks).set({ campaignId: null }).where(and(eq(tasks.ownerId, ownerId), eq(tasks.campaignId, id)));
   await db.update(meetings).set({ campaignId: null }).where(and(eq(meetings.ownerId, ownerId), eq(meetings.campaignId, id)));
+  await db.update(capitalOpportunities).set({ campaignId: null }).where(and(eq(capitalOpportunities.ownerId, ownerId), eq(capitalOpportunities.campaignId, id)));
+  await db.update(capitalAllocations).set({ campaignId: null }).where(and(eq(capitalAllocations.ownerId, ownerId), eq(capitalAllocations.campaignId, id)));
   await db.delete(campaigns).where(and(eq(campaigns.ownerId, ownerId), eq(campaigns.id, id)));
   return { success: true } as const;
 }
@@ -231,9 +241,9 @@ export async function createTask(ownerId: number, input: Omit<InsertTask, "owner
   return rows[0];
 }
 
-export async function updateTask(ownerId: number, id: number, status: InsertTask["status"]) {
+export async function updateTask(ownerId: number, id: number, patch: Partial<Omit<InsertTask, "ownerId" | "id">>) {
   const db = await getDb(); if (!db) throw new Error("Database unavailable");
-  await db.update(tasks).set({ status }).where(and(eq(tasks.ownerId, ownerId), eq(tasks.id, id)));
+  await db.update(tasks).set(patch).where(and(eq(tasks.ownerId, ownerId), eq(tasks.id, id)));
 }
 
 export async function listMeetings(ownerId: number) {
@@ -243,9 +253,29 @@ export async function listMeetings(ownerId: number) {
 
 export async function createMeeting(ownerId: number, input: Omit<InsertMeeting, "ownerId">) {
   const db = await getDb(); if (!db) throw new Error("Database unavailable");
-  await db.insert(meetings).values({ ...input, ownerId });
-  const rows = await db.select().from(meetings).where(eq(meetings.ownerId, ownerId)).orderBy(desc(meetings.id)).limit(1);
+  await validateMeetingLinks(ownerId, input);
+  const result = await db.insert(meetings).values({ ...input, ownerId });
+  const rows = await db.select().from(meetings).where(and(eq(meetings.ownerId, ownerId), eq(meetings.id, Number(result[0].insertId))));
+  if (input.investorId != null) await db.insert(outreachEvents).values({ ownerId, contactId: input.investorId, kind: "meeting_scheduled", detail: `Meeting scheduled: ${input.title}` });
   return rows[0];
+}
+
+async function validateMeetingLinks(ownerId: number, input: Partial<InsertMeeting>) {
+  const db = await getDb(); if (!db) throw new Error("Database unavailable");
+  if (input.investorId != null && !(await db.select({ id: investorContacts.id }).from(investorContacts).where(and(eq(investorContacts.ownerId, ownerId), eq(investorContacts.id, input.investorId)))).length) throw new Error("Investor not found in this workspace");
+  if (input.campaignId != null && !(await db.select({ id: campaigns.id }).from(campaigns).where(and(eq(campaigns.ownerId, ownerId), eq(campaigns.id, input.campaignId)))).length) throw new Error("Campaign not found in this workspace");
+  if (input.capitalOpportunityId != null && !(await db.select({ id: capitalOpportunities.id }).from(capitalOpportunities).where(and(eq(capitalOpportunities.ownerId, ownerId), eq(capitalOpportunities.id, input.capitalOpportunityId)))).length) throw new Error("Opportunity not found in this workspace");
+}
+
+export async function updateMeeting(ownerId: number, id: number, input: Partial<Omit<InsertMeeting, "id" | "ownerId" | "createdAt" | "updatedAt">>) {
+  const db = await getDb(); if (!db) throw new Error("Database unavailable");
+  await validateMeetingLinks(ownerId, input);
+  return db.transaction(async tx => {
+    const [row] = await tx.select().from(meetings).where(and(eq(meetings.id, id), eq(meetings.ownerId, ownerId))).for("update");
+    if (!row) throw new Error("Meeting not found in this workspace");
+    await tx.update(meetings).set(input).where(and(eq(meetings.id, id), eq(meetings.ownerId, ownerId)));
+    return { id };
+  });
 }
 
 export async function getFundraisingAnalytics(ownerId: number) {
@@ -375,6 +405,10 @@ export async function createCapitalOpportunity(ownerId: number, opportunity: Omi
 
 export async function updateCapitalOpportunity(ownerId: number, id: number, patch: Partial<Omit<InsertCapitalOpportunity, "ownerId" | "id">>) {
   const db = await getDb(); if (!db) throw new Error("Database unavailable");
+  if (patch.campaignId != null) {
+    const owned = await db.select({ id: campaigns.id }).from(campaigns).where(and(eq(campaigns.ownerId, ownerId), eq(campaigns.id, patch.campaignId))).limit(1);
+    if (!owned.length) throw new Error("Campaign not found");
+  }
   await assertOwnedInternalProject(ownerId, patch.internalProjectId);
   await db.update(capitalOpportunities).set(patch).where(and(eq(capitalOpportunities.ownerId, ownerId), eq(capitalOpportunities.id, id)));
   return getCapitalOpportunity(ownerId, id);
@@ -496,6 +530,7 @@ export async function listEquipmentRentalQuotes(ownerId: number, requirementId?:
 }
 export async function createEquipmentRentalQuote(ownerId: number, input: EquipmentRentalQuoteInput) {
   const db = await getDb(); if (!db) throw new Error("Database unavailable");
+  if (input.quoteStatus === "selected") throw new Error("Record the vendor quote as received, then select it as a separate decision.");
   const [requirement, vendor] = await Promise.all([getEquipmentRentalRequirement(ownerId, input.requirementId), getEquipmentRentalVendor(ownerId, input.vendorId)]);
   if (!requirement) throw new Error("Rental requirement not found.");
   if (!vendor || vendor.status !== "qualified") throw new Error("Qualify this rental vendor before recording a quote.");
@@ -504,6 +539,25 @@ export async function createEquipmentRentalQuote(ownerId: number, input: Equipme
 }
 export async function updateEquipmentRentalQuote(ownerId: number, id: number, patch: Partial<EquipmentRentalQuoteInput>) {
   const db = await getDb(); if (!db) throw new Error("Database unavailable");
+  if (patch.quoteStatus === "selected") {
+    const selected = await db.transaction(async (tx) => {
+      const rows = await tx.select().from(equipmentRentalQuotes).where(and(eq(equipmentRentalQuotes.ownerId, ownerId), eq(equipmentRentalQuotes.id, id))).limit(1);
+      const quote = rows[0];
+      if (!quote) throw new Error("Rental quote not found.");
+      const requirementRows = await tx.select({ id: equipmentRentalRequirements.id }).from(equipmentRentalRequirements).where(and(eq(equipmentRentalRequirements.ownerId, ownerId), eq(equipmentRentalRequirements.id, quote.requirementId))).for("update").limit(1);
+      if (!requirementRows.length) throw new Error("Rental requirement not found.");
+      if (quote.quoteStatus !== "received" && quote.quoteStatus !== "selected") throw new Error("Only a received rental quote can be selected.");
+      if (quote.estimatedTotal === null) throw new Error("Record the estimated rental total before selecting a quote.");
+      if (quote.quoteValidUntil && quote.quoteValidUntil < new Date()) throw new Error("This rental quote has expired.");
+      const vendorRows = await tx.select().from(equipmentRentalVendors).where(and(eq(equipmentRentalVendors.ownerId, ownerId), eq(equipmentRentalVendors.id, quote.vendorId))).limit(1);
+      if (vendorRows[0]?.status !== "qualified") throw new Error("The vendor must remain qualified before quote selection.");
+      await tx.update(equipmentRentalQuotes).set({ quoteStatus: "received" }).where(and(eq(equipmentRentalQuotes.ownerId, ownerId), eq(equipmentRentalQuotes.requirementId, quote.requirementId), eq(equipmentRentalQuotes.quoteStatus, "selected")));
+      await tx.update(equipmentRentalQuotes).set({ quoteStatus: "selected" }).where(and(eq(equipmentRentalQuotes.ownerId, ownerId), eq(equipmentRentalQuotes.id, id)));
+      await tx.update(equipmentRentalRequirements).set({ status: "selected" }).where(and(eq(equipmentRentalRequirements.ownerId, ownerId), eq(equipmentRentalRequirements.id, quote.requirementId)));
+      return { ...quote, quoteStatus: "selected" as const };
+    });
+    return selected;
+  }
   await db.update(equipmentRentalQuotes).set(patch).where(and(eq(equipmentRentalQuotes.ownerId, ownerId), eq(equipmentRentalQuotes.id, id)));
   const rows = await db.select().from(equipmentRentalQuotes).where(and(eq(equipmentRentalQuotes.ownerId, ownerId), eq(equipmentRentalQuotes.id, id))).limit(1); return rows[0];
 }
@@ -514,6 +568,7 @@ export async function listEquipmentActiveRentals(ownerId: number) {
 export async function createEquipmentActiveRental(ownerId: number, input: EquipmentActiveRentalInput) {
   const db = await getDb(); if (!db) throw new Error("Database unavailable");
   if (input.quoteId === null || input.quoteId === undefined) throw new Error("Select a rental quote before scheduling an active rental.");
+  if (!input.scheduledStartDate || !input.scheduledEndDate || input.scheduledEndDate < input.scheduledStartDate) throw new Error("Record a valid start and end date before scheduling a rental.");
   const [requirement, quote, vendor] = await Promise.all([getEquipmentRentalRequirement(ownerId, input.requirementId), db.select().from(equipmentRentalQuotes).where(and(eq(equipmentRentalQuotes.ownerId, ownerId), eq(equipmentRentalQuotes.id, input.quoteId))).limit(1), getEquipmentRentalVendor(ownerId, input.vendorId)]);
   if (!requirement || !quote[0] || quote[0].requirementId !== input.requirementId || quote[0].vendorId !== input.vendorId || quote[0].quoteStatus !== "selected") throw new Error("Select a matching rental quote before scheduling an active rental.");
   if (!vendor || vendor.status !== "qualified") throw new Error("The rental vendor must remain qualified before scheduling.");

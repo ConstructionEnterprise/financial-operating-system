@@ -1,0 +1,27 @@
+.project-dashboard-chart-grid article{display:flex;flex-direction:column;gap:14px}
+.project-chart-title{display:flex;align-items:start;justify-content:space-between;gap:15px}
+.project-chart-title h3{margin:4px 0}
+.project-chart-title>strong{font:700 20px Georgia,serif;color:#355641;text-align:right;white-space:nowrap}
+.project-chart-kicker{font-size:11px;font-weight:800;letter-spacing:.1em;color:#70856f}
+.project-dashboard-donut{position:relative;max-width:320px;width:100%;margin:0 auto}
+.project-dashboard-donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;color:#314c39}
+.project-dashboard-donut-center b{font:700 30px Georgia,serif}
+.project-dashboard-donut-center small{font-size:12px}
+.project-dashboard-mix-legend{display:grid;gap:9px}
+.project-dashboard-mix-legend span{display:block}
+.project-dashboard-mix-legend small{color:#667368}
+.project-chart-note{line-height:1.45;margin:0;color:#647265}
+.project-chart-empty{display:grid;align-content:center;gap:8px;min-height:170px;padding:18px;border:1px dashed #c8d3c3;background:#f7f9f5}
+.project-chart-empty p{margin:0}
+.project-chart-warning{padding:10px 12px;background:#fbefd9;border-left:3px solid #ae8438;color:#674a1c!important}
+.project-chart-zero{margin:0;padding:11px 13px;background:#f0f4ee;color:#355641!important}
+.project-dashboard-chart-grid article>.project-chart-empty+button,.project-dashboard-chart-grid article>button:last-child{align-self:start;margin-top:auto}
+.project-funding-rail-group{display:grid;gap:7px;padding:10px 0}
+.project-funding-rail-label{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.project-funding-rail-label b{font-size:19px;color:#314c39}
+.project-funding-rail{height:20px;background:#e6ebe3;border:1px solid #d3ddcf;overflow:hidden;border-radius:3px}
+.project-funding-rail i{display:block;height:100%;min-width:0;transition:width .25s ease}
+.project-funding-rail i.committed{background:#a48848}
+.project-funding-rail i.funded{background:#486b53}
+.project-funding-rail-group small{color:#687469}
+@media(max-width:650px){.project-chart-title{flex-direction:column}.project-chart-title>strong{text-align:left}}
