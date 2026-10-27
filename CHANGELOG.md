@@ -2,6 +2,80 @@
 
 All notable changes to the Financial Operating System project will be documented in this file.
 
+## [2026-10-27] - Cedarwood structural Blender coordination model
+
+- Built editable B1 and isolated-module Blender models from Structural Issue 02 and Architectural Issue 04 registers. B1 contains 150 module frames for 56 apartments; primary framing remains separate from nonstructural LGS wall and ceiling systems.
+- Added assembled/exploded module animation, named inspection cameras and seven previews including floor plan, cutaway, stack and foundation interface views. Provided component registers, generator, drawing basis and validation report.
+- Reopened both Blender files, reconciled 13,855 building / 100 module components, verified the module animation and confirmed exported GLB metre-scale bounds by reimport.
+- Uploaded five Current / Internal records (330001-330005): source ZIP, two GLBs and two preview ZIPs. Verified every stored download by SHA-256. An initial database HTTP 500 cleared on retry; no database reset or data migration was performed.
+- Retained explicit schematic limits for member envelopes/pitches, connections, foundations, cores and lateral design; no structural capacity or procurement takeoff is asserted, and no financial inputs were changed.
+- Updated README.md and .readme to include the structural delivery alongside existing discipline models.
+
+## [2026-10-27] - Melissa civil/site model in Records and viewport repair
+
+- Added Cedarwood Melissa Civil Issue 01 as three Current / Internal Records: Blender source ZIP (300001), site GLB (300002), and preview ZIP (300003). Downloaded each stored artifact and verified its SHA-256 against the final local package.
+- Site study retains five modular buildings, 280 apartments and 750 module positions, with 420 parking study spaces including 140 covered spaces, circulation, regional USGS terrain/5 ft contours, concept pads and drainage/access reservations.
+- Corrected saved Blender viewport clipping from a 1,000 ft far limit at a 1,500 ft view distance to near/far limits of 1/10,000 ft. The source ZIP includes the recommended ViewportFixed.blend copy and original file; reopened the corrected copy and verified all 1,418 objects remain. Generator defaults now use the corrected orthographic isometric view.
+- Preserved feasibility qualifications: regional terrain is not survey-grade; five-story entitlement, shared access and engineered grading/drainage remain unresolved. Unknown land price and financing terms remain unset; authoritative FOS financial inputs were not changed.
+- Checked live Records for existing architectural, mechanical, electrical and plumbing 3D packages and structural/erection drawing PDFs. Synchronized README.md and .readme. This update does not create a separate structural Blender model or an in-app 3D viewer.
+
+## [2026-10-26] - Cedarwood electrical and plumbing Blender models in Records
+
+- Created plumbing Blender models for the five-level B1 building and the B1-L1-N02 Type B apartment from Plumbing Issue 01 and Architectural Issue 04 registers. Separate collections expose cold/hot water, central hot-water-return option, sanitary, vents, fixtures, and floor-layout coordination holds.
+- Preserved all 420 B1 plumbing fixture/appliance points and all 9 points in the isolated three-module apartment. Both saved Blender files were reopened and their fixture IDs checked against the register. Rendered previews were visually reviewed and source ZIP integrity was checked.
+- Uploaded the existing Electrical Issue 01 models (2,118 registered B1 concept device points; 43 apartment points) and the new Plumbing Issue 01 models as six Current / Internal records: one Blender source ZIP and two GLBs per discipline. Both B1 models represent 56 apartments and 150 modular positions. Source ZIPs contain Blender files, GLBs, previews, manifests, generators and registers.
+- Verified all six stored files by downloading them from FOS and matching SHA-256 hashes to the local originals. Existing drawing PDFs and mechanical model records remain available.
+- Documented schematic boundaries: no approved circuit/pipe sizes, gravity drainage slopes or inverts, stack offsets, service/equipment selection, code-compliance determination, or resolved discipline clashes. Model uploads do not change financial scenario inputs or establish approved procurement quantities.
+- Updated README.md and .readme with package filenames, model scope, inspection instructions and limitations. This delivery adds model records and documentation; it does not add an in-app 3D viewer or change application code.
+
+## [2026-10-22] - Portfolio-first Command Center
+
+- Promoted the interactive funding-source -> project -> use-of-capital Sankey to the opening section, titled **The portfolio, connected.** Retained node filtering, Clear filter, and the Project model budgets / Allocations & payments switch without duplicating the chart.
+- Added a six-project portfolio directory with comparative development-cost bars, search, project-type filters, type/stage tags, planning-case labels, and direct model links. Added entry points to Projects and supporting Records; missing model costs remain visibly unavailable.
+- Removed the four fundraising headline cards, including the default $1M target, while preserving interactive capital-path funding and pipeline-stage bar charts below the portfolio.
+- Kept illustrative planning cases distinct from reporting-selected cases, approved portfolio totals, commitments, and received funding. No financial records, capital targets, or reporting selections were changed.
+- Validation at implementation: TypeScript and frontend production build passed; live desktop/mobile checks confirmed six project rows, search/type filtering, and no portfolio overflow. Subsequent live checks confirmed the Sankey is first, appears once, and supports project filtering and clearing without browser errors.
+- README.md and .readme documentation synchronized on 2026-10-24.
+
+## [2026-10-18] - Restored six-project planning views
+
+- Restored all six projects to the Command Center capital flow, 4D Capital Viewer, and Projects & Models comparison. Project dashboards and the economics scatterplot use an available planning case when no reporting case is selected.
+- Marked view-only cases as illustrative and kept reporting totals tied to explicitly selected scenarios. Added case selectors to the capital flow and 4D viewer without changing financial records.
+- Verified six project destinations, six viewer hubs, six portfolio rows, and a non-reporting project dashboard in the live app; focused tests, TypeScript, and production build passed.
+
+## [2026-10-17] - Consolidated model and workflow authority
+
+- Consolidated seven redundancy areas: project editors, reporting scenario selection, derived facts/cash coverage, capital measures, follow-ups, page queries/workflows, and campaign identifiers.
+- Replaced duplicate model entry screens with the scenario editor; historical schemas remain readable and legacy model writes are rejected.
+- Routed reporting and exports through the explicitly selected scenario. Unselected projects remain visibly unselected.
+- Backed up and migrated 122 follow-ups into 117 linked Tasks; verified every source title and due date. Source forms now project Task state.
+- Unified campaign type aliases and prevented partial campaign edits from resetting financing type/status.
+- Added the Task origin table to the 20 audit scopes (58 tables). Preserved review/approval controls, charts and Gantt workflows.
+- See [consolidation boundaries and migration](docs/fos-consolidation.md).
+
+## [2026-10-16] - Interactive Financial Controls
+
+- Added Financial Controls under Projects & Models, with aggregate reconciliation charts, clickable filters, status tags, compact evidence tables, and a selected-finding inspector instead of a repeated card grid.
+- Added explicit authoritative scenario selection and versioned workbook generation into Records, including source fingerprints and embedded charts.
+- Added WBS approval and remaining-forecast controls, allocation mapping, and a separate invoice register. Estimates, commitments, invoices and payments remain distinct; missing values remain missing.
+- Added saved cash scenarios, baseline comparisons and a zoomable phase Gantt with source-record drilldown. Dates are relative model months; no task dates are invented.
+- Added finding-to-model comparison, correction previews and explicit approval for owner-scoped planning fields, with stale-source checks and before/after history. Actuals are excluded. Derived monthly schedules still require rebuilding after input changes.
+- Added the owner-scoped financial-controls table to audit coverage (57 tables across 20 scopes). Qwen remains read-only and its findings remain unverified review candidates.
+- Passed 31 focused tests and live checks for chart filtering, timeline drilldown, model comparison and generated-workbook viewing from Records.
+
+## [2026-10-15] - Workbooks Inside Records
+
+- Added View workbook to Excel documents in Records, opening a read-only viewer with sheet tabs, zoom, fit-to-width, and a separate Excel download.
+- Rendered worksheet values, formatting, merged cells, and native pie, bar, and line charts alongside their source sheets. Charts resolve worksheet references even when Excel chart caches are empty. Missing saved formula results and unsupported charts remain explicit.
+- Verified all six stored project workbooks across their 24 sheets in the live browser, including their inline charts. Workbook editing and formula recalculation remain in Excel.
+
+## [2026-10-14] - Focused A.I. Audits
+
+- Expanded the A.I. Audit workspace from ten to twenty focused scopes. The scopes assign all 56 eligible owner-scoped structured tables once, excluding user accounts, Gmail credentials, and attached file contents.
+- Reduced Qwen3:4b requests to at most two records within a 3,500-character JSON batch and a 4,096-token context. An incomplete record-ID acknowledgement splits the batch or stops the run without advancing coverage; no sampling, silent skipping, model fallback, or accepted truncated output.
+- Kept audits read-only on FOS's own Ollama service at `127.0.0.1:11436`, with record-count progress and checkpoints for eligible interrupted runs. Findings are unverified review candidates.
+- Verified the 20-scope API response, model listing, six focused audit tests, and application build. A fresh full audit has not yet established end-to-end runtime reliability; the prior Project foundations run was stopped after repeated failures and its disposable checkpoint was removed. Repository-wide TypeScript checking still reports errors outside the audit changes.
+
 ## [2026-10-11] - Gmail OAuth Connection and Status Recovery
 
 - Configured the FOS Sandbox Google OAuth client for local FOS and connected the approved shared Gmail mailbox. FOS now displays the saved connection in Integrations; OAuth credentials remain in ignored local environment configuration and the refresh token remains in the database, not in this repository.

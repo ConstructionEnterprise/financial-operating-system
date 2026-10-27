@@ -1,16 +1,36 @@
 # Financial Operating System
 
+The seven consolidation areas now share explicit model authority and linked Tasks. See [FOS consolidation](docs/fos-consolidation.md) for the migration, reporting selection, retained history and validation. Select each project’s reporting case in Financial Controls → Project model; comparison cases do not silently become authoritative.
+
 The **Financial Operating System** is the CE/FF capital-formation and project-underwriting platform. It combines approval-first outreach operations with a governed financial-modeling engine for Internal Projects, capital strategies, project economics, scenario analysis, and portfolio visibility.
 
 This repository is intentionally separate from any prior CE/FF repository. It contains the application source, reproducible import and model scripts, approved project-model artifacts, reference materials, and documentation needed to understand and reconstruct the system.
 
+## Cedarwood Melissa civil/site model in Records
+
+Updated 2026-10-27. Records now includes `Cedarwood_Melissa_Civil_Blender_Source_Issue01.zip`, `Cedarwood_Melissa_Civil_Site_Issue01.glb`, and `Cedarwood_Melissa_Civil_Previews_Issue01.zip`, all Current / Internal. All three stored downloads were SHA-256 verified. Download and extract the source ZIP; open `Cedarwood_Melissa_Civil_Site_Issue01_ViewportFixed.blend`. The original file remains for history. The corrected copy fixes distance clipping and uses an orthographic isometric view; all 1,418 objects were retained and the saved file reopened successfully.
+
+The study contains five modular buildings, 280 apartments, 750 module positions, 420 parking spaces (including 140 covered), circulation, concept pads, regional USGS terrain with 5 ft contours, and access/drainage reservations. The source package includes registers, source metadata, generators and provisional cost inputs. Regional DEM contours are not a field survey. Five-story entitlement, access across other tracts, drainage and engineered grading remain unresolved. Land asking price and financing terms remain unknown; no authoritative financial model inputs were changed.
+
+Existing architectural, mechanical, electrical and plumbing 3D packages remain in Records, alongside structural and five-phase erection PDFs. The structural Blender package described below supplements those documents. Model files are downloadable; this update does not add an in-app 3D viewer.
+
+## Cedarwood structural Blender models in Records
+
+Updated 2026-10-27. Structural Issue 01 is available as five Current / Internal records: `Cedarwood_Structural_Blender_Source_Issue01.zip`, `Cedarwood_B1_Structural_Frame_Issue01.glb`, `Cedarwood_Module_Structural_Frame_Issue01.glb`, and separate building and module/detail preview ZIPs (records 330001-330005). All five stored downloads were SHA-256 verified.
+
+Open the source ZIP's building Blender file for 150 B1 module frames across five levels / 56 apartments. Primary posts, perimeter rings, floor and roof cross-members are separate from LGS infill and ceiling framing. Level/system collections allow inspection; LGS starts hidden in the building for clarity. The isolated B1-L1-N-M01 file has individually selectable components and an inspection animation: frame 1 assembled, frame 60 exploded. Seven previews cover the building isometric, level-one plan, cutaway, assembled/exploded module and stack/foundation interface zones.
+
+The building register covers 13,855 schematic pieces, including 600 primary posts and 1,200 perimeter-ring members; the isolated module has 100 pieces. Both Blender files reopened successfully, component counts matched the CSVs, exploded transforms were checked, and GLB reimports confirmed metre-scale dimensions. Member sections and pitches are display assumptions, not engineered selections. Connection zones are not detailed hardware; foundations, cores and the lateral system remain unresolved. The geometry does not establish construction safety, approved quantities or costs, and changes no FOS financial inputs. Source basis: Structural Feasibility Issue 02 and Architectural Issue 04 registers.
+
 ## What the system does
+
+**Projects & Models → Financial Controls** combines interactive reconciliation charts, filtered evidence tables, WBS budget controls, source-tracked workbook versions in Records, and cash scenarios with a zoomable Gantt. Findings can be compared alongside current planning-model fields, previewed, and explicitly approved as corrections with before/after history. AI findings remain review candidates. Changed inputs do not automatically rebuild derived monthly schedules. See [Financial Controls](docs/financial-controls.md) for setup and calculation boundaries.
 
 Project deployment charts support category stacks, monthly/quarterly and cumulative views, phase bands, period record inspection and funding-draw coverage. Draws remain scenario estimates rather than receipts; unknown spending/funding months are not zero-filled. Categorized monthly entries take precedence over schedule estimates without double-counting.
 
 The 4D Capital Viewer lays out project, campaign, source and record relationships in a global spatial graph rather than a tall column. Records are visible by default; optional cluster collapse helps manage density without removing the All records view. Project selection dims unrelated branches, and the inspector can focus that project. Automatic spacing preserves pinned nodes. Fit entire model, pinch zoom and the remembered collapsible inspector remain available.
 
-Navigation follows ten workspaces: **Command Center → 4D Capital Viewer → Projects & Models → Capital Campaigns → Capital Sources → Action Center → Communications → Records → Integrations → Settings**. Related pages are accessible through workspace sub-navigation; existing section links and equipment-rental links remain supported. Company equity and project debt remain distinct, with project-debt underwriting in Capital Campaigns. See [the navigation audit](docs/navigation-audit.md) for the complete mapping and compatibility boundaries.
+Navigation follows eleven workspaces: **Command Center → 4D Capital Viewer → Projects & Models → Capital Campaigns → Capital Sources → Action Center → Communications → Records → A.I. Audit → Integrations → Settings**. Related pages are accessible through workspace sub-navigation; existing section links and equipment-rental links remain supported. Company equity and project debt remain distinct, with project-debt underwriting in Capital Campaigns. See [the navigation audit](docs/navigation-audit.md) for the earlier navigation mapping and compatibility boundaries.
 
 The **4D Capital Viewer** combines a spatial relationship graph and time playback in one scene. Its global graph exposes records from the start rather than requiring users to open a chain of collapsed hubs. Dated events follow each project's trajectory; the playhead can show one period or cumulative activity through that period, and All records restores the undated overview. Undated records are not assigned invented months. Modeled budgets, equipment allowances, planned allocations, committed expenses and recorded payments remain distinct evidence views; no modeled funding assignment is invented. Open `?section=capital_viewer` directly.
 
@@ -20,11 +40,43 @@ Choose Light, Space or Green backgrounds, saved per user on this device. The cam
 
 **Integrations** shows the saved Gmail connection and setup requirements for QuickBooks, Xero and Sage. The local FOS Sandbox shared mailbox was connected through Google OAuth on 2026-10-11. This confirms authorization and persistence, not end-to-end email automation. A failed status check is shown as unavailable with a retry action, not as a disconnected account. Accounting connectors are explicitly not implemented or connected yet; this workspace does not collect accounting credentials or synchronize accounting data. Open `?section=integrations` directly.
 
+Records also supports **View workbook** for uploaded `.xlsx` files. The in-app viewer provides sheet tabs, zoom and fit-to-width controls, saved cell values, and inline pie, bar, and line charts resolved from workbook references. Download Excel remains available for editing and recalculation. Missing saved formula results and unsupported chart types are reported in the viewer.
+
+### Cedarwood Flats 3D coordination models in Records
+
+Records contains the **Electrical Issue 01** and **Plumbing Issue 01** model packages, uploaded and download-verified on 2026-10-26. Search Records for `Cedarwood` and the discipline. Each discipline has a downloadable Blender source ZIP plus separate building and apartment GLBs. Extract the ZIP and open its `.blend` files in Blender 5.1 or later; collections separate the systems for inspection. The ZIPs also contain previews, a model manifest, drawing generators, and source registers. GLB exports use metres; source geometry is authored in feet.
+
+| Discipline | Building model | Apartment model | Source ZIP |
+| --- | --- | --- | --- |
+| Electrical Issue 01 | `Cedarwood_B1_Electrical_Distribution_Issue01.glb` | `Cedarwood_TypeB_Module_Electrical_Issue01.glb` | `Cedarwood_Electrical_Blender_Source_Issue01.zip` |
+| Plumbing Issue 01 | `Cedarwood_B1_Plumbing_Distribution_Issue01.glb` | `Cedarwood_TypeB_Module_Plumbing_Issue01.glb` | `Cedarwood_Plumbing_Blender_Source_Issue01.zip` |
+
+Both building models cover **B1: five levels, 56 apartments and 150 modular positions**. The apartment model isolates **B1-L1-N02**, a Type B apartment spanning three modules. This is one building within the five-building, 280-apartment architectural program. Device and fixture objects retain their source register and apartment IDs.
+
+- **Electrical:** 2,118 registered concept device points in B1 and 43 in the isolated apartment. Collections show panels, feeders, ceiling route envelopes, receptacles, luminaires, controls, equipment connections, detection candidates and accessible module interfaces.
+- **Plumbing:** 420 registered fixture/appliance points in B1 and 9 in the isolated apartment. Collections show cold water, hot water, the central hot-water-return option, sanitary, vents, fixture placeholders and coordination holds. The P-303 wet-location transition register is included to track changed layouts between floors.
+
+These are schematic coordination models based on Architectural Issue 04 and each discipline's Issue 01 drawings. Pipe and electrical sizing, circuit assignments, drainage slopes/inverts, stack offsets, equipment selection, required clearances, rated penetrations and discipline clashes remain unresolved. The plumbing collectors and east risers illustrate system relationships; they do not establish an approved stack or shaft design. The models do not certify code compliance, release construction work, provide approved procurement quantities, or update FOS financial scenarios. Records stores the packages as **Current / Internal**. The separate mechanical Issue 04 model package and GLBs are also available in Records.
+
+### Command Center
+
+The Command Center opens with **The portfolio, connected.**, an interactive Sankey chart linking funding sources, projects, and uses of capital. Select a node to filter the flow and use Clear filter to restore the overview. Switch between **Project model budgets** and **Allocations & payments** to inspect planning flows or recorded activity. The chart appears once, ahead of the project directory and funding charts.
+
+The portfolio directory shows all six current projects with relative development-cost bars, search, project-type filters, stage/type tags, and direct financial-model links. Each row identifies its planning case as reporting-selected or illustrative; projects without a modeled cost remain visible as Not modeled. Links to Projects and supporting Records provide routes to the underlying evidence. The directory uses its default display cases independently of the capital-flow case selectors.
+
+The former four fundraising headline cards, including the default $1M target, have been removed from the landing presentation. Interactive funding-by-capital-path and pipeline-stage bar charts remain below the portfolio. Capital-path targets remain available in the funding chart; no targets, financial records, or reporting selections were changed by this layout update. Illustrative modeled uses are not approved portfolio totals, commitments, or funding receipts, and weighted prospects are not secured funding.
+
+### A.I. Audit
+
+Open `?section=ai_audit` to run one of twenty focused, read-only FOS audits. Together the scopes assign each of 57 eligible owner-scoped structured tables once; user accounts, Gmail credentials, and attached file contents are outside this metadata audit. Each run covers every record in its selected scope, without sampling. The interface shows audited records against the total, and a checkpoint supports continuation after an interrupted run when the source snapshot is unchanged.
+
+Audits use **Qwen3:4b only** through FOS's local Ollama service at `127.0.0.1:11436`, independently of the VCSD model service. Requests contain at most two records within a 3,500-character batch limit and a 4,096-token model context. Coverage advances only when Qwen acknowledges every record ID in the batch; an incomplete response is split into smaller requests or halted rather than counted as complete. The system does not silently truncate output or substitute another model. AI findings are review candidates, not verified facts, and audits do not alter FOS records.
+
 ### Gmail and VCSD sandbox pilot
 
 Keep `GMAIL_CLIENT_ID`, `GMAIL_CLIENT_SECRET`, `PUBLIC_APP_URL`, `SHARED_INBOX`, and `OUTREACH_SANDBOX_ONLY=true` in the ignored local `.env` (see `.env.example`). Start FOS with `npm run dev` and open the reported local URL, then confirm the expected mailbox appears under Integrations. The OAuth refresh token is stored in the database; restarting the laptop should not require reconnecting if the same database and environment configuration remain available. Do not commit `.env` or copy credentials into documentation.
 
-The OAuth flow requests Gmail send and read-only access and checks the authorized mailbox before saving the connection. The current connection does not itself send mail. Sandbox-only recipient checks and approval-first sending remain active. Before using the seeded VCSD contacts for a campaign, verify a sandbox initial send, incoming reply capture, event-file handoff, and persona ingestion end to end. Real-investor outreach remains out of scope until those checks and explicit approvals are complete. See [`docs/VCSD_BRIEFING.md`](docs/VCSD_BRIEFING.md) and [`docs/VCSD_FOS_CONTRACT.md`](docs/VCSD_FOS_CONTRACT.md).
+The OAuth flow requests Gmail send and read-only access and checks the authorized mailbox before saving the connection. The current connection does not itself send mail. Sandbox-only recipient checks and approval-first sending remain active. Before using the seeded VCSD contacts for a campaign, verify a sandbox initial send, incoming Gmail reply capture and event-file handoff end to end. VCSD replies use an on-demand Gmail send queue, with simulated-inbound import disabled; see [`docs/VCSD_GMAIL_SENDER.md`](docs/VCSD_GMAIL_SENDER.md). Real-investor outreach remains out of scope until those checks and explicit approvals are complete. See [`docs/VCSD_BRIEFING.md`](docs/VCSD_BRIEFING.md) and [`docs/VCSD_FOS_CONTRACT.md`](docs/VCSD_FOS_CONTRACT.md).
 
 Analytics is the enterprise decision layer for the FOS. It combines stored project models, capital-path targets, opportunity pipeline, recorded commitments and funding, campaign structure, meetings, tasks, equipment needs, grants and documents without collapsing their accounting states. The capital-path selector scopes both the performance comparison and decision-stage distribution; the comparison distinguishes target, requested amount, probability-weighted pipeline, committed capital and funded cash. Missing target or request data is shown as missing, with a route to the relevant capital-path inputs—not as an invented zero-funded result. The workspace also provides project funding coverage, project-economics, operating-activity and data-coverage visualizations with click-through navigation. Run `node scripts/verifyFinancialAnalytics.ts` to verify aggregation and evidence-boundary calculations without database writes.
 
@@ -65,7 +117,7 @@ Internal Projects opens the selected project's visual dashboard, including saved
 
 The Capital Dashboard connects fundraising and project planning without collapsing their accounting states. It presents two intentionally separate views:
 
-- **Project model budgets** use one primary scenario per project, preventing alternate scenarios from being added together. Existing model data populates the charts immediately. Funding remains labeled as unassigned until a source is recorded.
+- **Project model budgets** use one display case per project, preventing alternate scenarios from being added together. The reporting-selected case is preferred; an available fallback case remains explicitly illustrative. View-only case selectors do not change reporting authority. Funding remains labeled as unassigned until a source is recorded.
 - **Allocations & payments** connect a funding opportunity to an Internal Project or Company operations, then classify the use of capital. Planned, committed, and paid amounts can be viewed independently.
 
 The Sankey diagram represents each amount as a single flow:

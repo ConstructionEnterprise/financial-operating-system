@@ -1,8 +1,19 @@
 FINANCIAL OPERATING SYSTEM
 
+2026-10-27 structural delivery: Records now includes the Structural Issue 01 Blender source ZIP, B1 and isolated-module GLBs, and two preview ZIPs (330001-330005), all downloaded and SHA-256 verified. B1: 150 independent module frames / 56 apartments; primary framing and internal LGS/ceiling framing are separate. Isolated module offers frame 1 assembled / frame 60 exploded inspection. Both Blender files reopened, component registers reconciled and GLB units checked. Sections, connection zones, core and foundation reservations remain schematic, not engineered. See README.md and CHANGELOG.md.
+
+2026-10-27 documentation update: Melissa Civil Issue 01 is now in Records as a Blender source ZIP, site GLB and preview ZIP (records 300001-300003), with all three downloaded hashes verified. Open the ViewportFixed.blend copy inside the source ZIP; viewport clipping is repaired, all 1,418 objects retained. Study: five buildings, 280 apartments, 750 module positions and 420 parking spaces including 140 covered. Terrain is regional USGS data, not a survey. Five-story entitlement, shared access and engineering remain unresolved; land price and financing terms remain unset. Existing architectural/mechanical/electrical/plumbing models and structural/erection PDFs remain available. See README.md and the October 27 CHANGELOG entry.
+
+2026-10-26 documentation update: Cedarwood Electrical Issue 01 and Plumbing Issue 01 3D models are available in Records as two Blender source ZIPs and four GLBs (building and Type B apartment for each discipline). Each B1 model covers five levels, 56 apartments and 150 modular positions; the isolated apartment is B1-L1-N02 across three modules. Electrical carries 2,118 B1 concept device points / 43 apartment points; plumbing carries 420 B1 fixture/appliance points / 9 apartment points. Source ZIPs include editable Blender files, previews, generators, manifests and registers. All six stored files were downloaded and SHA-256 matched to their local originals. Geometry, sizing, circuit assignments, gravity drainage, shaft offsets and cross-discipline clearances remain schematic/unresolved. See README.md, Cedarwood Flats 3D coordination models in Records, and the 2026-10-26 CHANGELOG entry.
+
+2026-10-24 documentation update: Command Center now leads with "The portfolio, connected." and its interactive funding-source -> project -> use-of-capital flow. The six-project directory follows with development-cost bars, search, project-type filters, planning-case labels, and links to models and Records. Funding and pipeline bar charts remain; the four fundraising headline cards were removed. Display changes do not alter financial records or reporting selections. Illustrative planning flows are not approved portfolio totals or received funds. See README.md, Command Center, and the 2026-10-22 CHANGELOG entry.
+
+2026-10-17: Seven consolidation areas implemented. One project-scenario editor; explicit reporting scenario; shared facts, cash coverage and capital measures; linked Tasks own follow-ups; scoped page queries; canonical campaign types. See docs/fos-consolidation.md. Existing scenarios and financial records are preserved.
+
 The Financial Operating System is the CE/FF capital formation and project underwriting platform. It connects approval-first fundraising operations, four specialized capital paths, Internal Projects, scenario-isolated project economics, and portfolio-level financial visibility.
 
 Primary domains:
+- Financial Controls: interactive reconciliation, tagged review queues, WBS budget controls, versioned workbooks in Records, cash scenarios and source-linked Gantt timelines; approved planning corrections with before/after history
 - Equity Investors and approval-first Gmail outreach
 - JV / Facility partnership formation
 - Equipment Finance and Equipment Rental
@@ -12,6 +23,9 @@ Primary domains:
 - 4D Capital Viewer: one spatial relationship graph with dated project trajectories and a time playhead
 - Capital-path analytics: target, requested, probability-weighted, committed, and funded values kept separate
 - Source attribution, data-state control, and capital-stage boundaries
+- A.I. Audit: twenty focused, read-only Qwen3:4b audits of owner-scoped FOS structured records, with complete record coverage and checkpointed progress; findings require human review
+
+The FOS audit uses its own local Ollama service at 127.0.0.1:11436, independently of VCSD. Each model request contains at most two records. The audit excludes user accounts, Gmail credentials, and attached file contents, and it never changes source records.
 
 Gmail / VCSD pilot status (2026-10-11): the sandbox shared mailbox is OAuth-connected and visible in FOS Integrations. This is a connection milestone, not a completed automated campaign. Sandbox-only sending and explicit approval remain in force; verify sandbox send/receive and VCSD reply ingestion before considering real-investor outreach. Local OAuth credentials stay in ignored `.env` and tokens stay in the database.
 
